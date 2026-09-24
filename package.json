@@ -6,6 +6,7 @@
   "scripts": {
     "build:engine": "node mascot_engine/build_mascot_engine.js --debug && node mascot_engine/build_mascot_engine.js --publish && node mascot_engine/build_mascot_engine.js --starter",
     "build:rive": "node mascot_engine/rive/build_all_rive.cjs",
+    "build:rive-kit": "node rive_animations/build_rive_kit.cjs",
     "build:packs": "node mascot_engine/build_pack.cjs && node mascot_engine/build_pack.cjs --starter",
     "build:site": "node test_and_deploy/publish_site.cjs --draft",
     "build": "npm run build:engine && npm run build:packs && npm run build:site",

@@ -1,0 +1,72 @@
+{
+  "version": 2,
+  "status": "to_build_in_rive_editor",
+  "note": "Contrat des fichiers .riv faits à la main dans l'éditeur Rive. Les trois fichiers le respectent à l'identique : changer de personnage = changer de fichier, rien d'autre.",
+  "files": ["uko.riv", "aituko.riv", "meowuko.riv"],
+  "artboard": "Mascot",
+  "artboardSize": [1024, 1536],
+  "stateMachine": "Mascot",
+  "viewModel": {
+    "name": "Mascot",
+    "properties": {
+      "state": {
+        "type": "enum",
+        "enum": "MascotState",
+        "values": ["idle", "welcome", "thinking", "loading", "success", "error", "empty", "sleep"],
+        "default": "idle",
+        "persistent": ["idle", "thinking", "loading", "sleep"],
+        "oneShot": ["welcome", "success", "error", "empty"],
+        "oneShotReturnsTo": "idle"
+      },
+      "bodyColor":   { "type": "color", "default": "#FFFFFF", "binds": "remplissage tête, mains, pieds" },
+      "lineColor":   { "type": "color", "default": "#16161D", "binds": "traits du corps, contours, traits du visage" },
+      "hairColor":   { "type": "color", "default": "#16161D", "binds": "cheveux (Uko)", "characters": ["uko"] },
+      "accentColor": { "type": "color", "default": "#FFC93C", "binds": "boule de l'antenne (Aituko)", "characters": ["aituko"] },
+      "lookX": { "type": "number", "min": -1, "max": 1, "default": 0, "binds": "regard horizontal (yeux + léger tour de tête)" },
+      "lookY": { "type": "number", "min": -1, "max": 1, "default": 0, "binds": "regard vertical" },
+      "reducedMotion": { "type": "boolean", "default": false, "binds": "coupe la couche Life (gestes aléatoires, décor) ; garde les états" },
+      "wake": { "type": "trigger", "binds": "sort de sleep (animation Wake puis idle)" },
+      "poke": { "type": "trigger", "binds": "réaction au toucher (petit sursaut + expression surprise)" }
+    }
+  },
+  "events": {
+    "actionDone": "émis à la fin d'une action ponctuelle (welcome, success, error, empty), au moment du retour à idle",
+    "asleep": "émis quand l'entrée dans sleep est terminée"
+  },
+  "layers": {
+    "Body": "une animation par état (entrées, boucles, sorties) ; seule couche qui touche au squelette",
+    "Face": "changement d'expression (groupe faces en mode Solo) piloté par state",
+    "Blink": "clignement toutes les 3 à 6 s (échelle Y des yeux), indépendant",
+    "Gaze": "blend 2D lookX/lookY sur la position des yeux et la rotation de la tête",
+    "Life": "petits gestes aléatoires dans idle/thinking/loading/sleep, désactivée si reducedMotion",
+    "Decor": "boucles propres au personnage : antenne (Aituko), queue et oreille (Meowuko)"
+  },
+  "animations": {
+    "Idle":            { "loop": true,  "seconds": 8 },
+    "Welcome":         { "loop": false, "seconds": 3.2 },
+    "ThinkingEnter":   { "loop": false },
+    "Thinking":        { "loop": true,  "seconds": 7.2 },
+    "ThinkingExit":    { "loop": false, "seconds": 0.9 },
+    "LoadingEnter":    { "loop": false },
+    "Loading":         { "loop": true,  "seconds": 7.2 },
+    "LoadingExit":     { "loop": false, "seconds": 0.9 },
+    "LoadingToSuccess":{ "loop": false },
+    "LoadingToError":  { "loop": false },
+    "Success":         { "loop": false, "seconds": 3.6 },
+    "Error":           { "loop": false, "seconds": 3.8 },
+    "Empty":           { "loop": false, "seconds": 3.4 },
+    "SleepEnter":      { "loop": false },
+    "Sleep":           { "loop": true,  "seconds": 7.8 },
+    "Wake":            { "loop": false, "seconds": 2.2 },
+    "Poke":            { "loop": false, "seconds": 0.6 }
+  },
+  "budget": {
+    "rivBytesMax": 40000,
+    "target": "moins de 40 Ko par .riv (137 Ko pour les fichiers générés actuels)",
+    "rules": [
+      "des images clés sur les poses, pas sur chaque image : l'interpolation (courbes) fait le reste",
+      "aucune image bitmap, aucune police embarquée",
+      "rotations des groupes/os plutôt que déformation de sommets"
+    ]
+  }
+}
