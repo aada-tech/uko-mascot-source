@@ -1,0 +1,54 @@
+.bone{stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:15;stroke-linecap:round;}
+.hand{fill:var(--handFillColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:15;}
+.foot{fill:var(--footFillColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:15;}
+.headCircle{fill:var(--headFillColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:15;}
+.hair{fill:none;stroke:var(--hairColor, #0B0B0B);stroke-width:15;stroke-linecap:round;stroke-linejoin:round;}
+.hairStroke{fill:none;stroke:var(--hairColor, #0B0B0B);stroke-linecap:round;stroke-linejoin:round;}
+.hairFill{fill:var(--hairColor, #0B0B0B);}
+.moustache{fill:none;stroke:var(--hairColor, #0B0B0B);stroke-linecap:round;stroke-linejoin:round;}
+.hairDetail{fill:none;stroke:var(--hairDetailColor, #FFFFFF);stroke-width:4.5;stroke-linecap:round;opacity:.58;}
+.hairFadeMid{fill:var(--hairColor, #0B0B0B);opacity:.68;}
+.hairFadeTip{fill:var(--hairColor, #0B0B0B);opacity:.42;}
+.faceStroke{fill:none;stroke:var(--detailColor, #0B0B0B);stroke-width:11;stroke-linecap:round;stroke-linejoin:round;}
+.eye{fill:var(--detailColor, #0B0B0B);}
+.accessory{fill:none;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:12;stroke-linecap:round;stroke-linejoin:round;}
+.blue{stroke:var(--bodyStrokeColor, #0B0B0B);fill:none;}
+.red{stroke:var(--bodyStrokeColor, #0B0B0B);fill:none;}
+.fxLoading .loadingSpinner{fill:none;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:12;stroke-linecap:round;}
+.fxWelcome .accessory,.fxEmpty .accessory{stroke:var(--bodyStrokeColor, #0B0B0B);}
+.fxSuccess .accessory{stroke:var(--bodyStrokeColor, #0B0B0B);}
+.fxError .accessory{stroke:var(--bodyStrokeColor, #0B0B0B);}
+.fxError circle{fill:var(--bodyStrokeColor, #0B0B0B);}
+.fxSleep .accessory{stroke:var(--bodyStrokeColor, #0B0B0B);}
+.fxSleep text{fill:var(--bodyStrokeColor, #0B0B0B);}
+.fxThoughtBubble .bubble{fill:var(--surfaceColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:12;stroke-linejoin:round;}
+.fxThoughtBubble .bubbleTail{fill:var(--surfaceColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:10;}
+.fxThoughtBubble .question{fill:none;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:12;stroke-linecap:round;stroke-linejoin:round;}
+.fxThoughtBubble .questionDot{fill:var(--bodyStrokeColor, #0B0B0B);}
+.faceOpenMouth{fill:var(--headFillColor, #FFFFFF);stroke:var(--detailColor, #0B0B0B);stroke-width:11;stroke-linejoin:round;}
+.thinkingForeground .hand{fill:var(--handFillColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:15;}
+.loadingLaptop .laptopSurface{fill:var(--stageBackground, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:9;stroke-linecap:round;stroke-linejoin:round;}
+.loadingLaptop .laptopEdge{fill:var(--stageBackground, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;}
+.loadingLaptop .laptopDetail{fill:none;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:5;stroke-linecap:round;opacity:.58;}
+.blush{fill:var(--blushColor, #F6A7B7);opacity:.55;}
+.eyeShine{fill:var(--headFillColor, #FFFFFF);}
+.fxSpark{fill:var(--bodyStrokeColor, #0B0B0B);}
+.boneHalo{stroke:var(--surfaceColor, #FFFFFF);stroke-width:29;stroke-linecap:round;}
+.robotScreen{fill:#1C2033;}
+.robotGlare{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;opacity:.35;}
+.robotMark{fill:var(--characterAccent, #FFC93C);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:12;}
+.led{fill:none;stroke:#6CF0E0;stroke-width:14;stroke-linecap:round;stroke-linejoin:round;}
+.ledFill{fill:#6CF0E0;stroke:#6CF0E0;stroke-width:6;stroke-linejoin:round;}
+.catInnerEar{fill:var(--blushColor, #F6A7B7);}
+.catNose{fill:#F48FA2;stroke:var(--detailColor, #0B0B0B);stroke-width:5;stroke-linejoin:round;}
+.catWhisker{fill:none;stroke:var(--detailColor, #0B0B0B);stroke-width:7;stroke-linecap:round;}
+.catTail{fill:none;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:15;stroke-linecap:round;stroke-linejoin:round;}
+.touchInk{fill:none;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:10;stroke-linecap:round;stroke-linejoin:round;}
+.touchBold{stroke-width:16;}
+.touchDot{fill:var(--bodyStrokeColor, #0B0B0B);}
+.touchStar{fill:#FFC93C;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:7;stroke-linejoin:round;}
+.touchHeart{fill:#FF7AAE;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:7;stroke-linejoin:round;}
+.touchPuff{fill:var(--surfaceColor, #FFFFFF);stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:7;}
+.touchConfetti{stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:4;}
+.touchC0{fill:#FFC93C;}.touchC1{fill:#FF7AAE;}.touchC2{fill:#3B5BFF;}.touchC3{fill:#3DDC97;}
+.touchNote{fill:#3B5BFF;stroke:var(--bodyStrokeColor, #0B0B0B);stroke-width:6;}

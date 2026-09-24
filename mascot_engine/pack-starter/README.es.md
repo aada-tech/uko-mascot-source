@@ -1,0 +1,165 @@
+# Uko Starter — gratis
+
+*Français : `README.md` · English: `README.en.md`*
+
+Uko, Aituko el robot y Meowuko el gato, en versión gratuita: **3 mascotas**, **4 estados**, 17 peinados para Uko,
+todos los colores, tema claro u oscuro. Pruébalas en tu app y quédatelas en producción si quieres: está permitido
+(ver `LICENSE.md`; prevalece el texto francés de la licencia).
+
+| | Para | Archivo |
+|---|---|---|
+| **Motor web** | sitios y apps web (HTML, React, Vue, Svelte…) | `uko-mascot-engine.js` (cero dependencias) |
+| **Archivo Rive** | web, Flutter, iOS, Android, React Native… | `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv` + máquina de estados «Uko» |
+
+## Starter o pack completo
+
+| | Starter (gratis) | Pack completo |
+|---|---|---|
+| Mascotas | Uko, Aituko, Meowuko | igual |
+| Estados | `idle` `welcome` `loading` `success` | esos 4 + `thinking` `error` `empty` `sleep` `wake` |
+| Peinados, colores, tema | 17 peinados, colores libres | igual |
+| Archivos Rive | 4 estados | 9 estados |
+| Movimientos: caminar, media vuelta, escalar `climb()` | — | sí |
+| Mirada: sigue el ratón al pasar por encima | sí | sí |
+| Mirada en toda la página (`follow="page"`, dedo en móvil), `lookAt()` | — | sí |
+| Uso comercial | sí | sí |
+
+**Pasar al pack completo**: reemplaza `uko-mascot-engine.js` y los archivos `rive/*.riv` por los del pack. Tu código no cambia.
+Si tu código ya pide un estado o un movimiento del pack completo (por ejemplo `error`, `climb()`, `lookAt()`), Uko se queda en su estado actual
+y la consola indica dónde encontrarlo: nada se rompe.
+
+Pack completo: {{SITE_URL}}/es/#prix
+
+---
+
+## 1. Motor web
+
+```html
+<script src="uko-mascot-engine.js"></script>
+
+<uko-mascot state="loading" hair="afro" brand="#FFD6E0" style="width:240px;height:360px"></uko-mascot>
+```
+
+Cambia un atributo y la mascota reacciona, con una transición natural:
+
+```js
+document.querySelector('uko-mascot').setAttribute('state', 'success');
+```
+
+| Atributo | Valores | Por defecto |
+|---|---|---|
+| `state` | `idle` `welcome` `loading` `success` | `idle` |
+| `character` | `uko`, `aituko` (robot), `meowuko` (gato) | `uko` |
+| `hair` | ver la lista de peinados (Uko) | `dreadlocks` |
+| `brand` | color de la cara, las manos y los pies (`#RRGGBB`) | `#FFFFFF` |
+| `hair-color` | color del pelo | `#0B0B0B` |
+| `accent` | color de la antena de Aituko | `#FFC93C` |
+| `theme` | `auto` (sigue `html.dark` / `data-theme`), `system`, `light`, `dark` | `auto` |
+| `contrast` | `auto` (colores ajustados al contraste WCAG) o `direct` | `auto` |
+| `interactive` | la mascota sigue el cursor y reacciona al clic | `true` |
+| `one-shot` | `return` (vuelve a idle tras welcome o success) o `loop` | `return` |
+| `cheeks` | mejillas rosas | `true` |
+
+Eventos: `statechange`, `complete` (`event.detail.state`) y `tap` (`event.detail.zone`: `head`, `hand_L`, `hand_R`, `foot_L`, `foot_R`, `body`; `event.detail.reaction`).
+
+### Tocar
+
+Toca la mascota (ratón o dedo): la zona tocada reacciona, con un pequeño efecto. Cabeza: boop, risita, mueca; mano: saludo, choca esos cinco; pie: saltito, patada, ay; cuerpo: rebote, cosquillas, sorpresa.
+Varios toques seguidos: tres en la cabeza y se marea; tres en el cuerpo y se parte de risa; cinco en cualquier sitio y salta de alegría. Dormida, un toque la despierta.
+Desde tu código: `uko.poke('head')` (o `'hand'`, `'foot'`, `'body'`), con una reacción concreta si quieres: `uko.poke('body', 'joy')`. `interactive="false"` desactiva el tacto.
+
+En cada estado de fondo Uko respira, cambia el peso de pierna y hace pequeños gestos por sí solo
+(mira alrededor, se encoge de hombros, mira la carga…): nunca se queda congelado.
+
+### React
+
+```jsx
+import './uko-mascot-engine.js';
+
+export default function Status({ busy, done }) {
+  const state = busy ? 'loading' : done ? 'success' : 'idle';
+  return <uko-mascot state={state} hair="boucles" brand="#FFD6E0" style={{ width: 200, height: 300 }} />;
+}
+```
+
+### JavaScript
+
+```js
+const uko = UkoMascot.create('#mascot', { hairStyle: 'afro', brandColor: '#FFE8A3', theme: 'auto' });
+
+uko.startLoading();            // durante una petición
+uko.resolveSuccess();          // … y luego la celebración
+uko.setState('welcome');
+uko.setHairStyle('chignon');
+uko.setBrandColor('#C9F2E1');
+uko.destroy();
+```
+
+`UkoMascot.edition` vale `"starter"` y `UkoMascot.ORDER` lista los estados disponibles.
+
+### Personajes
+
+Mismo esqueleto, mismos estados, mismos gestos de vida: solo cambia la cabeza.
+
+```html
+<uko-mascot character="aituko" state="loading" brand="#DDE3FF" accent="#3B5BFF"></uko-mascot>
+<uko-mascot character="meowuko" state="success" brand="#FFD9B3"></uko-mascot>
+```
+
+Los peinados solo se aplican a Uko.
+
+### Peinados
+
+`original` `classique` (clásico) `tres_court` (muy corto) `degrade` (degradado) `pixie` `mi_long` (media melena) `lisse` (liso)
+`ondule` (ondulado) `boucles` (rizos) `afro` `dreadlocks` (rastas) `tresses` (trenzas) `tresses_plaquees` (trenzas pegadas)
+`chignon` (moño) `queue_de_cheval` (coleta) `chauve` (calvo) `barbe` (barba)
+
+También se aceptan alias en inglés: `bald`, `medium`, `fade`, `cornrows`, `ponytail`, `straight`, `wavy`, `curly`, `beard`.
+
+### Accesibilidad y rendimiento
+
+- Se respeta `prefers-reduced-motion` (poses fijas, sin efectos).
+- La animación se pausa cuando la pestaña está oculta. `setMaxFps(30)` para páginas muy cargadas.
+- Fuera de la pantalla (página desplazada, `display: none`), una mascota solo se redibuja 4 veces por segundo; sus estados y movimientos siguen. Los peinados detallados se aligeran solos en tamaño pequeño (menos de ~200 píxeles de pantalla de ancho), sin diferencia visible.
+- Peso: motor web 298 KB sin comprimir, **≈ 89 KB gzip**. Archivos Rive: uko.riv 74 · aituko.riv 72 · meowuko.riv 73 KB. Con Rive, cuenta también el runtime de tu plataforma (web: `@rive-app/canvas`, ≈ 100 KB gzip de JS + ≈ 760 KB gzip de wasm, cargado una vez para todas las mascotas).
+
+---
+
+## 2. Archivos Rive (`rive/*.riv`)
+
+- Un archivo por personaje: `uko.riv`, `aituko.riv`, `meowuko.riv`, unos 75 KB cada uno, con huesos.
+  Máquina de estados **`Uko`** y mismas entradas en los tres: cambiar de personaje es cambiar de archivo.
+- En reposo y en carga, la máquina encadena gestos de vida (mirar alrededor, encogerse de hombros,
+  mirar la carga…): Uko nunca se queda congelado. Más una capa de parpadeo.
+
+| Entrada | Tipo | Función |
+|---|---|---|
+| `state` | Number | `0` idle · `2` loading |
+| `welcome` | Trigger | saludo |
+| `success` | Trigger | celebración (desde loading: transición dedicada) |
+
+Tras una carga correcta: pon `state = 0` **y** dispara `success` a la vez.
+Los números son los del pack completo (que añade `1` thinking, `3` sleep y los triggers `error`, `empty`).
+
+**Colores** (data binding): view model `Appearance` con `bodyColor`, `lineColor`, `hairColor` (+ `accentColor` en `aituko.riv`).
+
+```js
+import { Rive } from '@rive-app/canvas';
+
+const uko = new Rive({
+  src: 'uko.riv', canvas: document.querySelector('canvas'),
+  stateMachines: 'Uko', autoplay: true, autoBind: true,
+  onLoad: () => uko.resizeDrawingSurfaceToCanvas(),
+});
+const input = (n) => uko.stateMachineInputs('Uko').find(i => i.name === n);
+input('state').value = 2;   // loading
+input('success').fire();
+```
+
+Ejemplos en `examples/`: web, React, Flutter, iOS (Swift), Android (Kotlin).
+
+---
+
+## Licencia
+
+Gratis, uso comercial incluido, sin reventa ni redistribución de los archivos: ver `LICENSE.md` (en francés; prevalece sobre cualquier traducción).

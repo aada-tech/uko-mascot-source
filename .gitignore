@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build outputs (all reproducible, see README)
+site/
+mascot_engine/dist/
+mascot_engine/rive/build/
+test_and_deploy/output/
+marketing/subflow-ad/clips/
+marketing/subflow-ad/clips-*/
+marketing/subflow-ad/landing-clips/
+marketing/subflow-ad/out/
+.wrangler/
+
+# Secrets and personal data: never committed
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*service-account*.json
+stickers-3d-*.json
+landing_page/legal.config.json
+
+# Personal working notes
+TASKS.md
+README_AGENT.md
+INUKO_BRIEF.md
+
+# OS / editors / logs
+.DS_Store
+*.log
+.vscode/
+.idea/

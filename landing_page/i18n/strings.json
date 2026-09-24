@@ -1,0 +1,758 @@
+{
+  "Uko — une mascotte vivante pour ton app": {
+    "en": "Uko — a living mascot for your app",
+    "es": "Uko — una mascota viva para tu app"
+  },
+  "Le code": {
+    "en": "The code",
+    "es": "El código"
+  },
+  "En vrai": {
+    "en": "For real",
+    "es": "En la vida real"
+  },
+  "Les états": {
+    "en": "The states",
+    "es": "Los estados"
+  },
+  "Télécharger": {
+    "en": "Download",
+    "es": "Descargar"
+  },
+  "Ton app a besoin d'un": {
+    "en": "Your app needs a",
+    "es": "Tu app necesita un"
+  },
+  "petit bonhomme.": {
+    "en": "little buddy.",
+    "es": "amiguito."
+  },
+  "Loading, succès, erreur, dodo… Uko joue chaque état de ton interface. Une balise, zéro dépendance.": {
+    "en": "Loading, success, error, nap time… Uko plays every state of your interface. One tag, zero dependencies.",
+    "es": "Carga, éxito, error, siesta… Uko interpreta cada estado de tu interfaz. Una etiqueta, cero dependencias."
+  },
+  "Télécharger gratuitement": {
+    "en": "Download for free",
+    "es": "Descargar gratis"
+  },
+  "Essayer ici": {
+    "en": "Try it here",
+    "es": "Pruébalo aquí"
+  },
+  "Sans compte ni e-mail · web + Rive · usage commercial autorisé.": {
+    "en": "No account, no email · web + Rive · commercial use allowed.",
+    "es": "Sin cuenta ni correo · web + Rive · uso comercial permitido."
+  },
+  "Starter ou pack complet ?": {
+    "en": "Starter or full pack?",
+    "es": "¿Starter o pack completo?"
+  },
+  "↑ tout ce film est en JavaScript. Uko, c'est le vrai moteur que tu télécharges.": {
+    "en": "↑ this whole film is JavaScript. Uko is the actual engine you download.",
+    "es": "↑ toda esta película es JavaScript. Uko es el motor real que descargas."
+  },
+  "Colle ça.": {
+    "en": "Paste this.",
+    "es": "Pega esto."
+  },
+  "C'est vivant.": {
+    "en": "It comes alive.",
+    "es": "Cobra vida."
+  },
+  "Un fichier Rive pour toutes les plateformes, ou une balise pour le web. Touche aux contrôles : la mascotte réagit tout de suite, avec exactement le code que tu écris.": {
+    "en": "A Rive file for every platform, or a tag for the web. Play with the controls: the mascot reacts right away, with exactly the code you write.",
+    "es": "Un archivo Rive para todas las plataformas, o una etiqueta para la web. Toca los controles: la mascota reacciona al instante, con exactamente el código que escribes."
+  },
+  "uko.riv ·": {
+    "en": "uko.riv ·",
+    "es": "uko.riv ·"
+  },
+  "Ko · web, iOS, Android, Flutter…": {
+    "en": "KB · web, iOS, Android, Flutter…",
+    "es": "KB · web, iOS, Android, Flutter…"
+  },
+  "Moteur web": {
+    "en": "Web engine",
+    "es": "Motor web"
+  },
+  "1 balise ·": {
+    "en": "1 tag ·",
+    "es": "1 etiqueta ·"
+  },
+  "Ko gzip · zéro dépendance": {
+    "en": "KB gzip · zero dependencies",
+    "es": "KB gzip · cero dependencias"
+  },
+  "couleurs": {
+    "en": "colors",
+    "es": "colores"
+  },
+  "Idle": {
+    "en": "Idle",
+    "es": "Idle"
+  },
+  "repos (boucle)": {
+    "en": "idle (loop)",
+    "es": "reposo (bucle)"
+  },
+  "↑ clique sur les valeurs": {
+    "en": "↑ click the values",
+    "es": "↑ haz clic en los valores"
+  },
+  "state = idle": {
+    "en": "state = idle",
+    "es": "state = idle"
+  },
+  "Ko": {
+    "en": "KB",
+    "es": "KB"
+  },
+  "Moteur web compris": {
+    "en": "Web engine included",
+    "es": "Motor web incluido"
+  },
+  "Un seul fichier JS (gzip), zéro dépendance. Pas de GIF de 5 Mo, pas de vidéo.": {
+    "en": "A single JS file (gzip), zero dependencies. No 5 MB GIF, no video.",
+    "es": "Un solo archivo JS (gzip), cero dependencias. Ni GIF de 5 MB, ni vídeo."
+  },
+  "1 ligne": {
+    "en": "1 line",
+    "es": "1 línea"
+  },
+  "Zéro dépendance": {
+    "en": "Zero dependencies",
+    "es": "Cero dependencias"
+  },
+  "HTML, React, Vue, Svelte… une balise": {
+    "en": "HTML, React, Vue, Svelte… one",
+    "es": "HTML, React, Vue, Svelte… una etiqueta"
+  },
+  "suffit.": {
+    "en": "tag is all it takes.",
+    "es": "es suficiente."
+  },
+  "9 états": {
+    "en": "9 states",
+    "es": "9 estados"
+  },
+  "Ceux de ton app": {
+    "en": "The ones your app has",
+    "es": "Los de tu app"
+  },
+  "Idle, welcome, thinking, loading, success, error, empty, sleep, wake.": {
+    "en": "Idle, welcome, thinking, loading, success, error, empty, sleep, wake.",
+    "es": "Idle, welcome, thinking, loading, success, error, empty, sleep, wake."
+  },
+  "Dans une vraie app.": {
+    "en": "In a real app.",
+    "es": "En una app de verdad."
+  },
+  "Pas une maquette.": {
+    "en": "Not a mockup.",
+    "es": "No una maqueta."
+  },
+  "Uko intégré dans SubFlow, une app de suivi d’abonnements, aux couleurs de sa marque. Chaque moment de l’app a sa réaction.": {
+    "en": "Uko built into SubFlow, a subscription tracker, in its brand colors. Every moment of the app gets a reaction.",
+    "es": "Uko integrado en SubFlow, una app de seguimiento de suscripciones, con los colores de su marca. Cada momento de la app tiene su reacción."
+  },
+  "Liste vide : il hausse les épaules.": {
+    "en": "Empty list: he shrugs.",
+    "es": "Lista vacía: se encoge de hombros."
+  },
+  "Abonnement ajouté : il saute de joie.": {
+    "en": "Subscription added: he jumps for joy.",
+    "es": "Suscripción añadida: salta de alegría."
+  },
+  "Montant invalide : il se gratte la tête.": {
+    "en": "Invalid amount: he scratches his head.",
+    "es": "Importe no válido: se rasca la cabeza."
+  },
+  "Prélèvement aujourd’hui : il réfléchit.": {
+    "en": "Payment due today: he thinks it over.",
+    "es": "Cargo hoy: se pone a pensar."
+  },
+  "Clair, sombre, rose : il suit le thème.": {
+    "en": "Light, dark, pink: he follows the theme.",
+    "es": "Claro, oscuro, rosa: sigue el tema."
+  },
+  "La vidéo est filmée dans l’app réelle, pas animée à la main.": {
+    "en": "The video is recorded in the real app, not animated by hand.",
+    "es": "El vídeo está grabado en la app real, no animado a mano."
+  },
+  "🔇 son": {
+    "en": "🔇 sound",
+    "es": "🔇 sonido"
+  },
+  "Un Uko pour": {
+    "en": "An Uko for",
+    "es": "Un Uko para"
+  },
+  "chaque moment.": {
+    "en": "every moment.",
+    "es": "cada momento."
+  },
+  "combinaisons : états, coiffures, couleurs. Fais défiler à la main, survole une carte pour la regarder, clique pour la personnaliser et copier son code.": {
+    "en": "combinations: states, hairstyles, colors. Scroll by hand, hover a card to watch it, click to customize it and copy its code.",
+    "es": "combinaciones: estados, peinados, colores. Desplázate a mano, pasa el cursor por una tarjeta para verla, haz clic para personalizarla y copiar su código."
+  },
+  "État": {
+    "en": "State",
+    "es": "Estado"
+  },
+  "Coiffure": {
+    "en": "Hairstyle",
+    "es": "Peinado"
+  },
+  "Cheveux": {
+    "en": "Hair",
+    "es": "Pelo"
+  },
+  "Visage, mains, pieds": {
+    "en": "Face, hands, feet",
+    "es": "Cara, manos, pies"
+  },
+  "Thème": {
+    "en": "Theme",
+    "es": "Tema"
+  },
+  "copier": {
+    "en": "copy",
+    "es": "copiar"
+  },
+  "🎲 Au hasard": {
+    "en": "🎲 Random",
+    "es": "🎲 Al azar"
+  },
+  "Commence gratuitement.": {
+    "en": "Start for free.",
+    "es": "Empieza gratis."
+  },
+  "Va plus loin si tu veux.": {
+    "en": "Go further if you like.",
+    "es": "Ve más lejos si quieres."
+  },
+  "Tout le monde peut utiliser Uko. Le Starter est gratuit, même dans une app commerciale. Le pack complet ajoute les états qui manquent.": {
+    "en": "Everyone can use Uko. The Starter is free, even in a commercial app. The full pack adds the missing states.",
+    "es": "Todo el mundo puede usar Uko. El Starter es gratis, incluso en una app comercial. El pack completo añade los estados que faltan."
+  },
+  "gratuit": {
+    "en": "free",
+    "es": "gratis"
+  },
+  "4 états : idle, welcome, loading, success": {
+    "en": "4 states: idle, welcome, loading, success",
+    "es": "4 estados: idle, welcome, loading, success"
+  },
+  "17 coiffures, couleurs libres, clair ou sombre": {
+    "en": "17 hairstyles, any colors, light or dark",
+    "es": "17 peinados, colores libres, claro u oscuro"
+  },
+  "Moteur web et fichier Rive": {
+    "en": "Web engine and Rive file",
+    "es": "Motor web y archivo Rive"
+  },
+  "Usage commercial autorisé": {
+    "en": "Commercial use allowed",
+    "es": "Uso comercial permitido"
+  },
+  "Télécharger le Starter": {
+    "en": "Download the Starter",
+    "es": "Descargar el Starter"
+  },
+  "Sans compte ni e-mail ·": {
+    "en": "No account, no email ·",
+    "es": "Sin cuenta ni correo ·"
+  },
+  "Ko ·": {
+    "en": "KB ·",
+    "es": "KB ·"
+  },
+  "licence": {
+    "en": "license (FR)",
+    "es": "licencia (FR)"
+  },
+  "Pack complet": {
+    "en": "Full pack",
+    "es": "Pack completo"
+  },
+  "ttc": {
+    "en": "incl. VAT",
+    "es": "IVA incl."
+  },
+  "prix de lancement, puis 19 €": {
+    "en": "launch price, then €19",
+    "es": "precio de lanzamiento, luego 19 €"
+  },
+  "Les 9 états : + thinking, error, empty, sleep, wake": {
+    "en": "All 9 states: + thinking, error, empty, sleep, wake",
+    "es": "Los 9 estados: + thinking, error, empty, sleep, wake"
+  },
+  "Moteur web et fichier Rive à 9 états": {
+    "en": "Web engine and 9-state Rive file",
+    "es": "Motor web y archivo Rive de 9 estados"
+  },
+  "Licence commerciale, projets illimités": {
+    "en": "Commercial license, unlimited projects",
+    "es": "Licencia comercial, proyectos ilimitados"
+  },
+  "Bientôt disponible": {
+    "en": "Coming soon",
+    "es": "Muy pronto"
+  },
+  "Le pack complet arrive bientôt. En attendant, le Starter est gratuit, et passer au pack complet revient à remplacer 2 fichiers.": {
+    "en": "The full pack is coming soon. Meanwhile, the Starter is free, and moving to the full pack means replacing 2 files.",
+    "es": "El pack completo llega pronto. Mientras tanto, el Starter es gratis, y pasar al pack completo consiste en reemplazar 2 archivos."
+  },
+  "J’accepte les": {
+    "en": "I accept the",
+    "es": "Acepto las"
+  },
+  "CGV": {
+    "en": "terms of sale (FR)",
+    "es": "condiciones de venta (FR)"
+  },
+  "et la": {
+    "en": "and the",
+    "es": "y la"
+  },
+  ", et je demande l’accès immédiat au pack : je renonce ainsi à mon droit de rétractation.": {
+    "en": ", and I ask for immediate access to the pack: I therefore waive my right of withdrawal.",
+    "es": ", y solicito el acceso inmediato al pack: renuncio así a mi derecho de desistimiento."
+  },
+  "Obtenir le pack — 12 €": {
+    "en": "Get the pack — €12",
+    "es": "Obtener el pack — 12 €"
+  },
+  "Une fois, pour toujours · paiement Stripe · passer du Starter au pack = remplacer 2 fichiers": {
+    "en": "Once, forever · Stripe payment · Starter to full pack = replace 2 files",
+    "es": "Una vez, para siempre · pago con Stripe · del Starter al pack = reemplazar 2 archivos"
+  },
+  "© 2026 Uko": {
+    "en": "© 2026 Uko",
+    "es": "© 2026 Uko"
+  },
+  "Mentions légales": {
+    "en": "Legal notice (FR)",
+    "es": "Aviso legal (FR)"
+  },
+  "Confidentialité": {
+    "en": "Privacy (FR)",
+    "es": "Privacidad (FR)"
+  },
+  "Licence": {
+    "en": "License (FR)",
+    "es": "Licencia (FR)"
+  },
+  "dessiné pour les devs ✎": {
+    "en": "drawn for devs ✎",
+    "es": "dibujado para devs ✎"
+  },
+  "Uko, la mascotte stickman pour développeurs et vibe coders : loading, success, error, sleep… Une balise, zéro dépendance, réagit au curseur.": {
+    "en": "Uko, the stick-figure mascot for developers and vibe coders: loading, success, error, sleep… One tag, zero dependencies, follows the cursor.",
+    "es": "Uko, la mascota de palitos para desarrolladores y vibe coders: loading, success, error, sleep… Una etiqueta, cero dependencias, sigue el cursor."
+  },
+  "Loading, success, error, sleep… Une balise, et ta mascotte est vivante.": {
+    "en": "Loading, success, error, sleep… One tag, and your mascot comes alive.",
+    "es": "Loading, success, error, sleep… Una etiqueta, y tu mascota cobra vida."
+  },
+  "Court métrage : une journée d'Uko, qui passe par tous ses états.": {
+    "en": "Short film: a day in Uko's life, through all his states.",
+    "es": "Cortometraje: un día en la vida de Uko, pasando por todos sus estados."
+  },
+  "Format": {
+    "en": "Format",
+    "es": "Formato"
+  },
+  "Uko animé par le runtime Rive": {
+    "en": "Uko animated by the Rive runtime",
+    "es": "Uko animado por el runtime de Rive"
+  },
+  "Corps blanc": {
+    "en": "White body",
+    "es": "Cuerpo blanco"
+  },
+  "Corps rose": {
+    "en": "Pink body",
+    "es": "Cuerpo rosa"
+  },
+  "Corps menthe": {
+    "en": "Mint body",
+    "es": "Cuerpo menta"
+  },
+  "Corps soleil": {
+    "en": "Sunny body",
+    "es": "Cuerpo sol"
+  },
+  "Cheveux noirs": {
+    "en": "Black hair",
+    "es": "Pelo negro"
+  },
+  "Cheveux châtains": {
+    "en": "Brown hair",
+    "es": "Pelo castaño"
+  },
+  "Cheveux bleus": {
+    "en": "Blue hair",
+    "es": "Pelo azul"
+  },
+  "Uko dans l’application SubFlow : ajout d’un abonnement, erreur, simulation, code et thèmes": {
+    "en": "Uko in the SubFlow app: adding a subscription, error, simulation, code and themes",
+    "es": "Uko en la app SubFlow: añadir una suscripción, error, simulación, código y temas"
+  },
+  "Galerie de combinaisons Uko": {
+    "en": "Gallery of Uko combinations",
+    "es": "Galería de combinaciones de Uko"
+  },
+  "Personnaliser Uko": {
+    "en": "Customize Uko",
+    "es": "Personalizar Uko"
+  },
+  "Fermer": {
+    "en": "Close",
+    "es": "Cerrar"
+  },
+  "Informations légales": {
+    "en": "Legal information",
+    "es": "Información legal"
+  },
+  "Langue": {
+    "en": "Language",
+    "es": "Idioma"
+  },
+  "Uko — des mascottes vivantes pour ton app": {
+    "en": "Uko — living mascots for your app",
+    "es": "Uko — mascotas vivas para tu app"
+  },
+  "Loading, succès, erreur, dodo… Uko, Aituko le robot et Meowuko le chat jouent chaque état de ton interface. Une balise, zéro dépendance.": {
+    "en": "Loading, success, error, nap… Uko, Aituko the robot and Meowuko the cat act out every state of your interface. One tag, zero dependencies.",
+    "es": "Carga, éxito, error, siesta… Uko, Aituko el robot y Meowuko el gato interpretan cada estado de tu interfaz. Una etiqueta, cero dependencias."
+  },
+  "Un fichier Rive par mascotte pour toutes les plateformes, ou une balise pour le web. Touche aux contrôles : la mascotte réagit tout de suite, avec exactement le code que tu écris.": {
+    "en": "One Rive file per mascot for every platform, or one tag for the web. Play with the controls: the mascot reacts right away, with exactly the code you write.",
+    "es": "Un archivo Rive por mascota para todas las plataformas, o una etiqueta para la web. Toca los controles: la mascota reacciona al instante, con exactamente el código que escribes."
+  },
+  "un .riv par mascotte ·": {
+    "en": "one .riv per mascot ·",
+    "es": "un .riv por mascota ·"
+  },
+  "Ko max · web, iOS, Android, Flutter…": {
+    "en": "KB max · web, iOS, Android, Flutter…",
+    "es": "KB máx. · web, iOS, Android, Flutter…"
+  },
+  "fichier": {
+    "en": "file",
+    "es": "archivo"
+  },
+  "Idle, welcome, thinking, loading, success, error, empty, sleep, wake. Les mêmes pour Uko, Aituko et Meowuko.": {
+    "en": "Idle, welcome, thinking, loading, success, error, empty, sleep, wake. The same for Uko, Aituko and Meowuko.",
+    "es": "Idle, welcome, thinking, loading, success, error, empty, sleep, wake. Los mismos para Uko, Aituko y Meowuko."
+  },
+  "Une mascotte pour": {
+    "en": "A mascot for",
+    "es": "Una mascota para"
+  },
+  "combinaisons : personnages, états, coiffures, couleurs. Fais défiler à la main, survole une carte pour la regarder, clique pour la personnaliser et copier son code.": {
+    "en": "combinations: characters, states, hairstyles, colors. Scroll by hand, hover a card to watch it, click to customize it and copy its code.",
+    "es": "combinaciones: personajes, estados, peinados, colores. Desplázate a mano, pasa el cursor por una tarjeta para verla, haz clic para personalizarla y copiar su código."
+  },
+  "Personnage": {
+    "en": "Character",
+    "es": "Personaje"
+  },
+  "3 mascottes : Uko, Aituko, Meowuko": {
+    "en": "3 mascots: Uko, Aituko, Meowuko",
+    "es": "3 mascotas: Uko, Aituko, Meowuko"
+  },
+  "17 coiffures pour Uko, couleurs libres, clair ou sombre": {
+    "en": "17 hairstyles for Uko, any colors, light or dark",
+    "es": "17 peinados para Uko, colores libres, claro u oscuro"
+  },
+  "Moteur web et fichiers Rive": {
+    "en": "Web engine and Rive files",
+    "es": "Motor web y archivos Rive"
+  },
+  "Les 3 mascottes, les 9 états : + thinking, error, empty, sleep, wake": {
+    "en": "The 3 mascots, all 9 states: + thinking, error, empty, sleep, wake",
+    "es": "Las 3 mascotas, los 9 estados: + thinking, error, empty, sleep, wake"
+  },
+  "Moteur web et 3 fichiers Rive à 9 états": {
+    "en": "Web engine and 3 Rive files with 9 states",
+    "es": "Motor web y 3 archivos Rive con 9 estados"
+  },
+  "Uko, Aituko le robot et Meowuko le chat : des mascottes stickman pour développeurs et vibe coders. Loading, success, error, sleep… Une balise, zéro dépendance, réagit au curseur.": {
+    "en": "Uko, Aituko the robot and Meowuko the cat: stick-figure mascots for developers and vibe coders. Loading, success, error, sleep… One tag, zero dependencies, reacts to the cursor.",
+    "es": "Uko, Aituko el robot y Meowuko el gato: mascotas de palitos para desarrolladores y vibe coders. Loading, success, error, sleep… Una etiqueta, cero dependencias, reacciona al cursor."
+  },
+  "Court métrage : une journée d'Uko et de sa bande, qui passent par tous leurs états.": {
+    "en": "Short film: a day with Uko and friends, going through all their states.",
+    "es": "Cortometraje: un día de Uko y su pandilla, que pasan por todos sus estados."
+  },
+  "La mascotte animée par le runtime Rive": {
+    "en": "The mascot animated by the Rive runtime",
+    "es": "La mascota animada por el runtime de Rive"
+  },
+  "Antenne jaune": {
+    "en": "Yellow antenna",
+    "es": "Antena amarilla"
+  },
+  "Antenne bleue": {
+    "en": "Blue antenna",
+    "es": "Antena azul"
+  },
+  "Antenne rose": {
+    "en": "Pink antenna",
+    "es": "Antena rosa"
+  },
+  "Personnaliser la mascotte": {
+    "en": "Customize the mascot",
+    "es": "Personalizar la mascota"
+  },
+  "Le pack complet arrive bientôt. En attendant, le Starter est gratuit, et passer au pack complet revient à remplacer le moteur et les fichiers Rive.": {
+    "en": "The full pack is coming soon. Meanwhile, the Starter is free, and moving to the full pack means replacing the engine and the Rive files.",
+    "es": "El pack completo llegará pronto. Mientras tanto, el Starter es gratis, y pasar al pack completo consiste en reemplazar el motor y los archivos Rive."
+  },
+  "Une fois, pour toujours · paiement Stripe · passer du Starter au pack = remplacer le moteur et les fichiers Rive": {
+    "en": "Once, forever · Stripe payment · from the Starter to the pack = replace the engine and the Rive files",
+    "es": "Una vez, para siempre · pago con Stripe · del Starter al pack = reemplazar el motor y los archivos Rive"
+  },
+  "corps": {
+    "en": "body",
+    "es": "cuerpo"
+  },
+  "cheveux": {
+    "en": "hair",
+    "es": "pelo"
+  },
+  "antenne": {
+    "en": "antenna",
+    "es": "antena"
+  },
+  "Il regarde le prélèvement qui arrive, ce que tu touches, le total qui change.": {
+    "en": "He looks at the upcoming payment, at what you touch, at the total that changes.",
+    "es": "Mira el cargo que llega, lo que tocas, el total que cambia."
+  },
+  "Le regard est une intégration maison, écrite pour SubFlow avec l’API du pack (": {
+    "en": "The gaze is a custom integration, written for SubFlow with the pack’s API (",
+    "es": "La mirada es una integración a medida, escrita para SubFlow con la API del pack ("
+  },
+  ") : moins de 100 lignes.": {
+    "en": "): fewer than 100 lines.",
+    "es": "): menos de 100 líneas."
+  },
+  "du pack : ce comportement n’est pas fourni tel quel.": {
+    "en": ": this behaviour is not included as is.",
+    "es": "del pack: este comportamiento no viene incluido tal cual."
+  },
+  "SubFlow : la mascotte grimpe sur le formulaire, s’y allonge, se réveille quand on écrit et réagit": {
+    "en": "SubFlow: the mascot climbs onto the form, lies down on it, wakes up when you type and reacts",
+    "es": "SubFlow: la mascota sube al formulario, se tumba en él, se despierta cuando escribes y reacciona"
+  },
+  "Et sur mesure, il peut faire bien plus.": {
+    "en": "And with custom code, it can do much more.",
+    "es": "Y a medida, puede hacer mucho más."
+  },
+  "↻ demi-tour": {
+    "en": "↻ turn around",
+    "es": "↻ media vuelta"
+  },
+  "Dans SubFlow, il quitte sa place d’un bond, passe derrière le formulaire et s’y hisse à la force des bras, fait la sieste sur son bord, se réveille quand tu écris, se gratte la tête devant une erreur et rentre chez lui en sautant de joie quand c’est bon. Du code maison avec les états,": {
+    "en": "In SubFlow, it leaves its spot with a leap, drops behind the form and hauls itself up onto it, naps on its edge, wakes up when you type, scratches its head at an error and jumps back home for joy when it’s right. Custom code built with the pack’s states,",
+    "es": "En SubFlow, deja su sitio de un salto, pasa detrás del formulario y se sube a pulso, se echa la siesta en su borde, se despierta cuando escribes, se rasca la cabeza ante un error y vuelve a su sitio saltando de alegría cuando todo está bien. Código a medida con los estados,"
+  },
+  "et": {
+    "en": "and",
+    "es": "y"
+  },
+  "Mouvements (marche, demi-tour, escalade) et regard qui suit la page,": {
+    "en": "Movements (walk, turn around, climb) and a gaze that follows the page,",
+    "es": "Movimientos (caminar, media vuelta, escalar) y mirada que sigue la página,"
+  },
+  "Il grimpe": {
+    "en": "It climbs",
+    "es": "Escala"
+  },
+  "Les états, branchés sur l’app.": {
+    "en": "The states, wired to the app.",
+    "es": "Los estados, conectados a la app."
+  },
+  "Sur mesure : il grimpe sur le formulaire.": {
+    "en": "Custom: it climbs onto the form.",
+    "es": "A medida: escala al formulario."
+  },
+  "Il quitte l’en-tête d’un bond, passe derrière le formulaire et s’y hisse à la force des bras. Il fait la sieste sur le bord, se réveille quand tu écris, regarde le champ, se gratte la tête devant une erreur et rentre chez lui en sautant de joie.": {
+    "en": "It leaps out of the header, drops behind the form and pulls itself up by its arms. It naps on the edge, wakes up when you type, watches the field, scratches its head at an error and jumps back home for joy.",
+    "es": "Sale de la cabecera de un salto, pasa detrás del formulario y sube a pulso. Se echa la siesta en el borde, se despierta cuando escribes, mira el campo, se rasca la cabeza ante un error y vuelve a casa saltando de alegría."
+  },
+  "Du code maison, environ 150 lignes, écrit pour SubFlow avec l’API du pack : ce comportement n’est pas fourni tel quel. Le regard seul : moins de 100 lignes.": {
+    "en": "Custom code, about 150 lines, written for SubFlow with the pack’s API: this behaviour is not shipped as is. The gaze alone: fewer than 100 lines.",
+    "es": "Código propio, unas 150 líneas, escrito para SubFlow con la API del pack: este comportamiento no viene tal cual. La mirada sola: menos de 100 líneas."
+  },
+  "Les deux vidéos sont filmées dans l’app réelle, pas animées à la main.": {
+    "en": "Both videos are filmed in the real app, not animated by hand.",
+    "es": "Los dos vídeos están grabados en la app real, no animados a mano."
+  },
+  "Démos dans l’app": {
+    "en": "Demos in the app",
+    "es": "Demos en la app"
+  },
+  "Marcher, tourner, grimper, suivre du regard :": {
+    "en": "Walking, turning, climbing, following with its eyes:",
+    "es": "Caminar, girar, escalar, seguir con la mirada:"
+  },
+  "à essayer dans le moteur web": {
+    "en": "try them in the web engine",
+    "es": "pruébalos en el motor web"
+  },
+  "Mouvements et regard": {
+    "en": "Moves and gaze",
+    "es": "Movimientos y mirada"
+  },
+  "tourner": {
+    "en": "turn",
+    "es": "girar"
+  },
+  "face": {
+    "en": "front",
+    "es": "frente"
+  },
+  "profil": {
+    "en": "profile",
+    "es": "perfil"
+  },
+  "bouger": {
+    "en": "move",
+    "es": "mover"
+  },
+  "marcher": {
+    "en": "walk",
+    "es": "caminar"
+  },
+  "grimper": {
+    "en": "climb",
+    "es": "escalar"
+  },
+  "regard": {
+    "en": "gaze",
+    "es": "mirada"
+  },
+  "suit la souris": {
+    "en": "follows the mouse",
+    "es": "sigue el ratón"
+  },
+  "regarde la balle": {
+    "en": "looks at the ball",
+    "es": "mira la pelota"
+  },
+  "Balle à déplacer": {
+    "en": "Ball to drag",
+    "es": "Pelota para arrastrar"
+  },
+  "à": {
+    "en": "to",
+    "es": "a"
+  },
+  "Un .riv léger pour ton MVP": {
+    "en": "A light .riv for your MVP",
+    "es": "Un .riv ligero para tu MVP"
+  },
+  "Les 4 états essentiels d’une app (idle, welcome, loading, success), gratuits dans le Starter. Les 9 états :": {
+    "en": "The 4 essential states of an app (idle, welcome, loading, success), free in the Starter. All 9 states:",
+    "es": "Los 4 estados esenciales de una app (idle, welcome, loading, success), gratis en el Starter. Los 9 estados:"
+  },
+  "Ko. iOS, Android, Flutter, web.": {
+    "en": "KB. iOS, Android, Flutter, web.",
+    "es": "KB. iOS, Android, Flutter, web."
+  },
+  "Ou le moteur web": {
+    "en": "Or the web engine",
+    "es": "O el motor web"
+  },
+  "Un seul fichier JS (gzip), zéro dépendance : une balise": {
+    "en": "A single JS file (gzip), zero dependencies: one",
+    "es": "Un solo archivo JS (gzip), cero dependencias: una etiqueta"
+  },
+  "dans HTML, React, Vue, Svelte… Pas de GIF de 5 Mo, pas de vidéo.": {
+    "en": "tag in HTML, React, Vue, Svelte… No 5 MB GIF, no video.",
+    "es": "en HTML, React, Vue, Svelte… Ni GIF de 5 MB, ni vídeo."
+  },
+  "3 mascottes, 17 coiffures pour Uko, 9 états": {
+    "en": "3 mascots, 17 hairstyles for Uko, 9 states",
+    "es": "3 mascotas, 17 peinados para Uko, 9 estados"
+  },
+  "et les couleurs de ta marque. Fais défiler à la main, survole une carte pour la regarder, clique pour la personnaliser et copier son code.": {
+    "en": "and your brand colors. Scroll by hand, hover a card to watch it, click to customize it and copy its code.",
+    "es": "y los colores de tu marca. Desplázate a mano, pasa el cursor por una tarjeta para verla, haz clic para personalizarla y copiar su código."
+  },
+  "Chargement, succès, erreur, dodo… Uko, Aituko le robot et Meowuko le chat jouent chaque état de ton interface. Une balise, zéro dépendance.": {
+    "en": "Loading, success, error, nap… Uko, Aituko the robot and Meowuko the cat act out every state of your interface. One tag, zero dependencies.",
+    "es": "Carga, éxito, error, siesta… Uko, Aituko el robot y Meowuko el gato interpretan cada estado de tu interfaz. Una etiqueta, cero dependencias."
+  },
+  "Les 4 états essentiels d’une app (repos, accueil, chargement, succès), gratuits dans le Starter. Les 9 états :": {
+    "en": "The 4 essential states of an app (idle, welcome, loading, success), free in the Starter. All 9 states:",
+    "es": "Los 4 estados esenciales de una app (reposo, bienvenida, carga, éxito), gratis en el Starter. Los 9 estados:"
+  },
+  "Repos, accueil, réflexion, chargement, succès, erreur, vide, dodo, réveil. Les mêmes pour Uko, Aituko et Meowuko. Dans le code :": {
+    "en": "Idle, welcome, thinking, loading, success, error, empty, sleep, wake. The same for Uko, Aituko and Meowuko. In code:",
+    "es": "Reposo, bienvenida, reflexión, carga, éxito, error, vacío, siesta, despertar. Los mismos para Uko, Aituko y Meowuko. En el código:"
+  },
+  "4 états : repos, accueil, chargement, succès": {
+    "en": "4 states: idle, welcome, loading, success",
+    "es": "4 estados: reposo, bienvenida, carga, éxito"
+  },
+  "Les 3 mascottes, les 9 états : + réflexion, erreur, vide, dodo, réveil": {
+    "en": "The 3 mascots, all 9 states: + thinking, error, empty, sleep, wake",
+    "es": "Las 3 mascotas, los 9 estados: + reflexión, error, vacío, siesta, despertar"
+  },
+  "Uko, Aituko le robot et Meowuko le chat : des mascottes stickman pour développeurs et vibe coders. Chargement, succès, erreur, dodo… Une balise, zéro dépendance, réagit au curseur.": {
+    "en": "Uko, Aituko the robot and Meowuko the cat: stick-figure mascots for developers and vibe coders. Loading, success, error, sleep… One tag, zero dependencies, reacts to the cursor.",
+    "es": "Uko, Aituko el robot y Meowuko el gato: mascotas de palitos para desarrolladores y vibe coders. Carga, éxito, error, siesta… Una etiqueta, cero dependencias, reacciona al cursor."
+  },
+  "Chargement, succès, erreur, dodo… Une balise, et ta mascotte est vivante.": {
+    "en": "Loading, success, error, sleep… One tag, and your mascot comes alive.",
+    "es": "Carga, éxito, error, siesta… Una etiqueta, y tu mascota cobra vida."
+  },
+  "Touche-les : ils réagissent.": {
+    "en": "Touch them: they react.",
+    "es": "Tócalos: reaccionan."
+  },
+  "Toucher": {
+    "en": "Touch",
+    "es": "Tocar"
+  },
+  "Starter aussi": {
+    "en": "Starter too",
+    "es": "Starter también"
+  },
+  "poke": {
+    "en": "poke",
+    "es": "poke"
+  },
+  "tête": {
+    "en": "head",
+    "es": "cabeza"
+  },
+  "main": {
+    "en": "hand",
+    "es": "mano"
+  },
+  "pied": {
+    "en": "foot",
+    "es": "pie"
+  },
+  "étourdi": {
+    "en": "dizzy",
+    "es": "mareado"
+  },
+  "joie": {
+    "en": "joy",
+    "es": "alegría"
+  },
+  "… ou touche-le directement, plusieurs fois de suite.": {
+    "en": "… or touch it directly, several times in a row.",
+    "es": "… o tócalo directamente, varias veces seguidas."
+  },
+  "Réactions au toucher : tête, mains, pieds, corps (moteur web)": {
+    "en": "Touch reactions: head, hands, feet, body (web engine)",
+    "es": "Reacciones al tacto: cabeza, manos, pies, cuerpo (motor web)"
+  }
+}

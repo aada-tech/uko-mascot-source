@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de confidentialité — Uko</title>
+  <meta name="description" content="Quelles données le site Uko traite, pourquoi, combien de temps, et comment exercer vos droits (RGPD).">
+  <link rel="canonical" href="{{SITE_URL}}/confidentialite">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F4F7FF'/><circle cx='16' cy='12' r='7' fill='white' stroke='%231B1B1F' stroke-width='2.4'/><path d='M16 19v7M16 22l-5 4M16 22l5 4' stroke='%231B1B1F' stroke-width='2.4' stroke-linecap='round'/></svg>">
+  <link rel="preload" href="/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/legal.css">
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="/"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="14" r="9" fill="#fff" stroke="currentColor" stroke-width="2.6"/><path d="M20 23v9M20 27l-6 5M20 27l6 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg> Uko</a>
+      <a class="back" href="/">← Retour au site</a>
+    </div>
+  </header>
+  <main class="doc wrap">
+    <h1>Politique de confidentialité</h1>
+    <p class="updated">Dernière mise à jour : 23 septembre 2026</p>
+
+    <p class="lead">
+      En bref : pas de compte, pas de cookie publicitaire, pas de pisteur. Nous traitons seulement ce qu’il faut pour vous vendre le pack,
+      vous l’envoyer et tenir notre comptabilité.
+    </p>
+
+    <h2>Responsable du traitement</h2>
+    <p>
+      {{EDITEUR_NOM}} — {{ADRESSE}} — <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>.
+    </p>
+
+    <h2>Données traitées, finalités et durées</h2>
+    <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Finalité</th><th>Données</th><th>Base légale</th><th>Durée de conservation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vente et accès au pack</td>
+          <td>E-mail, nom, pays et adresse de facturation, montant, date, identifiant de paiement (collectés par Stripe)</td>
+          <td>Exécution du contrat (art. 6.1.b RGPD)</td>
+          <td>Durée de la relation commerciale</td>
+        </tr>
+        <tr>
+          <td>Comptabilité et factures</td>
+          <td>Données de facturation et de paiement</td>
+          <td>Obligation légale (art. 6.1.c)</td>
+          <td>10 ans (art. L123-22 du Code de commerce)</td>
+        </tr>
+        <tr>
+          <td>Preuve de votre accord (accès immédiat et renonciation à la rétractation)</td>
+          <td>Date et heure de l’accord, version des CGV acceptée</td>
+          <td>Intérêt légitime : prouver la conformité de la vente (art. 6.1.f)</td>
+          <td>5 ans après l’achat (prescription)</td>
+        </tr>
+        <tr>
+          <td>Service client</td>
+          <td>E-mails échangés</td>
+          <td>Exécution du contrat / intérêt légitime</td>
+          <td>3 ans après le dernier échange</td>
+        </tr>
+        <tr>
+          <td>Sécurité du Site</td>
+          <td>Journaux techniques de l’hébergeur : adresse IP, navigateur, page demandée, date</td>
+          <td>Intérêt légitime : sécurité et prévention des abus</td>
+          <td>Durée courte fixée par l’hébergeur, au plus 12 mois</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p>
+      Le Site ne mesure pas l’audience et n’utilise aucun outil publicitaire. Si une mesure d’audience sans cookie est ajoutée,
+      cette page sera mise à jour avant sa mise en service.
+    </p>
+
+    <h2>Destinataires et sous-traitants</h2>
+    <ul>
+      <li><strong>Stripe Payments Europe, Ltd.</strong> (Irlande) : paiement, reçus et factures. Stripe agit aussi comme responsable de traitement distinct pour la lutte contre la fraude et ses obligations réglementaires.</li>
+      <li><strong>Cloudflare, Inc.</strong> (États-Unis) : hébergement du Site, nom de domaine et protection contre les attaques.</li>
+      <li>{{PRESTATAIRE_EMAIL}} : messagerie du service client.</li>
+    </ul>
+    <p>Vos données ne sont jamais vendues ni utilisées à des fins publicitaires.</p>
+
+    <h2>Transferts hors de l’Union européenne</h2>
+    <p>
+      Certains prestataires (Cloudflare, Stripe) peuvent traiter des données aux États-Unis. Ces transferts sont encadrés par le
+      <em>Data Privacy Framework</em> UE–États-Unis, auquel ces sociétés sont certifiées, et/ou par les clauses contractuelles types de la Commission européenne.
+    </p>
+
+    <h2>Cookies et stockage local</h2>
+    <p>
+      Le Site ne dépose <strong>aucun cookie</strong> et n’utilise pas le stockage local du navigateur.
+      La page de paiement, hébergée par Stripe (checkout.stripe.com), utilise ses propres cookies, strictement nécessaires au paiement et à la prévention de la fraude :
+      voir la <a href="https://stripe.com/fr/privacy" rel="noopener">politique de confidentialité de Stripe</a>.
+    </p>
+
+    <h2>Sécurité</h2>
+    <p>
+      Le Site est servi uniquement en HTTPS, avec des en-têtes de sécurité stricts ; ses polices de caractères sont hébergées sur le Site lui-même (aucun appel à Google). Le paiement est délégué à Stripe, certifié PCI-DSS niveau 1 :
+      nous ne voyons ni ne stockons jamais vos données de carte. Les accès aux comptes de gestion sont protégés par une authentification à deux facteurs.
+    </p>
+
+    <h2>Vos droits</h2>
+    <p>
+      Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation, d’opposition et de portabilité de vos données,
+      ainsi que du droit de définir des directives sur leur sort après votre décès. Pour les exercer, écrivez à <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>.
+      Nous répondons dans un délai d’un mois. Les données de facturation ne peuvent pas être effacées avant la fin de l’obligation légale de conservation.
+    </p>
+    <p>
+      Vous pouvez introduire une réclamation auprès de la <strong>CNIL</strong> : 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 —
+      <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">cnil.fr/fr/plaintes</a>.
+    </p>
+
+    <h2>Modifications</h2>
+    <p>Cette politique peut évoluer. La date de mise à jour figure en haut de la page.</p>
+  </main>
+  <footer>
+    <div class="wrap">
+      <nav aria-label="Informations légales">
+        <a href="/mentions-legales">Mentions légales</a>
+        <a href="/cgv">CGV</a>
+        <a href="/confidentialite">Confidentialité</a>
+        <a href="/licence">Licence</a>
+        <a href="mailto:{{EMAIL}}">Contact</a>
+      </nav>
+      <p>© 2026 Uko — {{EDITEUR_NOM}}</p>
+    </div>
+  </footer>
+</body>
+</html>

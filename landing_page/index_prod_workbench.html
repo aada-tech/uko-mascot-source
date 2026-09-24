@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <title>Uko UI — Une Mascotte Vivante pour Votre App. Prête en 30 Secondes.</title>
+  <meta name="description" content="La mascotte articulée nouvelle génération pour développeurs et web coders. 9 états indispensables (Loading Laptop, Thinking IA, Success, Error, Idle...), réactive au curseur, Rive natif < 50 Ko et composant drop-in React/HTML.">
+  
+  <!-- Minimalist Monogram Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230B0B0B'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' fill='%23FFFFFF' font-family='sans-serif' font-weight='800' font-size='17'>U</text></svg>">
+  <meta name="theme-color" content="#090A0C">
+
+  <!-- Anti-FOUC Theme Pre-Initialization -->
+  <script>
+    (function() {
+      try {
+        var urlTheme = new URLSearchParams(window.location.search).get('theme');
+        var savedTheme = localStorage.getItem('uko_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (urlTheme === 'dark' || (!urlTheme && (savedTheme === 'dark' || (!savedTheme && prefersDark)))) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Uko UI">
+  <meta property="og:title" content="Uko UI — Une mascotte vivante pour votre app. Prête en 30 secondes.">
+  <meta property="og:description" content="9 états d'interface indispensables (Loading Laptop, Thinking IA, Success, Error, Idle...). Réactif au curseur, Rive natif < 50 Ko. Licence commerciale 100% libre.">
+
+  <!-- Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+            },
+            surface: {
+              light: '#FBFBFB',
+              lightcard: '#FFFFFF',
+              lightborder: '#E8E8EB',
+              lightmuted: '#6B7280',
+              dark: '#090A0D',
+              darkcard: '#12141A',
+              darkborder: '#212530',
+              darkmuted: '#8A92A6',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Mascot Vector Runtime -->
+  <script src="/js/uko-mascot-engine.js"></script>
+
+  <style>
+    /* Custom subtle grid background */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    
+    /* Code highlight tokens */
+    .token-keyword { color: #F43F5E; }
+    .token-func { color: #8B5CF6; }
+    .token-attr { color: #0EA5E9; }
+    .token-string { color: #10B981; }
+    .token-comment { color: #6B7280; font-style: italic; }
+  </style>
+</head>
+<body class="bg-surface-light dark:bg-surface-dark text-slate-900 dark:text-slate-100 min-h-screen font-sans antialiased transition-colors duration-200">
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/85 dark:bg-surface-dark/85 border-b border-surface-lightborder dark:border-surface-darkborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Badge -->
+      <div class="flex items-center gap-3">
+        <a href="#" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-black text-lg tracking-tight transition-transform group-hover:scale-105">
+            U
+          </div>
+          <span class="font-extrabold text-lg tracking-tight">Uko UI</span>
+        </a>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+          Stick Mascot · Dev Edition
+        </span>
+      </div>
+
+      <!-- Quick Nav Links -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600 dark:text-slate-400">
+        <a href="#workbench" class="hover:text-slate-950 dark:hover:text-white transition-colors">Workbench</a>
+        <a href="#states" class="hover:text-slate-950 dark:hover:text-white transition-colors">Les 9 États</a>
+        <a href="#developers" class="hover:text-slate-950 dark:hover:text-white transition-colors">Web Coders</a>
+        <a href="#rive-spec" class="hover:text-slate-950 dark:hover:text-white transition-colors">Rive & Mobile</a>
+        <a href="#pricing" class="hover:text-slate-950 dark:hover:text-white transition-colors">Tarifs</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggle" type="button" aria-label="Basculer le thème" class="w-9 h-9 rounded-xl border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-surface-darkcard flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <svg id="themeIconSun" class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="themeIconMoon" class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- CTA Buy -->
+        <a href="#pricing" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-white bg-slate-950 hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-slate-200 transition-all shadow-sm">
+          <span>Obtenir le Pack</span>
+          <span class="text-xs px-1.5 py-0.5 rounded bg-white/20 dark:bg-black/15 font-mono">9,99 €</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION (SPLIT WORKBENCH) ================= -->
+  <section id="workbench" class="relative pt-8 pb-16 md:pt-14 md:pb-24 border-b border-surface-lightborder dark:border-surface-darkborder bg-grid-pattern">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Value Proposition (Fast, Punchy, Direct) -->
+        <div class="lg:col-span-6 flex flex-col justify-center">
+          
+          <div class="inline-flex items-center gap-2 w-max px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 mb-5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L1 21h22L12 2zm0 3.8l7.53 13.2H4.47L12 5.8zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+            </svg>
+            Zéro Blender · Zéro timeline lourde · Drop-in immédiat
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-5">
+            Une mascotte vivante pour votre app.<br>
+            <span class="text-indigo-600 dark:text-indigo-400">Prête en 30 secondes.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+            Arrêtez de perdre 2 semaines à rigger des personnages 3D ou à charger des GIFs de 5 Mo. 
+            Une mascotte articulée vectorielle ultra-légère (<strong class="font-bold text-slate-900 dark:text-white">&lt; 50 Ko</strong>), 
+            avec les <strong>9 vrais états de votre produit</strong> (Loading laptop, Thinking IA, Success, Error 404, Idle...), réactive au curseur et adaptative à vos couleurs.
+          </p>
+
+          <!-- Primary CTAs -->
+          <div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
+            <a href="#pricing" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-extrabold text-base text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] transition-all shadow-md shadow-indigo-500/20">
+              <span>Acheter le Pack Complet — 9,99 €</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            
+            <a href="#developers" class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-bold text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9l3 3-3 3"/><path d="M13 15h3"/></svg>
+              <span>Voir le Code React / HTML</span>
+            </a>
+          </div>
+
+          <!-- Trust & Performance Metrics Bar -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-surface-lightborder dark:border-surface-darkborder">
+            <div>
+              <div class="font-mono text-xl font-black text-slate-900 dark:text-white">&lt; 50 Ko</div>
+              <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Poids Master .riv</div>
+            </div>
+            <div>
+              <div class="font-mono text-xl font-black text-indigo-600 dark:text-indigo-400">60 FPS</div>
+              <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Moteur vectoriel C2</div>
+            </div>
+            <div>
+              <div class="font-mono text-xl font-black text-slate-900 dark:text-white">9 États</div>
+              <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Prêts pour l'UI</div>
+            </div>
+            <div>
+              <div class="font-mono text-xl font-black text-emerald-600 dark:text-emerald-400">0 Royalties</div>
+              <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Licence commerciale</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Interactive Live Mascot Workbench -->
+        <div class="lg:col-span-6">
+          <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
+            
+            <!-- Workbench Header Bar -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-surface-lightborder dark:border-surface-darkborder">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-mono text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Live Interactive Rig</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Regard :</span>
+                <span class="text-xs font-bold text-slate-800 dark:text-slate-200">Suit le curseur</span>
+              </div>
+            </div>
+
+            <!-- Stage Box with Live Mascot -->
+            <div id="heroMascotStage" class="w-full h-80 sm:h-96 rounded-2xl bg-slate-50 dark:bg-surface-dark border border-surface-lightborder dark:border-surface-darkborder flex items-center justify-center relative cursor-crosshair overflow-hidden">
+              <!-- Live Vector Mascot Mount Point -->
+            </div>
+
+            <!-- 1-Click State Selector Pills -->
+            <div class="mt-4">
+              <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>Cliquez pour tester les états réels</span>
+                <span id="activeStateLabel" class="text-indigo-600 dark:text-indigo-400 font-mono font-extrabold normal-case">État actif : loading</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <button type="button" data-state-btn="loading" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-indigo-600 bg-indigo-600 text-white transition-all shadow-sm">
+                  💻 Loading (Laptop)
+                </button>
+                <button type="button" data-state-btn="thinking" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  🤔 Thinking
+                </button>
+                <button type="button" data-state-btn="success" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  ✓ Success
+                </button>
+                <button type="button" data-state-btn="error" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  ✕ Error
+                </button>
+                <button type="button" data-state-btn="empty" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  🤷 Empty
+                </button>
+                <button type="button" data-state-btn="sleep" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  💤 Sleep
+                </button>
+                <button type="button" data-state-btn="wake" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  ⚡ Wake
+                </button>
+                <button type="button" data-state-btn="welcome" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  👋 Welcome
+                </button>
+                <button type="button" data-state-btn="idle" class="state-pill px-3 py-1.5 rounded-xl text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                  ● Neutral
+                </button>
+              </div>
+            </div>
+
+            <!-- Transition Flows & Marche (Sub-bar tabs) -->
+            <div class="mt-4 pt-3.5 border-t border-surface-lightborder dark:border-surface-darkborder">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">⚡ Enchaînements fluides & Transitions</span>
+                <span id="activeFlowLabel" class="text-[11px] font-mono text-slate-400">Transitions 60 FPS automatiques</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-3">
+                <button type="button" id="flowThinkingLoadingBtn" class="flow-pill px-2.5 py-1.5 rounded-xl text-xs font-semibold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all text-left flex items-center justify-between shadow-xs">
+                  <span>🤔 ➔ 💻 Laptop</span>
+                  <span class="text-[10px] text-slate-400 font-mono">Flow</span>
+                </button>
+                <button type="button" id="flowLoadingSuccessBtn" class="flow-pill px-2.5 py-1.5 rounded-xl text-xs font-semibold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all text-left flex items-center justify-between shadow-xs">
+                  <span>💻 ➔ ✓ Succès</span>
+                  <span class="text-[10px] text-slate-400 font-mono">Flow</span>
+                </button>
+                <button type="button" id="flowLoadingErrorBtn" class="flow-pill px-2.5 py-1.5 rounded-xl text-xs font-semibold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:border-rose-500 hover:text-rose-600 dark:hover:text-rose-400 transition-all text-left flex items-center justify-between shadow-xs">
+                  <span>💻 ➔ ✕ Erreur</span>
+                  <span class="text-[10px] text-slate-400 font-mono">Flow</span>
+                </button>
+                <button type="button" id="flowSleepWakeBtn" class="flow-pill px-2.5 py-1.5 rounded-xl text-xs font-semibold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-400 transition-all text-left flex items-center justify-between shadow-xs">
+                  <span>💤 ➔ ⚡ Réveil</span>
+                  <span class="text-[10px] text-slate-400 font-mono">Flow</span>
+                </button>
+              </div>
+
+              <!-- Walk & Orientation Row -->
+              <div class="p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-surface-lightborder dark:border-surface-darkborder flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Marche :</span>
+                  <button type="button" id="walkLeftBtn" class="walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-600 transition-all">
+                    🚶 Gauche
+                  </button>
+                  <button type="button" id="walkRightBtn" class="walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-600 transition-all">
+                    🚶 Droite
+                  </button>
+                  <button type="button" id="walkStopBtn" class="walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-all">
+                    ⏹ Stop
+                  </button>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Orientation :</span>
+                  <button type="button" data-yaw="0" class="orient-btn px-2 py-0.5 rounded text-[11px] font-mono border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400">0°</button>
+                  <button type="button" data-yaw="0.5" class="orient-btn px-2 py-0.5 rounded text-[11px] font-mono border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400">45°</button>
+                  <button type="button" data-yaw="1" class="orient-btn px-2 py-0.5 rounded text-[11px] font-mono border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400">90°</button>
+                  <button type="button" id="turnDemoBtn" class="px-2 py-0.5 rounded text-[11px] font-bold border border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 transition-all">🔄 360°</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customization Bar: Brand Colors, Hair Colors & Hairstyle -->
+            <div class="mt-4 pt-4 border-t border-surface-lightborder dark:border-surface-darkborder space-y-4">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Brand Colors & Contrast -->
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Couleur de marque</span>
+                    <button type="button" id="brandContrastToggle" class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-indigo-500 transition-colors" title="Bascule entre mode Direct et Contraste Automatique WCAG AAA 4.5:1">
+                      Contraste : Direct
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <button type="button" data-brand-color="#6366F1" title="Indigo" class="brand-swatch w-6 h-6 rounded-full bg-[#6366F1] ring-2 ring-offset-2 ring-indigo-600 dark:ring-offset-surface-darkcard transition-all"></button>
+                    <button type="button" data-brand-color="#10B981" title="Émeraude" class="brand-swatch w-6 h-6 rounded-full bg-[#10B981] transition-all"></button>
+                    <button type="button" data-brand-color="#2563EB" title="Bleu" class="brand-swatch w-6 h-6 rounded-full bg-[#2563EB] transition-all"></button>
+                    <button type="button" data-brand-color="#8B5CF6" title="Violet" class="brand-swatch w-6 h-6 rounded-full bg-[#8B5CF6] transition-all"></button>
+                    <button type="button" data-brand-color="#F43F5E" title="Rose" class="brand-swatch w-6 h-6 rounded-full bg-[#F43F5E] transition-all"></button>
+                    <button type="button" data-brand-color="#F59E0B" title="Ambre" class="brand-swatch w-6 h-6 rounded-full bg-[#F59E0B] transition-all"></button>
+                    <button type="button" data-brand-color="#0B0B0B" title="Noir Carbone" class="brand-swatch w-6 h-6 rounded-full bg-[#0B0B0B] dark:border dark:border-slate-600 transition-all"></button>
+                    
+                    <!-- Brand color input -->
+                    <label class="w-6 h-6 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center cursor-pointer hover:border-slate-500 transition-colors" title="Couleur de marque personnalisée">
+                      <input id="brandColorPicker" type="color" value="#6366F1" class="sr-only">
+                      <svg class="w-3 h-3 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Hair Color & Contrast -->
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Couleur cheveux</span>
+                    <button type="button" id="hairContrastToggle" class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-indigo-500 transition-colors" title="Bascule entre mode Direct et Contraste Automatique WCAG AAA 3:1">
+                      Contraste : Direct
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <button type="button" data-hair-color="#0B0B0B" title="Noir Carbone" class="hair-color-swatch w-6 h-6 rounded-full bg-[#0B0B0B] ring-2 ring-offset-2 ring-indigo-600 dark:ring-offset-surface-darkcard dark:border dark:border-slate-600 transition-all"></button>
+                    <button type="button" data-hair-color="#451A03" title="Chocolat foncé" class="hair-color-swatch w-6 h-6 rounded-full bg-[#451A03] transition-all"></button>
+                    <button type="button" data-hair-color="#78350F" title="Châtain chaud" class="hair-color-swatch w-6 h-6 rounded-full bg-[#78350F] transition-all"></button>
+                    <button type="button" data-hair-color="#CA8A04" title="Blond doré" class="hair-color-swatch w-6 h-6 rounded-full bg-[#CA8A04] transition-all"></button>
+                    <button type="button" data-hair-color="#B45309" title="Roux cuivré" class="hair-color-swatch w-6 h-6 rounded-full bg-[#B45309] transition-all"></button>
+                    <button type="button" data-hair-color="#F1F5F9" title="Blanc polaire" class="hair-color-swatch w-6 h-6 rounded-full bg-[#F1F5F9] border border-slate-300 dark:border-slate-600 transition-all"></button>
+                    <button type="button" data-hair-color="#9333EA" title="Violet pop" class="hair-color-swatch w-6 h-6 rounded-full bg-[#9333EA] transition-all"></button>
+                    <button type="button" data-hair-color="#0284C7" title="Cyan fluo" class="hair-color-swatch w-6 h-6 rounded-full bg-[#0284C7] transition-all"></button>
+                    
+                    <!-- Hair color picker -->
+                    <label class="w-6 h-6 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center cursor-pointer hover:border-slate-500 transition-colors" title="Couleur de cheveux personnalisée">
+                      <input id="hairColorPicker" type="color" value="#0B0B0B" class="sr-only">
+                      <svg class="w-3 h-3 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hairstyle Switcher (All 10 Styles) -->
+              <div class="pt-2.5 border-t border-surface-lightborder dark:border-surface-darkborder space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Style de Coiffure (10 modèles) :</span>
+                  <span id="activeHairLabel" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-bold">Dreadlocks</span>
+                </div>
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin">
+                  <button type="button" data-hair-style="dreadlocks" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-black">
+                    Dreadlocks
+                  </button>
+                  <button type="button" data-hair-style="medium" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Mi-long
+                  </button>
+                  <button type="button" data-hair-style="original" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Original
+                  </button>
+                  <button type="button" data-hair-style="classique" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Classique
+                  </button>
+                  <button type="button" data-hair-style="tres_court" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Très court
+                  </button>
+                  <button type="button" data-hair-style="fade" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Dégradé
+                  </button>
+                  <button type="button" data-hair-style="afro_femme" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Afro
+                  </button>
+                  <button type="button" data-hair-style="chignon_femme" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Chignon
+                  </button>
+                  <button type="button" data-hair-style="tresses_femme" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Tresses
+                  </button>
+                  <button type="button" data-hair-style="bald" class="hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    Chauve
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Real-Time Code Snippet Preview & Copy -->
+            <div class="mt-4 pt-4 border-t border-surface-lightborder dark:border-surface-darkborder">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400">Code drop-in réactif (React / HTML) :</span>
+                <button id="heroCopyCodeBtn" type="button" class="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span id="heroCopyCodeText">Copier le snippet</span>
+                </button>
+              </div>
+              <div class="bg-slate-900 text-slate-100 rounded-xl p-3 font-mono text-xs overflow-x-auto border border-slate-800">
+                <code id="heroCodeSnippet">&lt;<span class="token-func">Mascot</span> <span class="token-attr">state</span>=<span class="token-string">"loading"</span> <span class="token-attr">brand</span>=<span class="token-string">"#6366F1"</span> <span class="token-attr">hairStyle</span>=<span class="token-string">"dreadlocks"</span> <span class="token-attr">hairColor</span>=<span class="token-string">"#0B0B0B"</span> /&gt;</code>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= BENTO GRID: LE PROBLÈME DEV VS LA SOLUTION UKO ================= -->
+  <section class="py-16 md:py-24 border-b border-surface-lightborder dark:border-surface-darkborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-extrabold font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Pourquoi Uko UI ?</span>
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight mt-2 mb-4">
+          Conçu pour les développeurs pressés,<br class="hidden sm:block"> pas pour les timeline animators.
+        </h2>
+        <p class="text-base text-slate-600 dark:text-slate-400">
+          Les mascottes classiques sont un cauchemar pour les web coders : formats inadaptés, GIFs lourds, assets éclatés. Voici pourquoi Uko change la donne.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-black text-lg mb-4">
+              ⚡
+            </div>
+            <h3 class="font-extrabold text-lg mb-2">30 secondes d'intégration</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Fini les devis à 1 500 € et 3 semaines d'attente auprès d'un animateur 3D. Téléchargez, importez 1 ligne et shippez votre produit aujourd'hui.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-lightborder dark:border-surface-darkborder text-xs font-mono font-bold text-slate-400">
+            Gain : ~40h de travail économisées
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-lg mb-4">
+              🪶
+            </div>
+            <h3 class="font-extrabold text-lg mb-2">&lt; 50 Ko vs GIFs de 8 Mo</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Un GIF ou une vidéo WebM dégrade vos Core Web Vitals (LCP/CLS). Le fichier master Rive et le moteur vectoriel SVG pèsent moins qu'une icône raster.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-lightborder dark:border-surface-darkborder text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
+            100% Vectoriel · Retina crisp
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-black text-lg mb-4">
+              👁️
+            </div>
+            <h3 class="font-extrabold text-lg mb-2">Réactif au curseur & clics</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Ce n'est pas une boucle vidéo inerte. Les yeux suivent le pointeur de la souris, le stickman cligne naturellement et réagit aux interactions.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-lightborder dark:border-surface-darkborder text-xs font-mono font-bold text-purple-600 dark:text-purple-400">
+            Micro-interactions intégrées
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-black text-lg mb-4">
+              🔄
+            </div>
+            <h3 class="font-extrabold text-lg mb-2">State Machine logique</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Transitions propres sans à-coups : le stickman passe de Thinking (réflexion IA) à Loading (saisie laptop), puis explose de joie sur Success.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-lightborder dark:border-surface-darkborder text-xs font-mono font-bold text-amber-600 dark:text-amber-400">
+            Zero flash · Pas de coupure
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= THE 9 ESSENTIAL APP STATES (INTERACTIVE GALLERY) ================= -->
+  <section id="states" class="py-16 md:py-24 border-b border-surface-lightborder dark:border-surface-darkborder bg-slate-50/50 dark:bg-surface-dark/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs font-extrabold font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Les 9 États Clés de Votre UI</span>
+          <h2 class="text-3xl sm:text-4xl font-black tracking-tight mt-2">
+            Une réaction prête pour chaque écran.
+          </h2>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 max-w-md">
+          Cliquez sur n'importe quelle carte pour animer instantanément la mascotte ci-dessus et tester son rendu in situ.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- State 0: Idle -->
+        <button type="button" data-gallery-state="idle" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>●</span> 00 · idle
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Neutre & Suivi Curseur</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Regard dynamique qui suit le curseur en temps réel avec micro-respiration et clignements naturels.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="idle"
+          </div>
+        </button>
+
+        <!-- State 1: Welcome -->
+        <button type="button" data-gallery-state="welcome" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>👋</span> 01 · welcome
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Accueil & Onboarding</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Signe de la main amical lors de la première visite ou de l'accueil dans le dashboard.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="welcome"
+          </div>
+        </button>
+
+        <!-- State 2: Thinking -->
+        <button type="button" data-gallery-state="thinking" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>🤔</span> 02 · thinking
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Génération IA & Attente</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Main au menton et regard vers le haut. Idéal pendant un appel API LLM ou un filtrage complexe.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="thinking"
+          </div>
+        </button>
+
+        <!-- State 3: Loading -->
+        <button type="button" data-gallery-state="loading" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>💻</span> 03 · loading
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Saisie Laptop & Traitement</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Tape activement sur son ordinateur portable avec spinner SVG rotatif et animation de frappe.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="loading"
+          </div>
+        </button>
+
+        <!-- State 4: Success -->
+        <button type="button" data-gallery-state="success" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>✓</span> 04 · success
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Validation & Paiement</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Saut de joie, bras levés et rayons de célébration lors d'un formulaire validé ou checkout Stripe.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="success"
+          </div>
+        </button>
+
+        <!-- State 5: Error -->
+        <button type="button" data-gallery-state="error" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>✕</span> 05 · error
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Erreur 404 & Panne</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Bulle de pensée avec point d'interrogation. Dédramatise une panne réseau ou un code 500.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="error"
+          </div>
+        </button>
+
+        <!-- State 6: Empty -->
+        <button type="button" data-gallery-state="empty" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>🤷</span> 06 · empty
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Filtre vide & 0 Résultat</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Haussement d'épaules expressif. Évite l'écran blanc froid quand une recherche ne donne rien.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="empty"
+          </div>
+        </button>
+
+        <!-- State 7: Sleep -->
+        <button type="button" data-gallery-state="sleep" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>💤</span> 07 · sleep
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Veille & Inactivité</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            S'allonge au sol et respire avec symboles Zzz flottants après un temps d'inactivité.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="sleep"
+          </div>
+        </button>
+
+        <!-- State 8: Wake -->
+        <button type="button" data-gallery-state="wake" class="gallery-card text-left bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-500 hover:shadow-lg transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-xs font-bold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/60 px-2 py-0.5 rounded flex items-center gap-1.5">
+              <span>⚡</span> 08 · wake
+            </span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors font-bold">Tester →</span>
+          </div>
+          <h4 class="font-extrabold text-base mb-1">Réveil & Reprise de Session</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+            Se relève avec fluidité anatomique dès que l'utilisateur déplace à nouveau son curseur.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 bg-slate-50 dark:bg-slate-900/60 p-2 rounded-lg">
+            state="wake"
+          </div>
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= DUAL DEVELOPER TRACK (WEB CODER VS RIVE POWER USER) ================= -->
+  <section id="developers" class="py-16 md:py-24 border-b border-surface-lightborder dark:border-surface-darkborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-extrabold font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Developer Experience</span>
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight mt-2 mb-4">
+          Deux façons d'intégrer. Une seule ligne de code.
+        </h2>
+        <p class="text-base text-slate-600 dark:text-slate-400">
+          Que vous soyez un créateur web pressé ou un développeur mobile Flutter / Swift exigeant, Uko s'adapte à votre stack.
+        </p>
+      </div>
+
+      <!-- Tab Switcher Header -->
+      <div class="flex justify-center mb-8">
+        <div class="inline-flex p-1.5 rounded-2xl bg-slate-100 dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder">
+          <button id="tabBtnWeb" type="button" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-sm transition-all">
+            ⚡ Web Coder (React / Vue / HTML)
+          </button>
+          <button id="tabBtnRive" type="button" class="px-5 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+            📱 Rive Power User (Flutter / Swift / Native)
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 1 Content: Web Coder / React / HTML -->
+      <div id="tabContentWeb" class="block">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-5">
+            <h3 class="text-2xl font-extrabold mb-3">Composant Drop-in Ultra-Simple</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              Pas de canvas complexe à configurer. Utilisez le composant React ou la balise HTML standard <code class="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded">&lt;uko-mascot&gt;</code>. Changez simplement l'attribut d'état quand vos données chargent.
+            </p>
+
+            <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300 font-semibold mb-6">
+              <li class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span>Zero configuration Webpack / Vite / Next.js</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span>Moteur SVG autonome inclus (<strong class="font-bold">0 dépendance externe</strong>)</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span>TypeScript definitions (<code class="font-mono text-xs">MascotState</code>) incluses</span>
+              </li>
+            </ul>
+
+            <div class="bg-slate-100 dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-xl p-3 font-mono text-xs flex items-center justify-between">
+              <span class="text-slate-600 dark:text-slate-400">npm i @ukoui/mascot</span>
+              <button onclick="navigator.clipboard.writeText('npm i @ukoui/mascot')" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Copier</button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="bg-slate-900 text-slate-100 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
+              <!-- Editor Header -->
+              <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                  <span class="font-mono text-xs text-slate-400 ml-2">CheckoutPage.tsx</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500">React / Next.js / Vite</span>
+              </div>
+              
+              <!-- Editor Body -->
+              <pre class="p-5 font-mono text-xs leading-relaxed overflow-x-auto"><code><span class="token-keyword">import</span> { useState } <span class="token-keyword">from</span> <span class="token-string">'react'</span>;
+<span class="token-keyword">import</span> { Mascot } <span class="token-keyword">from</span> <span class="token-string">'@ukoui/mascot'</span>;
+
+<span class="token-keyword">export default function</span> <span class="token-func">PaymentFlow</span>() {
+  <span class="token-keyword">const</span> [status, setStatus] = <span class="token-func">useState</span>&lt;<span class="token-string">'loading'</span> | <span class="token-string">'success'</span> | <span class="token-string">'error'</span>&gt;(<span class="token-string">'loading'</span>);
+
+  <span class="token-keyword">return</span> (
+    &lt;<span class="token-func">div</span> <span class="token-attr">className</span>=<span class="token-string">"checkout-card"</span>&gt;
+      {<span class="token-comment">/* Drop-in ultra simple : 1 ligne de code */</span>}
+      &lt;<span class="token-func">Mascot</span> 
+        <span class="token-attr">state</span>={status} 
+        <span class="token-attr">brand</span>=<span class="token-string">"#6366F1"</span>
+        <span class="token-attr">hair</span>=<span class="token-string">"dreadlocks"</span>
+        <span class="token-attr">interactive</span>={<span class="token-keyword">true</span>} 
+      /&gt;
+
+      &lt;<span class="token-func">button</span> <span class="token-attr">onClick</span>={() =&gt; setStatus(<span class="token-string">'success'</span>)}&gt;
+        Valider le paiement
+      &lt;/<span class="token-func">button</span>&gt;
+    &lt;/<span class="token-func">div</span>&gt;
+  );
+}</code></pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tab 2 Content: Rive Power User / Flutter / Mobile -->
+      <div id="tabContentRive" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <div class="lg:col-span-5">
+            <h3 class="text-2xl font-extrabold mb-3">Fichier Master .riv Natif</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              Le pack contient le fichier <code class="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded">mascot.riv</code> optimisé (&lt; 50 Ko) avec la State Machine officielle <code class="font-mono text-xs font-bold text-slate-900 dark:text-white">MascotState</code>.
+            </p>
+
+            <!-- State Machine Input Specs Table -->
+            <div class="border border-surface-lightborder dark:border-surface-darkborder rounded-xl overflow-hidden mb-6">
+              <table class="w-full text-left text-xs font-mono">
+                <thead class="bg-slate-100 dark:bg-surface-darkcard text-slate-600 dark:text-slate-400 border-b border-surface-lightborder dark:border-surface-darkborder">
+                  <tr>
+                    <th class="p-2.5 font-bold">Input</th>
+                    <th class="p-2.5 font-bold">Type</th>
+                    <th class="p-2.5 font-bold">Valeur</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-surface-lightborder dark:divide-surface-darkborder text-slate-700 dark:text-slate-300">
+                  <tr>
+                    <td class="p-2.5 font-bold text-indigo-600 dark:text-indigo-400">state</td>
+                    <td class="p-2.5 text-slate-500">Number</td>
+                    <td class="p-2.5">0..7 (0=idle, 3=loading, 4=success...)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold text-indigo-600 dark:text-indigo-400">primaryColor</td>
+                    <td class="p-2.5 text-slate-500">Color</td>
+                    <td class="p-2.5">Teinte de marque ARGB</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold text-indigo-600 dark:text-indigo-400">hairColor</td>
+                    <td class="p-2.5 text-slate-500">Color</td>
+                    <td class="p-2.5">Teinte chevelure ARGB</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold text-indigo-600 dark:text-indigo-400">reducedMotion</td>
+                    <td class="p-2.5 text-slate-500">Boolean</td>
+                    <td class="p-2.5">Accessibilité sans oscillation</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold text-indigo-600 dark:text-indigo-400">wake</td>
+                    <td class="p-2.5 text-slate-500">Trigger</td>
+                    <td class="p-2.5">Transition dynamique Sleep ➔ Idle</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="bg-slate-900 text-slate-100 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
+              <!-- Editor Header -->
+              <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                  <span class="font-mono text-xs text-slate-400 ml-2">mascot_view.dart</span>
+                </div>
+                <span class="text-xs font-mono text-slate-500">Flutter / Mobile SDK</span>
+              </div>
+              
+              <!-- Editor Body -->
+              <pre class="p-5 font-mono text-xs leading-relaxed overflow-x-auto"><code><span class="token-keyword">import</span> <span class="token-string">'package:flutter/material.dart'</span>;
+<span class="token-keyword">import</span> <span class="token-string">'package:rive/rive.dart'</span>;
+
+<span class="token-keyword">class</span> <span class="token-func">MascotWidget</span> <span class="token-keyword">extends</span> <span class="token-func">StatelessWidget</span> {
+  <span class="token-keyword">final</span> <span class="token-func">int</span> stateIndex; <span class="token-comment">// 3 = loading, 4 = success</span>
+  <span class="token-keyword">const</span> <span class="token-func">MascotWidget</span>({<span class="token-keyword">required</span> <span class="token-keyword">this</span>.stateIndex});
+
+  @override
+  <span class="token-func">Widget</span> <span class="token-func">build</span>(<span class="token-func">BuildContext</span> context) {
+    <span class="token-keyword">return</span> <span class="token-func">RiveAnimation.asset</span>(
+      <span class="token-string">'assets/mascot.riv'</span>,
+      <span class="token-attr">stateMachines</span>: <span class="token-keyword">const</span> [<span class="token-string">'MascotState'</span>],
+      <span class="token-attr">onInit</span>: (artboard) {
+        <span class="token-keyword">final</span> controller = <span class="token-func">StateMachineController.fromArtboard</span>(
+          artboard, 
+          <span class="token-string">'MascotState'</span>,
+        );
+        artboard.addController(controller!);
+        
+        <span class="token-comment">// Contrôle direct de l'état applicatif</span>
+        controller.findInput&lt;<span class="token-func">double</span>&gt;(<span class="token-string">'state'</span>)?.value = stateIndex.toDouble();
+      },
+    );
+  }
+}</code></pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ACCESSIBILITY & CONTRAST (WCAG 2.2 AAA) ================= -->
+  <section class="py-14 border-b border-surface-lightborder dark:border-surface-darkborder bg-slate-50/50 dark:bg-surface-dark/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div>
+          <span class="text-xs font-extrabold font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400">WCAG 2.2 AAA Compliant</span>
+          <h3 class="text-2xl font-black tracking-tight mt-1 mb-2">Contraste Garanti ou Direct Pur.</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Vous avez le choix total : utilisez vos codes hexadécimaux bruts en <strong>Mode Direct WYSIWYG</strong>, ou activez le <strong>Mode Auto WCAG</strong> pour garantir un contraste minimal de 4.5:1 sur n'importe quel arrière-plan.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-xs font-extrabold">Mode Direct (WYSIWYG)</span>
+            <span class="text-xs font-bold text-slate-400">100% Fidèle</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Applique exactement vos teintes de marque (hexadécimal sans altération). Idéal quand votre charte graphique est déjà validée.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-xs font-extrabold text-indigo-600 dark:text-indigo-400">Mode Auto WCAG 4.5:1</span>
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Accessible</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Ajuste automatiquement la luminosité dans l'espace Oklab si la couleur choisie risque d'être illisible sur le fond clair ou sombre.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING & COMMERCIAL LICENSE ================= -->
+  <section id="pricing" class="py-16 md:py-24 border-b border-surface-lightborder dark:border-surface-darkborder">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-extrabold font-mono uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Achat Unique · Accès Immédiat</span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight mt-2 mb-4">
+          Un prix simple. Aucun abonnement.
+        </h2>
+        <p class="text-base text-slate-600 dark:text-slate-400">
+          Obtenez le pack complet avec le fichier master Rive, le runtime SVG et la licence commerciale perpétuelle sans restriction.
+        </p>
+      </div>
+
+      <!-- Pricing Card -->
+      <div class="max-w-xl mx-auto bg-white dark:bg-surface-darkcard border-2 border-indigo-600 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+        
+        <!-- Popular Badge -->
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-4 py-0.5 rounded-full text-xs font-extrabold tracking-wide uppercase">
+          Pack Mascotte Pro · Licence Complète
+        </div>
+
+        <div class="flex items-baseline justify-between mb-6 pt-2">
+          <div>
+            <h3 class="text-2xl font-black">Pack Mascotte Uko Pro</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tous les livrables web, mobile & master .riv inclus</p>
+          </div>
+          <div class="text-right">
+            <div class="text-4xl sm:text-5xl font-black font-mono tracking-tight text-slate-950 dark:text-white">9,99 €</div>
+            <div class="text-xs text-slate-500 font-semibold mt-0.5">Paiement unique · À vie</div>
+          </div>
+        </div>
+
+        <!-- Deliverables List -->
+        <div class="space-y-3.5 py-6 border-y border-surface-lightborder dark:border-surface-darkborder mb-8 text-sm">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <div>
+              <strong class="text-slate-900 dark:text-white font-bold">Fichier master Rive natif (.riv)</strong>
+              <div class="text-xs text-slate-500">&lt; 50 Ko avec State Machine complète (MascotState) et inputs paramétrables.</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <div>
+              <strong class="text-slate-900 dark:text-white font-bold">Moteur SVG Vectoriel Autonome (Web Component & React)</strong>
+              <div class="text-xs text-slate-500">60 FPS fluide, zéro dépendance réseau, eye-tracking au curseur.</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <div>
+              <strong class="text-slate-900 dark:text-white font-bold">Les 9 États Applicatifs & Transitions Fluides</strong>
+              <div class="text-xs text-slate-500">Idle (Curseur), Loading (Laptop), Thinking IA, Success, Error, Empty, Sleep, Wake, Welcome + Marche.</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <div>
+              <strong class="text-slate-900 dark:text-white font-bold">10 Coiffures Modulaires Incluses</strong>
+              <div class="text-xs text-slate-500">Dreadlocks animées avec physique C2, Mi-long, Original, Classique, Dégradé, Afro, Chignon, Tresses, Chauve...</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <div>
+              <strong class="text-emerald-700 dark:text-emerald-400 font-bold">Licence Commerciale Mondiale 100% Libre</strong>
+              <div class="text-xs text-slate-500">Utilisation illimitée dans tous vos SaaS, projets clients et apps personnelles. Zéro attribution requise.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buy Button -->
+        <button id="buyPackBtn" type="button" class="w-full py-4 rounded-2xl font-extrabold text-base text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] transition-all shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2">
+          <span>Acheter et Télécharger Immédiatement</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+
+        <div class="mt-4 flex items-center justify-center gap-4 text-xs text-slate-400 font-semibold">
+          <span class="flex items-center gap-1">🔒 Paiement sécurisé Stripe</span>
+          <span>•</span>
+          <span>⚡ Téléchargement ZIP instantané</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FAQ SECTION ================= -->
+  <section class="py-16 border-b border-surface-lightborder dark:border-surface-darkborder">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-black tracking-tight mb-2">Questions Fréquentes</h2>
+        <p class="text-sm text-slate-500">Tout ce que vous devez savoir avant d'intégrer Uko dans votre projet.</p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="group bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 cursor-pointer">
+          <summary class="font-extrabold text-sm flex items-center justify-between list-none">
+            <span>Avec quels frameworks la mascotte est-elle compatible ?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Absolument tous. Côté Web, vous recevez un composant React / Next.js natif et un Web Component HTML standard <code class="font-mono text-xs">&lt;uko-mascot&gt;</code> compatible avec Vue, Svelte, Angular, Astro et HTML pur. Côté mobile, le fichier master Rive fonctionne directement avec Flutter, React Native, iOS Swift et Android Kotlin.
+          </p>
+        </details>
+
+        <details class="group bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 cursor-pointer">
+          <summary class="font-extrabold text-sm flex items-center justify-between list-none">
+            <span>Quel est l'impact réel sur les performances et le Core Web Vitals ?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Quasiment nul (&lt; 50 Ko). Contrairement aux vidéos ou GIFs qui consomment plusieurs mégaoctets de bande passante et saturent la mémoire mobile, la mascotte est rendue en vecteurs purs à 60 FPS avec accélération matérielle, sans aucun pic de CPU.
+          </p>
+        </details>
+
+        <details class="group bg-white dark:bg-surface-darkcard border border-surface-lightborder dark:border-surface-darkborder rounded-2xl p-5 cursor-pointer">
+          <summary class="font-extrabold text-sm flex items-center justify-between list-none">
+            <span>Ai-je le droit de l'utiliser dans un projet client ou SaaS commercial ?</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            Oui, à 100%. L'achat unique à 9,99 € vous octroie une licence commerciale mondiale illimitée. Vous pouvez l'intégrer dans autant de projets clients ou SaaS personnels payants que vous le souhaitez, sans aucune redevance et sans mentionner Uko UI.
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-12 bg-white dark:bg-surface-dark text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-md bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-black text-xs">U</div>
+        <span class="font-extrabold text-slate-900 dark:text-white">Uko UI</span>
+        <span>— Mascottes Vectorielles pour Développeurs & Web Coders</span>
+      </div>
+      <div>
+        © 2026 Uko UI. Tous droits réservés. Conçu pour le code.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= PAGE LOGIC SCRIPT ================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Hero Live Mascot Workbench
+      const heroStage = document.getElementById('heroMascotStage');
+      let currentSelectedState = 'loading';
+      let currentSelectedBrand = '#6366F1';
+      let currentSelectedHair = 'dreadlocks';
+      let currentSelectedHairColor = '#0B0B0B';
+      let currentBrandContrast = 'direct';
+      let currentHairContrast = 'direct';
+      let currentWalkDir = null;
+
+      let mascotInstance = null;
+      if (typeof UkoMascot !== 'undefined' && heroStage) {
+        mascotInstance = UkoMascot.create(heroStage, {
+          state: currentSelectedState,
+          brandColor: currentSelectedBrand,
+          hairStyle: currentSelectedHair,
+          hairColor: currentSelectedHairColor,
+          brandContrast: currentBrandContrast,
+          hairContrast: currentHairContrast,
+          contrastMode: 'direct',
+          interactive: true,
+          onStateChange: (newState) => {
+            if (newState === 'walk') {
+              // handled in walk buttons
+            } else {
+              currentSelectedState = newState;
+              currentWalkDir = null;
+              syncWalkButtons();
+              const matchingPill = Array.from(statePills).find(p => p.dataset.stateBtn === newState);
+              if (matchingPill) {
+                resetStatePills();
+                matchingPill.classList.add('border-indigo-600', 'bg-indigo-600', 'text-white');
+                matchingPill.classList.remove('border-surface-lightborder', 'dark:border-surface-darkborder', 'bg-slate-100', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300');
+              }
+            }
+            updateSnippet();
+          }
+        });
+      }
+
+      // 2. Code Snippet Updater
+      const codeSnippet = document.getElementById('heroCodeSnippet');
+      const activeStateLabel = document.getElementById('activeStateLabel');
+
+      function updateSnippet() {
+        if (codeSnippet) {
+          if (currentWalkDir !== null) {
+            codeSnippet.innerHTML = `&lt;<span class="token-func">Mascot</span> <span class="token-attr">state</span>=<span class="token-string">"walk"</span> <span class="token-attr">walkDir</span>=<span class="token-string">"${currentWalkDir > 0 ? 'right' : 'left'}"</span> <span class="token-attr">brand</span>=<span class="token-string">"${currentSelectedBrand}"</span> <span class="token-attr">hairStyle</span>=<span class="token-string">"${currentSelectedHair}"</span> <span class="token-attr">hairColor</span>=<span class="token-string">"${currentSelectedHairColor}"</span> <span class="token-attr">brandContrast</span>=<span class="token-string">"${currentBrandContrast}"</span> <span class="token-attr">hairContrast</span>=<span class="token-string">"${currentHairContrast}"</span> /&gt;`;
+          } else {
+            codeSnippet.innerHTML = `&lt;<span class="token-func">Mascot</span> <span class="token-attr">state</span>=<span class="token-string">"${currentSelectedState}"</span> <span class="token-attr">brand</span>=<span class="token-string">"${currentSelectedBrand}"</span> <span class="token-attr">hairStyle</span>=<span class="token-string">"${currentSelectedHair}"</span> <span class="token-attr">hairColor</span>=<span class="token-string">"${currentSelectedHairColor}"</span> <span class="token-attr">brandContrast</span>=<span class="token-string">"${currentBrandContrast}"</span> <span class="token-attr">hairContrast</span>=<span class="token-string">"${currentHairContrast}"</span> /&gt;`;
+          }
+        }
+        if (activeStateLabel) {
+          if (currentWalkDir !== null) {
+            activeStateLabel.textContent = `État actif : marche (${currentWalkDir > 0 ? 'droite ➔' : '⬅ gauche'})`;
+          } else {
+            activeStateLabel.textContent = `État actif : ${currentSelectedState}`;
+          }
+        }
+      }
+
+      // 3. State Pills Click Handling
+      const statePills = document.querySelectorAll('.state-pill');
+      function resetStatePills() {
+        statePills.forEach(p => {
+          p.classList.remove('border-indigo-600', 'bg-indigo-600', 'text-white');
+          p.classList.add('border-surface-lightborder', 'dark:border-surface-darkborder', 'bg-slate-100', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300');
+        });
+      }
+
+      statePills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const targetState = pill.dataset.stateBtn;
+          currentSelectedState = targetState;
+          currentWalkDir = null;
+          syncWalkButtons();
+          
+          resetStatePills();
+          pill.classList.add('border-indigo-600', 'bg-indigo-600', 'text-white');
+          pill.classList.remove('border-surface-lightborder', 'dark:border-surface-darkborder', 'bg-slate-100', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300');
+
+          if (mascotInstance) {
+            mascotInstance.setState(targetState);
+          }
+          updateSnippet();
+        });
+      });
+
+      // 4. Transition Flows
+      const flowThinkingLoadingBtn = document.getElementById('flowThinkingLoadingBtn');
+      const flowLoadingSuccessBtn = document.getElementById('flowLoadingSuccessBtn');
+      const flowLoadingErrorBtn = document.getElementById('flowLoadingErrorBtn');
+      const flowSleepWakeBtn = document.getElementById('flowSleepWakeBtn');
+      const flowPills = document.querySelectorAll('.flow-pill');
+
+      function flashFlowPill(btn) {
+        flowPills.forEach(p => p.classList.remove('ring-2', 'ring-indigo-500', 'bg-indigo-50', 'dark:bg-indigo-950/50'));
+        btn.classList.add('ring-2', 'ring-indigo-500', 'bg-indigo-50', 'dark:bg-indigo-950/50');
+        setTimeout(() => {
+          btn.classList.remove('ring-2', 'ring-indigo-500', 'bg-indigo-50', 'dark:bg-indigo-950/50');
+        }, 2200);
+      }
+
+      if (flowThinkingLoadingBtn) {
+        flowThinkingLoadingBtn.addEventListener('click', () => {
+          currentWalkDir = null;
+          syncWalkButtons();
+          flashFlowPill(flowThinkingLoadingBtn);
+          if (mascotInstance) mascotInstance.flowThinkingToLoading();
+        });
+      }
+
+      if (flowLoadingSuccessBtn) {
+        flowLoadingSuccessBtn.addEventListener('click', () => {
+          currentWalkDir = null;
+          syncWalkButtons();
+          flashFlowPill(flowLoadingSuccessBtn);
+          if (mascotInstance) mascotInstance.flowLoadingToSuccess();
+        });
+      }
+
+      if (flowLoadingErrorBtn) {
+        flowLoadingErrorBtn.addEventListener('click', () => {
+          currentWalkDir = null;
+          syncWalkButtons();
+          flashFlowPill(flowLoadingErrorBtn);
+          if (mascotInstance) mascotInstance.flowLoadingToError();
+        });
+      }
+
+      if (flowSleepWakeBtn) {
+        flowSleepWakeBtn.addEventListener('click', () => {
+          currentWalkDir = null;
+          syncWalkButtons();
+          flashFlowPill(flowSleepWakeBtn);
+          if (mascotInstance) mascotInstance.flowSleepToWake();
+        });
+      }
+
+      // 5. Walk & Orientation Controls
+      const walkLeftBtn = document.getElementById('walkLeftBtn');
+      const walkRightBtn = document.getElementById('walkRightBtn');
+      const walkStopBtn = document.getElementById('walkStopBtn');
+      const turnDemoBtn = document.getElementById('turnDemoBtn');
+      const orientBtns = document.querySelectorAll('.orient-btn');
+
+      function syncWalkButtons() {
+        if (walkLeftBtn) {
+          if (currentWalkDir === -1) {
+            walkLeftBtn.className = 'walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-indigo-600 bg-indigo-600 text-white transition-all shadow-xs';
+          } else {
+            walkLeftBtn.className = 'walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-600 transition-all';
+          }
+        }
+        if (walkRightBtn) {
+          if (currentWalkDir === 1) {
+            walkRightBtn.className = 'walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-indigo-600 bg-indigo-600 text-white transition-all shadow-xs';
+          } else {
+            walkRightBtn.className = 'walk-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-indigo-500 hover:text-indigo-600 transition-all';
+          }
+        }
+      }
+
+      if (walkLeftBtn) {
+        walkLeftBtn.addEventListener('click', () => {
+          currentWalkDir = -1;
+          resetStatePills();
+          syncWalkButtons();
+          if (mascotInstance) mascotInstance.startWalk(-1);
+          updateSnippet();
+        });
+      }
+
+      if (walkRightBtn) {
+        walkRightBtn.addEventListener('click', () => {
+          currentWalkDir = 1;
+          resetStatePills();
+          syncWalkButtons();
+          if (mascotInstance) mascotInstance.startWalk(1);
+          updateSnippet();
+        });
+      }
+
+      if (walkStopBtn) {
+        walkStopBtn.addEventListener('click', () => {
+          currentWalkDir = null;
+          syncWalkButtons();
+          if (mascotInstance) mascotInstance.stopWalk();
+          currentSelectedState = 'idle';
+          const idlePill = Array.from(statePills).find(p => p.dataset.stateBtn === 'idle');
+          if (idlePill) {
+            resetStatePills();
+            idlePill.classList.add('border-indigo-600', 'bg-indigo-600', 'text-white');
+          }
+          updateSnippet();
+        });
+      }
+
+      orientBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const yaw = parseFloat(btn.dataset.yaw);
+          currentWalkDir = null;
+          syncWalkButtons();
+          orientBtns.forEach(b => b.className = 'orient-btn px-2 py-0.5 rounded text-[11px] font-mono border border-surface-lightborder dark:border-surface-darkborder bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400');
+          btn.className = 'orient-btn px-2 py-0.5 rounded text-[11px] font-mono border border-indigo-600 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-bold';
+          if (mascotInstance) mascotInstance.setOrientation(yaw);
+        });
+      });
+
+      if (turnDemoBtn) {
+        turnDemoBtn.addEventListener('click', () => {
+          currentWalkDir = null;
+          syncWalkButtons();
+          if (mascotInstance) mascotInstance.playTurnDemo();
+        });
+      }
+
+      // 6. Brand Color Swatches & Contrast Toggle
+      const brandSwatches = document.querySelectorAll('.brand-swatch');
+      const brandColorPicker = document.getElementById('brandColorPicker');
+      const brandContrastToggle = document.getElementById('brandContrastToggle');
+
+      function applyBrandColor(hex) {
+        currentSelectedBrand = hex;
+        brandSwatches.forEach(s => s.classList.remove('ring-2', 'ring-offset-2', 'ring-indigo-600', 'dark:ring-offset-surface-darkcard'));
+        const matched = Array.from(brandSwatches).find(s => s.dataset.brandColor.toUpperCase() === hex.toUpperCase());
+        if (matched) matched.classList.add('ring-2', 'ring-offset-2', 'ring-indigo-600', 'dark:ring-offset-surface-darkcard');
+        
+        if (mascotInstance) mascotInstance.setBrandColor(hex);
+        updateSnippet();
+      }
+
+      brandSwatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+          applyBrandColor(swatch.dataset.brandColor);
+        });
+      });
+
+      if (brandColorPicker) {
+        brandColorPicker.addEventListener('input', (e) => {
+          applyBrandColor(e.target.value);
+        });
+      }
+
+      if (brandContrastToggle) {
+        brandContrastToggle.addEventListener('click', () => {
+          currentBrandContrast = currentBrandContrast === 'direct' ? 'auto' : 'direct';
+          brandContrastToggle.textContent = 'Contraste : ' + (currentBrandContrast === 'auto' ? 'Auto (3:1)' : 'Direct');
+          brandContrastToggle.className = currentBrandContrast === 'auto' 
+            ? 'text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-emerald-500 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 transition-colors'
+            : 'text-[10px] font-mono font-semibold px-2 py-0.5 rounded border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-indigo-500 transition-colors';
+          
+          if (mascotInstance) mascotInstance.setBrandContrast(currentBrandContrast);
+          updateSnippet();
+        });
+      }
+
+      // 7. Hair Color Swatches & Contrast Toggle
+      const hairSwatches = document.querySelectorAll('.hair-color-swatch');
+      const hairColorPicker = document.getElementById('hairColorPicker');
+      const hairContrastToggle = document.getElementById('hairContrastToggle');
+
+      function applyHairColor(hex) {
+        currentSelectedHairColor = hex;
+        hairSwatches.forEach(s => s.classList.remove('ring-2', 'ring-offset-2', 'ring-indigo-600', 'dark:ring-offset-surface-darkcard'));
+        const matched = Array.from(hairSwatches).find(s => s.dataset.hairColor.toUpperCase() === hex.toUpperCase());
+        if (matched) matched.classList.add('ring-2', 'ring-offset-2', 'ring-indigo-600', 'dark:ring-offset-surface-darkcard');
+        
+        if (mascotInstance) mascotInstance.setHairColor(hex);
+        updateSnippet();
+      }
+
+      hairSwatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+          applyHairColor(swatch.dataset.hairColor);
+        });
+      });
+
+      if (hairColorPicker) {
+        hairColorPicker.addEventListener('input', (e) => {
+          applyHairColor(e.target.value);
+        });
+      }
+
+      if (hairContrastToggle) {
+        hairContrastToggle.addEventListener('click', () => {
+          currentHairContrast = currentHairContrast === 'direct' ? 'auto' : 'direct';
+          hairContrastToggle.textContent = 'Contraste : ' + (currentHairContrast === 'auto' ? 'Auto (3:1)' : 'Direct');
+          hairContrastToggle.className = currentHairContrast === 'auto' 
+            ? 'text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-emerald-500 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 transition-colors'
+            : 'text-[10px] font-mono font-semibold px-2 py-0.5 rounded border border-surface-lightborder dark:border-surface-darkborder bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-indigo-500 transition-colors';
+          
+          if (mascotInstance) mascotInstance.setHairContrast(currentHairContrast);
+          updateSnippet();
+        });
+      }
+
+      // 8. Hairstyle Pills
+      const hairPills = document.querySelectorAll('.hair-pill');
+      const activeHairLabel = document.getElementById('activeHairLabel');
+      hairPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentSelectedHair = pill.dataset.hairStyle;
+          hairPills.forEach(p => {
+            p.className = 'hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-surface-lightborder dark:border-surface-darkborder bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400 transition-colors';
+          });
+          pill.className = 'hair-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-black';
+          if (activeHairLabel) {
+            activeHairLabel.textContent = pill.textContent.trim();
+          }
+          if (mascotInstance) mascotInstance.setHairStyle(currentSelectedHair);
+          updateSnippet();
+        });
+      });
+
+      // 9. Gallery Cards Click (Interact & Animate Hero)
+      const galleryCards = document.querySelectorAll('.gallery-card');
+      galleryCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const state = card.dataset.galleryState;
+          const matchingPill = Array.from(statePills).find(p => p.dataset.stateBtn === state);
+          if (matchingPill) {
+            matchingPill.click();
+          } else if (mascotInstance) {
+            mascotInstance.setState(state);
+            currentSelectedState = state;
+            currentWalkDir = null;
+            syncWalkButtons();
+            updateSnippet();
+          }
+
+          // Smooth scroll to workbench for immediate visual delight
+          heroStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      // 10. Copy Code Button
+      const copyBtn = document.getElementById('heroCopyCodeBtn');
+      const copyText = document.getElementById('heroCopyCodeText');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const snippet = currentWalkDir !== null
+            ? `<Mascot state="walk" walkDir="${currentWalkDir > 0 ? 'right' : 'left'}" brand="${currentSelectedBrand}" hairStyle="${currentSelectedHair}" hairColor="${currentSelectedHairColor}" brandContrast="${currentBrandContrast}" hairContrast="${currentHairContrast}" />`
+            : `<Mascot state="${currentSelectedState}" brand="${currentSelectedBrand}" hairStyle="${currentSelectedHair}" hairColor="${currentSelectedHairColor}" brandContrast="${currentBrandContrast}" hairContrast="${currentHairContrast}" />`;
+          navigator.clipboard.writeText(snippet).then(() => {
+            copyText.textContent = 'Copié !';
+            setTimeout(() => copyText.textContent = 'Copier le snippet', 2000);
+          }).catch(() => {
+            copyText.textContent = 'Erreur';
+          });
+        });
+      }
+
+      // 8. Dual Dev Track Tabs (Web vs Rive)
+      const tabBtnWeb = document.getElementById('tabBtnWeb');
+      const tabBtnRive = document.getElementById('tabBtnRive');
+      const tabContentWeb = document.getElementById('tabContentWeb');
+      const tabContentRive = document.getElementById('tabContentRive');
+
+      if (tabBtnWeb && tabBtnRive) {
+        tabBtnWeb.addEventListener('click', () => {
+          tabBtnWeb.className = 'px-5 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-sm transition-all';
+          tabBtnRive.className = 'px-5 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
+          tabContentWeb.classList.remove('hidden');
+          tabContentRive.classList.add('hidden');
+        });
+
+        tabBtnRive.addEventListener('click', () => {
+          tabBtnRive.className = 'px-5 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-950 dark:text-white shadow-sm transition-all';
+          tabBtnWeb.className = 'px-5 py-2.5 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
+          tabContentRive.classList.remove('hidden');
+          tabContentWeb.classList.add('hidden');
+        });
+      }
+
+      // 9. Theme Switcher (Dark / Light)
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('uko_theme', isDark ? 'dark' : 'light');
+        });
+      }
+
+      // 10. Buy Pack Action (Stripe Checkout)
+      const buyBtn = document.getElementById('buyPackBtn');
+      if (buyBtn) {
+        buyBtn.addEventListener('click', async () => {
+          buyBtn.disabled = true;
+          const origText = buyBtn.innerHTML;
+          buyBtn.innerHTML = `
+            <svg class="animate-spin w-5 h-5 text-white mr-2" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>Connexion à Stripe...</span>
+          `;
+          try {
+            const resp = await fetch('/api/create-checkout-session', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ tier: 'unique', mascot: 'aituko', origin: window.location.origin })
+            });
+            const data = await resp.json();
+            if (data.url) {
+              window.location.href = data.url;
+            } else {
+              alert(data.error || 'Erreur lors de la création de session Stripe.');
+              buyBtn.disabled = false;
+              buyBtn.innerHTML = origText;
+            }
+          } catch(err) {
+            alert('Service Stripe indisponible en mode local. Redirection directe vers le pack téléchargeable.');
+            window.location.href = '/downloads/Uko-Free-Sample.zip';
+            buyBtn.disabled = false;
+            buyBtn.innerHTML = origText;
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

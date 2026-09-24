@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "status": "proposed_not_implemented_in_rive",
+  "artboard": "Mascot",
+  "stateMachine": "MascotState",
+  "viewModel": "MascotConfig",
+  "properties": {
+    "state": {
+      "type": "enum",
+      "values": [
+        "neutral",
+        "welcome",
+        "loading",
+        "success",
+        "error",
+        "empty",
+        "sleep"
+      ]
+    },
+    "hairStyle": {
+      "type": "enum",
+      "values": [
+        "original",
+        "classique",
+        "tres_court",
+        "fade",
+        "medium",
+        "dreadlocks",
+        "tresses_femme",
+        "chignon_femme",
+        "afro_femme",
+        "bald"
+      ]
+    },
+    "bodyColor": {
+      "type": "color"
+    },
+    "hairColor": {
+      "type": "color"
+    },
+    "surfaceColor": {
+      "type": "color"
+    },
+    "yawDegrees": {
+      "type": "number",
+      "min": -90,
+      "max": 90,
+      "scope": "neutral"
+    },
+    "reducedMotion": {
+      "type": "boolean"
+    },
+    "wake": {
+      "type": "trigger"
+    }
+  },
+  "layers": [
+    "MainMotion",
+    "FaceExpression",
+    "Blink",
+    "Attention",
+    "HairSecondary",
+    "Artifacts"
+  ],
+  "events": [
+    "animationCompleted",
+    "loadingReady",
+    "sleepReady"
+  ],
+  "compiledRiv": false
+}

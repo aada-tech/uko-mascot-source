@@ -1,0 +1,23 @@
+{
+  "name": "uko-mascot-source",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Uko, Aituko and Meowuko: living stick-figure mascots. Engine, Rive files, packs, landing page, tests.",
+  "scripts": {
+    "build:engine": "node mascot_engine/build_mascot_engine.js --debug && node mascot_engine/build_mascot_engine.js --publish && node mascot_engine/build_mascot_engine.js --starter",
+    "build:rive": "node mascot_engine/rive/build_all_rive.cjs",
+    "build:packs": "node mascot_engine/build_pack.cjs && node mascot_engine/build_pack.cjs --starter",
+    "build:site": "node test_and_deploy/publish_site.cjs --draft",
+    "build": "npm run build:engine && npm run build:packs && npm run build:site",
+    "serve": "python3 -m http.server 3350 --directory site",
+    "test": "node test_and_deploy/test_characters.cjs && node test_and_deploy/test_motion_invariants.cjs && node test_and_deploy/test_starter_pack.cjs",
+    "test:landing": "node test_and_deploy/test_landing_verification.cjs",
+    "i18n:check": "node test_and_deploy/i18n_site.cjs check"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

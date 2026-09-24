@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales — Uko</title>
+  <meta name="description" content="Mentions légales du site Uko : éditeur, hébergeur, propriété intellectuelle.">
+  <link rel="canonical" href="{{SITE_URL}}/mentions-legales">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F4F7FF'/><circle cx='16' cy='12' r='7' fill='white' stroke='%231B1B1F' stroke-width='2.4'/><path d='M16 19v7M16 22l-5 4M16 22l5 4' stroke='%231B1B1F' stroke-width='2.4' stroke-linecap='round'/></svg>">
+  <link rel="preload" href="/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/legal.css">
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="/"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="14" r="9" fill="#fff" stroke="currentColor" stroke-width="2.6"/><path d="M20 23v9M20 27l-6 5M20 27l6 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg> Uko</a>
+      <a class="back" href="/">← Retour au site</a>
+    </div>
+  </header>
+  <main class="doc wrap">
+    <h1>Mentions légales</h1>
+    <p class="updated">Dernière mise à jour : 23 septembre 2026</p>
+
+    <h2>Éditeur du site</h2>
+    <p>
+      Le site <strong>{{SITE_DOMAIN}}</strong> (ci-après « le Site ») est édité par :<br>
+      <strong>{{EDITEUR_NOM}}</strong> — {{EDITEUR_STATUT}}<br>
+      SIRET : {{SIRET}}<br>
+      Adresse : {{ADRESSE}}<br>
+      E-mail : <a href="mailto:{{EMAIL}}">{{EMAIL}}</a><br>
+      Téléphone : {{TELEPHONE}}<br>
+      {{TVA_MENTION}}
+    </p>
+    <p>Directeur de la publication : {{EDITEUR_NOM}}.</p>
+
+    <h2>Hébergement</h2>
+    <p>
+      <strong>Cloudflare, Inc.</strong><br>
+      101 Townsend Street, San Francisco, CA 94107, États-Unis<br>
+      Téléphone : {{HEBERGEUR_TELEPHONE}}<br>
+      Site : <a href="https://www.cloudflare.com" rel="noopener">cloudflare.com</a>
+    </p>
+
+    <h2>Paiement</h2>
+    <p>
+      Les paiements sont traités par <strong>Stripe Payments Europe, Ltd.</strong>, 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, D02 H210, Irlande.
+      L’éditeur n’a jamais accès à vos données de carte bancaire.
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      Le personnage Uko, ses dessins, ses animations, le moteur logiciel, le fichier Rive, les textes, le logo et l’ensemble des éléments du Site
+      sont protégés par le droit d’auteur et sont la propriété exclusive de {{EDITEUR_NOM}}.
+      Toute reproduction, représentation, adaptation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite,
+      sauf dans les limites de la <a href="/licence">licence</a> accordée aux acheteurs du pack.
+    </p>
+    <p>
+      Les polices Space Grotesk, Caveat et JetBrains Mono sont distribuées sous licence SIL Open Font License 1.1.
+    </p>
+
+    <h2>Données personnelles</h2>
+    <p>
+      Le traitement de vos données est décrit dans la <a href="/confidentialite">politique de confidentialité</a>.
+      Le Site ne dépose aucun cookie de mesure d’audience ou de publicité.
+    </p>
+
+    <h2>Contact et signalement</h2>
+    <p>
+      Pour toute question, ou pour signaler un contenu illicite, écrivez à <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>.
+    </p>
+  </main>
+  <footer>
+    <div class="wrap">
+      <nav aria-label="Informations légales">
+        <a href="/mentions-legales">Mentions légales</a>
+        <a href="/cgv">CGV</a>
+        <a href="/confidentialite">Confidentialité</a>
+        <a href="/licence">Licence</a>
+        <a href="mailto:{{EMAIL}}">Contact</a>
+      </nav>
+      <p>© 2026 Uko — {{EDITEUR_NOM}}</p>
+    </div>
+  </footer>
+</body>
+</html>
