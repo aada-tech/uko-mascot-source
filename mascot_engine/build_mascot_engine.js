@@ -61,7 +61,7 @@ const out = `/**
  * WCAG contrast helpers. Each instance is fully isolated.
  *
  * Generated file — edit mascot_engine/src/ and run build_mascot_engine.js.
- * ${STARTER ? `Starter edition (free): idle, welcome, loading, success. Full pack: ${SITE}/#prix` : '(c) Uko UI — Commercial License'}
+ * ${STARTER ? `Starter edition (free): idle, welcome, loading, success. Full pack: ${SITE}/#prix` : '(c) Uko — free licence (see LICENSE.md): any project, no redistribution of the files alone'}
  */
 (function (root) {
   'use strict';

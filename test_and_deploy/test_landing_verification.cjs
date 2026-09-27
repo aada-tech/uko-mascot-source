@@ -12,7 +12,7 @@ const OUT = process.env.UKO_QA_OUT || path.join(__dirname, 'output');
 // What a visitor downloads before any video is played (scripts, styles, fonts, images),
 // measured uncompressed: the host compresses text, so the real transfer is about half.
 const BUDGET_KB = 450;
-const PRICE = { fr: '6,99 €', en: '€6.99', es: '6,99 €' };
+const PRICE = { fr: '0 €', en: '€0', es: '0 €' };
 
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
@@ -43,21 +43,18 @@ const PRICE = { fr: '6,99 €', en: '€6.99', es: '6,99 €' };
     const info = await page.evaluate(() => ({
       mascots: document.querySelectorAll('.uko-mascot-svg').length,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      buy: !!document.getElementById('buyPackBtn'),
-      sale: document.getElementById('prix').dataset.sale,
-      soonVisible: !!document.querySelector('#prix .soon') && getComputedStyle(document.querySelector('#prix .soon')).display !== 'none',
+      paid: !!document.querySelector('#buyPackBtn, #buyConsent, a[href="/cgv"]'),
       sections: [...document.querySelectorAll('main > section')].map(s => s.id || s.className),
-      price: document.querySelector('#prix .offer:nth-child(2) .price').textContent.trim(),
+      price: document.querySelector('#prix .offer .price').firstChild.textContent.trim(),
       faq: document.querySelectorAll('#faq details').length,
       prompt: document.getElementById('promptText').textContent.replace(/\s+/g, ' ').trim()
     }));
     check(info.mascots >= 3, `${label}: ${info.mascots} live mascots rendered`);
     check(info.overflow <= 0, `${label}: no horizontal overflow (${info.overflow}px)`);
     check(info.sections.length <= 5, `${label}: a short page, ${info.sections.length} sections (${info.sections.join(' · ')})`);
-    check(info.buy, `${label}: buy button present`);
-    check(info.sale !== 'closed' || info.soonVisible, `${label}: sales closed → "coming soon" shown`);
-    check(info.price === PRICE[lang], `${label}: full pack at ${info.price} (${lang})`);
-    check(info.faq >= 4, `${label}: ${info.faq} FAQ entries`);
+    check(!info.paid, `${label}: no payment, no terms of sale (everything is free)`);
+    check(info.price === PRICE[lang], `${label}: free pack shown as ${info.price} (${lang})`);
+    check(info.faq >= 3, `${label}: ${info.faq} FAQ entries`);
     check(/loading/.test(info.prompt) && /success/.test(info.prompt) && info.prompt.length > 150, `${label}: the AI prompt is on the page (${info.prompt.length} chars)`);
 
     // Free first: the hero offers the free Starter (no price), the offers list it before the paid pack.
@@ -68,10 +65,10 @@ const PRICE = { fr: '6,99 €', en: '€6.99', es: '6,99 €' };
       const zip = href ? await fetch(href, { method: 'HEAD' }).then(r => r.ok, () => false) : false;
       return { href, download: cta && cta.hasAttribute('download'), heroPrice: /€/.test(document.querySelector('.hero').textContent), offers, zip };
     });
-    check(free.href === '/free/Uko-Starter.zip' && free.download, `${label}: hero button downloads the free Starter (${free.href})`);
+    check(free.href === '/free/Uko-Mascot-Pack.zip' && free.download, `${label}: hero button downloads the free pack (${free.href})`);
     check(!free.heroPrice, `${label}: no price in the hero`);
-    check(free.offers[0] === 'Starter' && free.offers.length === 2, `${label}: offers show the Starter first (${free.offers.join(' · ')})`);
-    check(free.zip, `${label}: free Starter zip is served`);
+    check(free.offers.length === 1, `${label}: one free offer (${free.offers.join(' · ')})`);
+    check(free.zip, `${label}: free pack zip is served`);
 
     // Demo: the chips drive the mascot and the code follows, in every tab.
     await page.evaluate(() => document.getElementById('code').scrollIntoView());

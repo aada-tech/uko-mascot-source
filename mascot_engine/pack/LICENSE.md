@@ -1,45 +1,22 @@
-# Licence Uko — version 1.1 (23 septembre 2026)
+# Licence Uko (gratuite) — v2.0
 
-**En une phrase :** tu peux utiliser Uko dans autant de projets que tu veux, y compris commerciaux,
-mais tu ne peux pas revendre ni redistribuer les fichiers du pack.
+*English below · Español más abajo*
 
-## 1. Parties et objet
-La présente licence est accordée par l'auteur du pack Uko (le « Concédant ») à l'acheteur (le « Licencié »).
-Elle porte sur l'ensemble des fichiers du pack : moteur JavaScript, composants, fichiers Rive `.riv`, dessins,
-animations et documentation (le « Pack »). Une licence couvre une seule personne physique ou morale, et l'ensemble
-de ses salariés et prestataires travaillant sur ses projets.
+Uko est gratuit. Tu peux l'utiliser dans autant de projets que tu veux, personnels ou commerciaux :
+sites, apps, logiciels, gratuits ou payants. Tu peux le modifier et l'adapter (couleurs, états, animations,
+code), y compris avec une IA, et le montrer dans tes captures, vidéos et publicités.
 
-Dans cette licence, « Uko » désigne chacun des personnages fournis : Uko, Aituko et Meowuko.
+Interdit : redistribuer ou revendre les fichiers du pack seuls (site de ressources, autre pack de mascottes…),
+ou présenter Uko, Aituko ou Meowuko comme ta création ou ta marque. Pour faire connaître Uko, partage le lien du site.
 
-## 2. Ce que tu peux faire
-- Intégrer Uko dans un nombre **illimité** de produits finaux, personnels ou commerciaux : sites, applications web,
-  mobiles et desktop, SaaS, jeux, extensions, présentations, vidéos, contenus pour les réseaux sociaux.
-- Modifier Uko : couleurs, coiffures, états, taille, timing, code d'intégration.
-- Livrer un produit final contenant Uko à un client (freelance, agence). Le client utilise ce produit final
-  mais n'acquiert pas de licence sur le Pack lui-même.
-- Utiliser Uko comme mascotte de ton produit. Cet usage n'est **pas exclusif**.
+Fourni gratuitement et tel quel, sans garantie ni assistance. Droit français.
 
-La mention de l'auteur n'est pas obligatoire.
+---
 
-## 3. Ce que tu ne peux pas faire
-- Revendre, sous-licencier, partager, publier ou redistribuer le Pack ou ses fichiers, modifiés ou non, seuls ou dans
-  un ensemble (template, kit d'interface, pack d'illustrations, bibliothèque de composants, paquet npm public…).
-- Permettre aux utilisateurs de ton produit d'extraire Uko pour le réutiliser séparément (éditeur ou générateur de mascottes).
-- Déposer « Uko », « Aituko », « Meowuko » ou les personnages comme marque, logo ou dessin, ou t'en présenter comme l'auteur.
-- Utiliser Uko dans des contenus illicites, haineux, diffamatoires, pornographiques ou trompeurs.
-- Utiliser le Pack, ses rendus ou ses animations pour entraîner, affiner ou évaluer un modèle d'IA, ou constituer un jeu de données.
+**English.** Uko is free. Use it in as many personal or commercial projects as you like, and modify it (including
+with AI). Do not redistribute or resell the pack files on their own, or present the characters as your own
+creation or brand. Provided free and as is, without warranty or support. French law.
 
-## 4. Propriété
-Le Concédant reste seul titulaire de tous les droits de propriété intellectuelle sur le Pack et les personnages Uko, Aituko et Meowuko.
-Licence mondiale, pour toute la durée de protection des droits d'auteur.
-
-## 5. Composants tiers
-Le moteur Uko est un code original sans dépendance. Les runtimes Rive qui lisent les fichiers `.riv` relèvent de leur propre licence (MIT).
-
-## 6. Fin de la licence
-En cas de manquement, la licence prend fin automatiquement. Le Licencié cesse alors d'utiliser le Pack et supprime ses copies.
-Les produits finaux déjà livrés à des tiers de bonne foi ne sont pas concernés.
-
-## 7. Garantie et droit applicable
-Le Pack est fourni tel quel, sous réserve des garanties légales du consommateur (voir les CGV du site).
-Licence soumise au droit français.
+**Español.** Uko es gratis. Úsalo en todos los proyectos personales o comerciales que quieras y modifícalo
+(también con IA). No redistribuyas ni revendas los archivos del pack por separado, ni presentes los personajes
+como creación o marca tuya. Se ofrece gratis y tal cual, sin garantía ni soporte. Ley francesa.

@@ -177,4 +177,3 @@ Complete examples in `examples/`: web, React, Flutter, iOS (Swift), Android (Kot
 ## License
 
 Unlimited commercial use, no resale or redistribution of the files: see `LICENSE.md` (French; it prevails over any translation).
-Support: the address shown on your receipt.

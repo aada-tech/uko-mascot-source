@@ -1,10 +1,8 @@
-# Cloudflare Pages project for the Uko site (static site/ + functions/ API).
+# Cloudflare Pages project for the Uko site (static site only: everything is free).
 # Deploy from this folder:  npx wrangler pages deploy
-# Secrets (set once, never committed):  npx wrangler pages secret put STRIPE_SECRET_KEY
 name = "uko-mascot"
 pages_build_output_dir = "./site"
 compatibility_date = "2026-05-01"
 
 [vars]
 SITE_URL = "https://uko-mascot.pages.dev"
-STRIPE_AUTOMATIC_TAX = "false"

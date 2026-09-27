@@ -1,22 +1,10 @@
 {
-  "_help": "Fill every value, then run: node test_and_deploy/publish_site.cjs. Placeholders {{KEY}} in the legal pages are replaced; publishing stops while one is empty.",
+  "_help": "Site gratuit et anonyme : seuls ces champs sont nécessaires. Copier en legal.config.json (jamais commité).",
   "SITE_URL": "https://uko-mascot.pages.dev",
   "SITE_DOMAIN": "uko-mascot.pages.dev",
-  "EDITEUR_NOM": "",
-  "EDITEUR_STATUT": "",
-  "SIRET": "",
-  "ADRESSE": "",
   "EMAIL": "",
-  "TELEPHONE": "",
-  "TVA_MENTION": "",
-  "MEDIATEUR": "",
   "HEBERGEUR_TELEPHONE": "",
-  "PRESTATAIRE_EMAIL": "",
   "_examples": {
-    "EDITEUR_STATUT": "Entrepreneur individuel (micro-entreprise)",
-    "TVA_MENTION": "TVA non applicable, art. 293 B du CGI.",
-    "MEDIATEUR": "CM2C — 49 rue de Ponthieu, 75008 Paris — www.cm2c.net (exemple : choisir et adhérer à un médiateur agréé)",
-    "PRESTATAIRE_EMAIL": "Apple (iCloud+) ou Zoho Corporation B.V. — le fournisseur de ta boîte mail",
     "HEBERGEUR_TELEPHONE": "Cloudflare, Inc. : numéro indiqué sur cloudflare.com (page Contact / Legal)"
   }
 }

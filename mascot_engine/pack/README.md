@@ -176,4 +176,4 @@ Exemples complets dans `examples/` : web, React, Flutter, iOS (Swift), Android (
 ## Licence
 
 Usage commercial illimité, sans revente ni redistribution des fichiers : voir `LICENSE.md`.
-Support : l'adresse indiquée sur ton reçu.
+

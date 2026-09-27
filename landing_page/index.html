@@ -214,7 +214,6 @@
     .offer ul { flex: 1; align-content: start; }
     .offer-name { font: 700 30px var(--hand); color: var(--blue); margin: 0; }
     .price-note { margin: 2px 0 0; font: 700 22px var(--hand); color: var(--ink-soft); }
-    #prix[data-sale="closed"] .buy-box, #prix[data-sale="open"] .soon { display: none; }
     .soon-btn { width: 100%; font-size: 18px; opacity: .6; box-shadow: none; cursor: default; }
     .soon-btn:hover { transform: none; box-shadow: none; }
     .price-card { padding: 38px 36px 34px; text-align: center; }
@@ -292,8 +291,8 @@
       <nav class="nav-links">
         <a href="#code">Démo</a>
         <a href="#ia">Avec l’IA</a>
-        <a href="#prix">Prix</a>
-        <a class="btn small primary" href="#prix">Télécharger</a>
+        <a href="#prix">Télécharger</a>
+        <a class="btn small primary" href="/free/Uko-Mascot-Pack.zip" download>Gratuit</a>
         <span class="lang-switch" role="group" aria-label="Langue">
           <a href="/" hreflang="fr" lang="fr" data-lang="fr" aria-current="page">FR</a><a href="/en/" hreflang="en" lang="en" data-lang="en">EN</a><a href="/es/" hreflang="es" lang="es" data-lang="es">ES</a>
         </span>
@@ -309,7 +308,7 @@
         <div class="hero-side">
           <p class="lede">Une mascotte animée et légère qui vit avec ton interface : chargement, succès, erreur, dodo… Une ligne pour l’ajouter, ton IA pour l’adapter à ton app.</p>
           <div class="cta-row">
-            <a class="btn primary" href="/free/Uko-Starter.zip" download>Télécharger gratuitement</a>
+            <a class="btn primary" href="/free/Uko-Mascot-Pack.zip" download>Télécharger gratuitement</a>
             <a class="btn ghost" href="#code">Voir la démo</a>
           </div>
           <p class="cta-note">Sans compte ni e-mail · <span data-size="starter">183</span> Ko · usage commercial autorisé</p>
@@ -354,12 +353,11 @@
                 <button class="chip" type="button" data-state="welcome" aria-pressed="false">welcome</button>
                 <button class="chip" type="button" data-state="loading" aria-pressed="true">loading</button>
                 <button class="chip" type="button" data-state="success" aria-pressed="false">success</button>
-                <button class="chip pack" type="button" data-state="error" aria-pressed="false">error</button>
-                <button class="chip pack" type="button" data-state="thinking" aria-pressed="false">thinking</button>
-                <button class="chip pack" type="button" data-state="empty" aria-pressed="false">empty</button>
-                <button class="chip pack" type="button" data-state="sleep" aria-pressed="false">sleep</button>
+                <button class="chip" type="button" data-state="error" aria-pressed="false">error</button>
+                <button class="chip" type="button" data-state="thinking" aria-pressed="false">thinking</button>
+                <button class="chip" type="button" data-state="empty" aria-pressed="false">empty</button>
+                <button class="chip" type="button" data-state="sleep" aria-pressed="false">sleep</button>
               </div>
-              <p class="pack-note"><b>★</b> dans le pack complet · les autres sont gratuits</p>
             </div>
           </div>
         </div>
@@ -374,7 +372,7 @@
           <p class="sub">Le pack est une base propre et documentée. Donne-la à ton assistant de code avec notre prompt : il branche la mascotte sur les vrais moments de ton app.</p>
         </div>
         <ol class="steps">
-          <li class="step"><b>Télécharge</b><p>Le Starter gratuit ou le pack complet.</p></li>
+          <li class="step"><b>Télécharge</b><p>Le pack complet, gratuit, sans compte.</p></li>
           <li class="step"><b>Colle le prompt</b><p>Dans Claude, ChatGPT, Cursor ou Copilot, avec ton projet ouvert.</p></li>
           <li class="step"><b>Elle vit dans ton app</b><p>Chargement, formulaire, erreur, liste vide : la bonne réaction, aux couleurs de ta marque.</p></li>
         </ol>
@@ -421,54 +419,26 @@
       </div>
     </section>
 
-    <!-- OFFERS: the free Starter first, then the full pack -->
-    <section id="prix" data-sale="closed">
+    <!-- DOWNLOAD: everything is free -->
+    <section id="prix">
       <div class="wrap">
         <div class="center">
-          <h2>Gratuit pour commencer.<br><span class="hand">6,99 € pour tout avoir.</span></h2>
+          <h2>Tout est gratuit.<br><span class="hand">Même en usage commercial.</span></h2>
         </div>
-        <p class="both">Dans les deux : <b>les 3 mascottes</b>, le moteur web et les fichiers Rive, les couleurs de ta marque, le prompt IA et l’usage commercial.</p>
-        <div class="offers">
-          <div class="price-card torn offer">
-            <div class="paper-bg" data-torn="2"></div>
-            <div class="inner">
-              <h3 class="offer-name">Starter</h3>
-              <div class="price">0 € <small>gratuit</small></div>
-              <ul>
-                <li><span>4 états : <code>idle</code>, <code>welcome</code>, <code>loading</code>, <code>success</code></span></li>
-                <li>17 coiffures pour Uko, clair ou sombre</li>
-                <li>Réactions au toucher</li>
-              </ul>
-              <a class="btn primary" href="/free/Uko-Starter.zip" download>Télécharger le Starter</a>
-              <p class="buy-trust">Sans compte ni e-mail · <span data-size="starter">183</span> Ko · <a href="/licence#starter">licence</a></p>
-            </div>
-          </div>
+        <div class="offers" style="grid-template-columns:minmax(0,560px);justify-content:center">
           <div class="price-card torn offer">
             <div class="paper-bg" data-torn="2"></div>
             <div class="inner">
               <h3 class="offer-name">Pack complet</h3>
-              <div class="price">6,99 €</div>
-              <p class="price-note">paiement unique</p>
+              <div class="price">0 € <small>gratuit</small></div>
               <ul>
-                <li><span>Les 9 états : + <code>error</code>, <code>thinking</code>, <code>empty</code>, <code>sleep</code>, <code>wake</code></span></li>
-                <li>Mouvements : marcher, se retourner, grimper</li>
-                <li>Un regard qui suit la souris ou un élément</li>
-                <li>Projets illimités</li>
+                <li>Les 3 mascottes et les 9 états</li>
+                <li>Moteur web et fichiers Rive, aux couleurs de ta marque</li>
+                <li>Mouvements, regard, 17 coiffures pour Uko</li>
+                <li>Le prompt IA pour l’adapter à ton app</li>
               </ul>
-              <!-- Sales stay closed during the test phase: switch #prix data-sale to "open" to show the checkout. -->
-              <div class="soon" role="status">
-                <span class="btn soon-btn" aria-disabled="true">Bientôt disponible</span>
-                <p class="buy-trust">En attendant, le Starter est gratuit. Passer au pack complet revient à remplacer le moteur et les fichiers Rive.</p>
-              </div>
-              <div class="buy-box">
-                <label class="consent" for="buyConsent">
-                  <input type="checkbox" id="buyConsent">
-                  <span>J’accepte les <a href="/cgv" target="_blank">CGV</a> et la <a href="/licence" target="_blank">licence</a>, et je demande l’accès immédiat au pack : je renonce ainsi à mon droit de rétractation.</span>
-                </label>
-                <button id="buyPackBtn" class="btn" type="button" aria-disabled="true">Obtenir le pack — 6,99 €</button>
-                <div class="buy-status" id="buyStatus" role="status"></div>
-                <p class="buy-trust">Une fois, pour toujours · paiement sécurisé par Stripe · reçu et facture par e-mail</p>
-              </div>
+              <a class="btn primary" href="/free/Uko-Mascot-Pack.zip" download>Télécharger le pack</a>
+              <p class="buy-trust">Sans compte ni e-mail · <span data-size="pack">319</span> Ko · <a href="/licence">licence</a></p>
             </div>
           </div>
         </div>
@@ -486,19 +456,11 @@
           </details>
           <details>
             <summary>Est-ce que ça alourdit mon app ?</summary>
-            <p>Très peu : le moteur web pèse <span data-size="engine">58</span> Ko compressé, un fichier Rive <span data-size="rivStarter">74</span> à <span data-size="riv">136</span> Ko. Pas de vidéo ni de GIF, et hors de l’écran la mascotte ne se redessine presque plus.</p>
-          </details>
-          <details>
-            <summary>Quelle différence entre le Starter et le pack ?</summary>
-            <p>Le Starter a les 4 états essentiels. Le pack ajoute erreur, réflexion, liste vide, dodo et réveil, plus les mouvements et le regard. Mêmes noms de fichiers : passer au pack, c’est remplacer le moteur et les fichiers Rive.</p>
+            <p>Très peu : le moteur web pèse <span data-size="engine">58</span> Ko compressé, un fichier Rive environ <span data-size="riv">136</span> Ko. Pas de vidéo ni de GIF, et hors de l’écran la mascotte ne se redessine presque plus.</p>
           </details>
           <details>
             <summary>Je peux l’utiliser dans une app commerciale ?</summary>
-            <p>Oui, même avec le Starter. Le pack complet couvre des projets illimités. Les détails sont dans la <a href="/licence">licence</a>.</p>
-          </details>
-          <details>
-            <summary>Comment se passe le paiement ?</summary>
-            <p>Paiement unique par carte avec Stripe, sans abonnement. Le téléchargement est immédiat, et tu reçois un reçu et une facture par e-mail.</p>
+            <p>Oui, gratuitement, dans autant de projets que tu veux. Les détails sont dans la <a href="/licence">licence</a>.</p>
           </details>
         </div>
       </div>
@@ -510,7 +472,6 @@
       <span>© 2026 Uko</span>
       <nav class="legal-links" aria-label="Informations légales">
         <a href="/mentions-legales">Mentions légales</a>
-        <a href="/cgv">CGV</a>
         <a href="/confidentialite">Confidentialité</a>
         <a href="/licence">Licence</a>
       </nav>
@@ -659,42 +620,6 @@ ${call}`;
       a.href = a.getAttribute('href') + location.hash;
     }));
 
-    // ---------- checkout ----------
-    // The consent box is required (CGV, licence, immediate access = no withdrawal
-    // right for digital content); the server refuses a request without it.
-    const buyBtn = document.getElementById('buyPackBtn');
-    const buyStatus = document.getElementById('buyStatus');
-    const consent = document.getElementById('buyConsent');
-    const consentBox = consent.closest('.consent');
-    consent.addEventListener('change', () => {
-      buyBtn.setAttribute('aria-disabled', String(!consent.checked));
-      consentBox.classList.remove('is-missing');
-      if (consent.checked) buyStatus.textContent = '';
-    });
-    if (new URLSearchParams(location.search).has('canceled')) buyStatus.textContent = ukoT('payCanceled');
-    buyBtn.addEventListener('click', async () => {
-      if (!consent.checked) {
-        consentBox.classList.remove('is-missing'); void consentBox.offsetWidth; consentBox.classList.add('is-missing');
-        buyStatus.textContent = ukoT('payConsent');
-        consent.focus();
-        return;
-      }
-      buyBtn.disabled = true;
-      buyStatus.textContent = ukoT('payConnecting');
-      try {
-        const resp = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ consent: true, lang: (document.documentElement.lang || 'fr').slice(0, 2) })
-        });
-        const data = await resp.json().catch(() => ({}));
-        if (resp.ok && data.url) { window.location.href = data.url; return; }
-        buyStatus.textContent = data.error || ukoT('payUnavailable');
-      } catch (err) {
-        buyStatus.textContent = ukoT('payOffline');
-      }
-      buyBtn.disabled = false;
-    });
   })();
   </script>
 </body>

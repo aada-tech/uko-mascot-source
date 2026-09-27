@@ -39,10 +39,6 @@
     "en": "free",
     "es": "gratis"
   },
-  "Télécharger le Starter": {
-    "en": "Download the Starter",
-    "es": "Descargar el Starter"
-  },
   "Sans compte ni e-mail ·": {
     "en": "No account, no email ·",
     "es": "Sin cuenta ni correo ·"
@@ -58,26 +54,6 @@
   "Pack complet": {
     "en": "Full pack",
     "es": "Pack completo"
-  },
-  "Bientôt disponible": {
-    "en": "Coming soon",
-    "es": "Muy pronto"
-  },
-  "J’accepte les": {
-    "en": "I accept the",
-    "es": "Acepto las"
-  },
-  "CGV": {
-    "en": "terms of sale (FR)",
-    "es": "condiciones de venta (FR)"
-  },
-  "et la": {
-    "en": "and the",
-    "es": "y la"
-  },
-  ", et je demande l’accès immédiat au pack : je renonce ainsi à mon droit de rétractation.": {
-    "en": ", and I ask for immediate access to the pack: I therefore waive my right of withdrawal.",
-    "es": ", y solicito el acceso inmediato al pack: renuncio así a mi derecho de desistimiento."
   },
   "© 2026 Uko": {
     "en": "© 2026 Uko",
@@ -139,10 +115,6 @@
     "en": "Demos in the app",
     "es": "Demos en la app"
   },
-  "à": {
-    "en": "to",
-    "es": "a"
-  },
   "Touche-les : ils réagissent.": {
     "en": "Touch them: they react.",
     "es": "Tócalos: reaccionan."
@@ -154,10 +126,6 @@
   "Avec l’IA": {
     "en": "With AI",
     "es": "Con IA"
-  },
-  "Prix": {
-    "en": "Pricing",
-    "es": "Precio"
   },
   "Voir la démo": {
     "en": "See the demo",
@@ -195,10 +163,6 @@
     "en": "Touch it, it reacts.",
     "es": "Tócalo, reacciona."
   },
-  "dans le pack complet · les autres sont gratuits": {
-    "en": "in the full pack · the others are free",
-    "es": "en el pack completo · los demás son gratis"
-  },
   "Ton IA l’adapte": {
     "en": "Your AI fits it",
     "es": "Tu IA la adapta"
@@ -214,10 +178,6 @@
   "Télécharge": {
     "en": "Download",
     "es": "Descarga"
-  },
-  "Le Starter gratuit ou le pack complet.": {
-    "en": "The free Starter or the full pack.",
-    "es": "El Starter gratis o el pack completo."
   },
   "Colle le prompt": {
     "en": "Paste the prompt",
@@ -279,70 +239,6 @@
     "en": "Filmed in the real app, not animated by hand.",
     "es": "Grabado en la app real, no animado a mano."
   },
-  "Gratuit pour commencer.": {
-    "en": "Free to start.",
-    "es": "Gratis para empezar."
-  },
-  "6,99 € pour tout avoir.": {
-    "en": "€6.99 for everything.",
-    "es": "6,99 € para tenerlo todo."
-  },
-  "Dans les deux :": {
-    "en": "In both:",
-    "es": "En los dos:"
-  },
-  "les 3 mascottes": {
-    "en": "the 3 mascots",
-    "es": "las 3 mascotas"
-  },
-  ", le moteur web et les fichiers Rive, les couleurs de ta marque, le prompt IA et l’usage commercial.": {
-    "en": ", the web engine and the Rive files, your brand colors, the AI prompt and commercial use.",
-    "es": ", el motor web y los archivos Rive, los colores de tu marca, el prompt de IA y el uso comercial."
-  },
-  "4 états :": {
-    "en": "4 states:",
-    "es": "4 estados:"
-  },
-  "17 coiffures pour Uko, clair ou sombre": {
-    "en": "17 hairstyles for Uko, light or dark",
-    "es": "17 peinados para Uko, claro u oscuro"
-  },
-  "Réactions au toucher": {
-    "en": "Touch reactions",
-    "es": "Reacciones al tacto"
-  },
-  "paiement unique": {
-    "en": "one-time payment",
-    "es": "pago único"
-  },
-  "Les 9 états : +": {
-    "en": "All 9 states: +",
-    "es": "Los 9 estados: +"
-  },
-  "Mouvements : marcher, se retourner, grimper": {
-    "en": "Moves: walk, turn around, climb",
-    "es": "Movimientos: caminar, darse la vuelta, trepar"
-  },
-  "Un regard qui suit la souris ou un élément": {
-    "en": "Eyes that follow the mouse or an element",
-    "es": "Una mirada que sigue al ratón o a un elemento"
-  },
-  "Projets illimités": {
-    "en": "Unlimited projects",
-    "es": "Proyectos ilimitados"
-  },
-  "En attendant, le Starter est gratuit. Passer au pack complet revient à remplacer le moteur et les fichiers Rive.": {
-    "en": "Meanwhile, the Starter is free. Moving to the full pack means replacing the engine and the Rive files.",
-    "es": "Mientras tanto, el Starter es gratis. Pasar al pack completo es reemplazar el motor y los archivos Rive."
-  },
-  "Obtenir le pack — 6,99 €": {
-    "en": "Get the pack — €6.99",
-    "es": "Obtener el pack — 6,99 €"
-  },
-  "Une fois, pour toujours · paiement sécurisé par Stripe · reçu et facture par e-mail": {
-    "en": "Once, forever · secure payment by Stripe · receipt and invoice by email",
-    "es": "Una vez, para siempre · pago seguro con Stripe · recibo y factura por e-mail"
-  },
   "Questions": {
     "en": "Questions",
     "es": "Preguntas"
@@ -363,33 +259,9 @@
     "en": "Barely: the web engine weighs",
     "es": "Muy poco: el motor web pesa"
   },
-  "Ko compressé, un fichier Rive": {
-    "en": "KB compressed, a Rive file",
-    "es": "KB comprimido, un archivo Rive"
-  },
-  "Quelle différence entre le Starter et le pack ?": {
-    "en": "What's the difference between the Starter and the pack?",
-    "es": "¿Qué diferencia hay entre el Starter y el pack?"
-  },
-  "Le Starter a les 4 états essentiels. Le pack ajoute erreur, réflexion, liste vide, dodo et réveil, plus les mouvements et le regard. Mêmes noms de fichiers : passer au pack, c’est remplacer le moteur et les fichiers Rive.": {
-    "en": "The Starter has the 4 essential states. The pack adds error, thinking, empty list, nap and wake-up, plus the moves and the gaze. Same file names: upgrading means replacing the engine and the Rive files.",
-    "es": "El Starter tiene los 4 estados esenciales. El pack añade error, pensando, lista vacía, siesta y despertar, además de los movimientos y la mirada. Mismos nombres de archivo: pasar al pack es reemplazar el motor y los archivos Rive."
-  },
   "Je peux l’utiliser dans une app commerciale ?": {
     "en": "Can I use it in a commercial app?",
     "es": "¿Puedo usarla en una app comercial?"
-  },
-  "Oui, même avec le Starter. Le pack complet couvre des projets illimités. Les détails sont dans la": {
-    "en": "Yes, even with the Starter. The full pack covers unlimited projects. The details are in the",
-    "es": "Sí, incluso con el Starter. El pack completo cubre proyectos ilimitados. Los detalles están en la"
-  },
-  "Comment se passe le paiement ?": {
-    "en": "How does payment work?",
-    "es": "¿Cómo funciona el pago?"
-  },
-  "Paiement unique par carte avec Stripe, sans abonnement. Le téléchargement est immédiat, et tu reçois un reçu et une facture par e-mail.": {
-    "en": "One-time card payment with Stripe, no subscription. The download is immediate, and you get a receipt and an invoice by email.",
-    "es": "Pago único con tarjeta a través de Stripe, sin suscripción. La descarga es inmediata y recibes un recibo y una factura por e-mail."
   },
   "Une mascotte animée pour ton app : chargement, succès, erreur, dodo… Une ligne pour l’ajouter, ton IA pour l’adapter. Web, React, Flutter, iOS, Android. Gratuit pour commencer.": {
     "en": "An animated mascot for your app: loading, success, error, nap… One line to add it, your AI to fit it. Web, React, Flutter, iOS, Android. Free to start.",
@@ -430,5 +302,49 @@
   "Version complète, en français, anglais et espagnol : AI-PROMPT.md, dans le pack.": {
     "en": "Full version, in English, French and Spanish: AI-PROMPT.md, in the pack.",
     "es": "Versión completa, en español, inglés y francés: AI-PROMPT.md, en el pack."
+  },
+  "Gratuit": {
+    "en": "Free",
+    "es": "Gratis"
+  },
+  "Le pack complet, gratuit, sans compte.": {
+    "en": "The full pack, free, no sign-up.",
+    "es": "El pack completo, gratis, sin registro."
+  },
+  "Tout est gratuit.": {
+    "en": "Everything is free.",
+    "es": "Todo es gratis."
+  },
+  "Même en usage commercial.": {
+    "en": "Even for commercial use.",
+    "es": "Incluso para uso comercial."
+  },
+  "Les 3 mascottes et les 9 états": {
+    "en": "The 3 mascots and all 9 states",
+    "es": "Las 3 mascotas y los 9 estados"
+  },
+  "Moteur web et fichiers Rive, aux couleurs de ta marque": {
+    "en": "Web engine and Rive files, in your brand colors",
+    "es": "Motor web y archivos Rive, con los colores de tu marca"
+  },
+  "Mouvements, regard, 17 coiffures pour Uko": {
+    "en": "Moves, gaze, 17 hairstyles for Uko",
+    "es": "Movimientos, mirada, 17 peinados para Uko"
+  },
+  "Le prompt IA pour l’adapter à ton app": {
+    "en": "The AI prompt to fit it to your app",
+    "es": "El prompt de IA para adaptarla a tu app"
+  },
+  "Télécharger le pack": {
+    "en": "Download the pack",
+    "es": "Descargar el pack"
+  },
+  "Ko compressé, un fichier Rive environ": {
+    "en": "KB compressed, a Rive file about",
+    "es": "KB comprimido, un archivo Rive unos"
+  },
+  "Oui, gratuitement, dans autant de projets que tu veux. Les détails sont dans la": {
+    "en": "Yes, for free, in as many projects as you like. The details are in the",
+    "es": "Sí, gratis, en todos los proyectos que quieras. Los detalles están en la"
   }
 }

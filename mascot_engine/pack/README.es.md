@@ -177,4 +177,3 @@ Ejemplos completos en `examples/`: web, React, Flutter, iOS (Swift), Android (Ko
 ## Licencia
 
 Uso comercial ilimitado, sin reventa ni redistribución de los archivos: ver `LICENSE.md` (en francés; prevalece sobre cualquier traducción).
-Soporte: la dirección indicada en tu recibo.

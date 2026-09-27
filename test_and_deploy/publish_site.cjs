@@ -19,7 +19,8 @@ const LEGAL = fs.existsSync(path.join(SRC, 'legal.config.json')) ? 'legal.config
 const cfg = JSON.parse(fs.readFileSync(path.join(SRC, LEGAL), 'utf8'));
 const SITE_URL = (cfg.SITE_URL || 'https://uko-mascot.pages.dev').replace(/\/$/, '');
 
-const PAGES = ['index.html', 'success.html', 'mentions-legales.html', 'cgv.html', 'confidentialite.html', 'licence.html'];
+// Everything is free: no checkout, no success page, no terms of sale.
+const PAGES = ['index.html', 'mentions-legales.html', 'confidentialite.html', 'licence.html'];
 // landing_page/rive/ (the .riv files and the Rive web runtime) is not published: the
 // landing runs on the web engine only, and the .riv files ship in the packs. The folder
 // stays in the repo for the Rive tests and to measure the sizes shown on the page.
@@ -37,11 +38,8 @@ const RIVS = ['uko', 'aituko', 'meowuko'].map(c => path.join(SRC, 'rive', `${c}.
 for (const f of RIVS) if (!fs.existsSync(f)) { console.error(`missing ${path.relative(PACK, f)} — copy it from mascot_engine/dist`); process.exit(1); }
 cfg.RIV_KB = String(Math.round(Math.max(...RIVS.map(f => fs.statSync(f).size)) / 1024));
 // The light file: the largest Starter .riv (4 essential states), as shipped in the free zip.
-const STARTER_RIVS = ['uko', 'aituko', 'meowuko'].map(c => path.join(PACK, 'mascot_engine', 'dist', 'starter', `${c}-starter.riv`));
-for (const f of STARTER_RIVS) if (!fs.existsSync(f)) { console.error(`missing ${path.relative(PACK, f)} — run node mascot_engine/rive/build_uko_rive.cjs --starter`); process.exit(1); }
-cfg.RIV_STARTER_KB = String(Math.round(Math.max(...STARTER_RIVS.map(f => fs.statSync(f).size)) / 1024));
-if (!fs.existsSync(STARTER_ZIP)) { console.error(`missing ${path.relative(PACK, STARTER_ZIP)} — run node mascot_engine/build_pack.cjs --starter`); process.exit(1); }
-cfg.STARTER_KB = String(Math.round(fs.statSync(STARTER_ZIP).size / 1024));
+if (!fs.existsSync(PACK_ZIP)) { console.error(`missing ${path.relative(PACK, PACK_ZIP)} — run node mascot_engine/build_pack.cjs`); process.exit(1); }
+cfg.PACK_KB = String(Math.round(fs.statSync(PACK_ZIP).size / 1024));
 
 const missing = new Set();
 const fill = html => html.replace(/\{\{([A-Z_]+)\}\}/g, (m, key) => {
@@ -50,7 +48,7 @@ const fill = html => html.replace(/\{\{([A-Z_]+)\}\}/g, (m, key) => {
   missing.add(key);
   return m;
 });
-const SIZES = { engine: cfg.ENGINE_KB, riv: cfg.RIV_KB, rivStarter: cfg.RIV_STARTER_KB, starter: cfg.STARTER_KB };
+const SIZES = { engine: cfg.ENGINE_KB, riv: cfg.RIV_KB, pack: cfg.PACK_KB };
 const sizes = html => html.replace(/(<span data-size="(\w+)">)[^<]*(<\/span>)/g, (m, open, key, close) => (SIZES[key] ? open + SIZES[key] + close : m));
 const pages = PAGES.map(p => [p, sizes(fill(fs.readFileSync(path.join(SRC, p), 'utf8')))]);
 if (missing.size && !draft) {
@@ -63,10 +61,8 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 for (const [p, html] of pages) fs.writeFileSync(path.join(OUT, p), html);
 for (const d of DIRS) fs.cpSync(path.join(SRC, d), path.join(OUT, d), { recursive: true });
-fs.mkdirSync(path.join(OUT, 'private'));
-fs.copyFileSync(PACK_ZIP, path.join(OUT, 'private', 'Uko-Mascot-Pack.zip'));
 fs.mkdirSync(path.join(OUT, 'free'));
-fs.copyFileSync(STARTER_ZIP, path.join(OUT, 'free', 'Uko-Starter.zip'));
+fs.copyFileSync(PACK_ZIP, path.join(OUT, 'free', 'Uko-Mascot-Pack.zip'));
 
 // English and Spanish versions of the home page (/en/, /es/), translated at build time.
 const i18n = require('./i18n_site.cjs');
@@ -85,16 +81,16 @@ const translated = (async () => {
       .replace(new RegExp(`(<a href="/${lang}/" hreflang="${lang}"[^>]*?data-lang="${lang}")`), '$1 aria-current="page"')
       .replace(/uko-(subflow-ad|custom)-(poster-)?fr\./g, `uko-$1-$2${lang}.`);
     // Prices are not text to translate (no letters): English writes the euro sign first.
-    if (lang === 'en') html = html.replace('<div class="price">6,99 €</div>', '<div class="price">€6.99</div>').replace('<div class="price">0 € <small>', '<div class="price">€0 <small>');
+    if (lang === 'en') html = html.replace('<div class="price">0 € <small>', '<div class="price">€0 <small>');
     fs.mkdirSync(path.join(OUT, lang), { recursive: true });
     fs.writeFileSync(path.join(OUT, lang, 'index.html'), html);
   }
 })();
 
 // robots + sitemap
-fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /private/\nDisallow: /success\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /free/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 const today = new Date().toISOString().slice(0, 10);
-const urls = [['', '1.0', 'weekly'], ['en/', '0.9', 'weekly'], ['es/', '0.9', 'weekly'], ...['mentions-legales', 'cgv', 'confidentialite', 'licence'].map(p => [p, '0.3', 'yearly'])];
+const urls = [['', '1.0', 'weekly'], ['en/', '0.9', 'weekly'], ['es/', '0.9', 'weekly'], ...['mentions-legales', 'confidentialite', 'licence'].map(p => [p, '0.3', 'yearly'])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, p, c]) => `  <url><loc>${SITE_URL}/${u}</loc><lastmod>${today}</lastmod><changefreq>${c}</changefreq><priority>${p}</priority></url>`).join('\n')}\n</urlset>\n`);
 
 // Security headers (Cloudflare Pages _headers). Everything is served from this origin only.
@@ -107,7 +103,7 @@ const CSP = [
   "connect-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
-  "form-action 'self' https://checkout.stripe.com",
+  "form-action 'self'",
   "object-src 'none'",
   'upgrade-insecure-requests',
 ].join('; ');
@@ -131,16 +127,16 @@ fs.writeFileSync(path.join(OUT, '_headers'), `/*
   Cache-Control: no-store
 
 /free/*
-  Content-Disposition: attachment; filename="Uko-Starter.zip"
+  Content-Disposition: attachment; filename="Uko-Mascot-Pack.zip"
   Cache-Control: public, max-age=3600
   X-Robots-Tag: noindex
 `);
-// Functions only run for the API and to lock /private/ (static assets stay free and unlimited).
-fs.writeFileSync(path.join(OUT, '_routes.json'), JSON.stringify({ version: 1, include: ['/api/*', '/private/*'], exclude: [] }, null, 2));
+
+
 
 const size = dir => fs.readdirSync(dir, { withFileTypes: true }).reduce((n, e) => n + (e.isDirectory() ? size(path.join(dir, e.name)) : fs.statSync(path.join(dir, e.name)).size), 0);
 translated.then(() => {
-  console.log(`${draft && missing.size ? 'DRAFT (do not deploy) — ' : ''}site/ built: ${PAGES.length} pages, ${DIRS.join(', ')}, private pack, free starter (${cfg.STARTER_KB} KB) · ${(size(OUT) / 1024 / 1024).toFixed(2)} MB · ${SITE_URL}`);
+  console.log(`${draft && missing.size ? 'DRAFT (do not deploy) — ' : ''}site/ built: ${PAGES.length} pages, ${DIRS.join(', ')}, free pack (${cfg.PACK_KB} KB) · ${(size(OUT) / 1024 / 1024).toFixed(2)} MB · ${SITE_URL}`);
 if (missing.size) console.log(`placeholders left: ${[...missing].join(', ')}`);
   console.log('  + /en/ and /es/ (translated)');
 });

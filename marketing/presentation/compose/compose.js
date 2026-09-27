@@ -18,8 +18,8 @@
       ai: ['Ton IA l’adapte ', 'à ton app.'], promptTag: 'le prompt est fourni ✎',
       prompt: 'Intègre la mascotte Uko dans mon app. Branche ses états : loading pendant les requêtes, success après un enregistrement, error sur un formulaire invalide, empty sur une liste vide. Reprends les couleurs de ma marque.',
       res1: 'Exemple réel : SubFlow', res2: 'sur mesure, il grimpe sur le formulaire',
-      end: 'Gratuit pour commencer.', price: 'Pack complet : 6,99 €',
-      thumb: ['Une mascotte', 'pour ton app'], thumbPills: ['<b>58 Ko</b> · Web · Mobile', 'Adaptée par l’IA']
+      end: 'Gratuit. Tout le pack.', price: 'même en usage commercial',
+      thumb: ['Une mascotte', 'pour ton app'], thumbPills: ['<b>Gratuit</b> · Web · Mobile', 'Adaptée par l’IA']
     },
     en: {
       hook: ['Your app needs', ['a ', 'little buddy.']], hookSub: 'A light animated mascot, ready for your app.', hookNote: 'meet Uko ✎',
@@ -28,8 +28,8 @@
       ai: ['Your AI fits it ', 'to your app.'], promptTag: 'the prompt is included ✎',
       prompt: 'Add the Uko mascot to my app. Wire its states: loading during requests, success after a save, error on an invalid form, empty on an empty list. Use my brand colors.',
       res1: 'Real example: SubFlow', res2: 'custom: it climbs onto the form',
-      end: 'Free to start.', price: 'Full pack: €6.99',
-      thumb: ['A mascot', 'for your app'], thumbPills: ['<b>58 KB</b> · Web · Mobile', 'Fitted by AI']
+      end: 'Free. The whole pack.', price: 'even for commercial use',
+      thumb: ['A mascot', 'for your app'], thumbPills: ['<b>Free</b> · Web · Mobile', 'Fitted by AI']
     },
     es: {
       hook: ['Tu app necesita', ['un ', 'muñequito.']], hookSub: 'Una mascota animada y ligera, lista para tu app.', hookNote: 'este es Uko ✎',
@@ -38,8 +38,8 @@
       ai: ['Tu IA la adapta ', 'a tu app.'], promptTag: 'el prompt está incluido ✎',
       prompt: 'Integra la mascota Uko en mi app. Conecta sus estados: loading durante las peticiones, success después de guardar, error en un formulario no válido, empty en una lista vacía. Usa los colores de mi marca.',
       res1: 'Ejemplo real: SubFlow', res2: 'a medida: trepa al formulario',
-      end: 'Gratis para empezar.', price: 'Pack completo: 6,99 €',
-      thumb: ['Una mascota', 'para tu app'], thumbPills: ['<b>58 KB</b> · Web · Móvil', 'Adaptada por IA']
+      end: 'Gratis. Todo el pack.', price: 'incluso para uso comercial',
+      thumb: ['Una mascota', 'para tu app'], thumbPills: ['<b>Gratis</b> · Web · Móvil', 'Adaptada por IA']
     }
   }[LANG];
 
