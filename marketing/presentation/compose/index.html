@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Uko — présentation 16:9</title>
+<style>
+  @font-face { font-family: 'Space Grotesk'; src: url(/landing_page/fonts/SpaceGrotesk.woff2) format('woff2'); font-weight: 300 700; }
+  @font-face { font-family: 'Caveat'; src: url(/landing_page/fonts/Caveat.woff2) format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'JetBrains Mono'; src: url(/landing_page/fonts/JetBrainsMono.woff2) format('woff2'); font-weight: 400 800; }
+  :root { --paper: #F4F7FF; --ink: #16161D; --soft: #4B4E63; --blue: #3B5BFF; --sun: #FFC93C; --mint: #3DDC97; --night: #0E1130; --pink: #FF7AAE; }
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); color: var(--ink); font-family: 'Space Grotesk', system-ui, sans-serif; }
+  body::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(59, 91, 255, .07) 2px, transparent 2px), linear-gradient(90deg, rgba(59, 91, 255, .07) 2px, transparent 2px); background-size: 48px 48px; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .abs { position: absolute; }
+  .hand { font-family: 'Caveat', cursive; font-weight: 700; color: var(--blue); }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  h1, h2 { margin: 0; font-weight: 700; letter-spacing: -0.03em; }
+  h1 { font-size: 124px; line-height: 1.02; }
+  h2 { font-size: 88px; line-height: 1; }
+  h1 .hand, h2 .hand { font-size: 1.15em; letter-spacing: 0; }
+  .line { display: block; will-change: transform, opacity; }
+  .sub { font-size: 44px; color: var(--soft); }
+  .stage { position: absolute; }
+  .card { position: absolute; background: #fff; border: 4px solid var(--ink); border-radius: 28px; box-shadow: 10px 10px 0 var(--ink); }
+  .card .m { position: absolute; left: 8%; right: 8%; top: 4%; height: 74%; }
+  .chip { position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%); white-space: nowrap; background: var(--ink); color: var(--sun); border-radius: 16px; padding: 10px 22px; font: 600 34px 'JetBrains Mono', monospace; }
+  .chip.flash { box-shadow: 0 0 0 8px rgba(255, 201, 60, .55); }
+  .label { position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font: 700 50px 'Caveat', cursive; color: var(--blue); }
+  .code, .prompt { box-sizing: border-box; }
+  .code { position: absolute; background: var(--night); color: #D9DDFF; border-radius: 28px; padding: 56px 60px; font: 400 34px/1.7 'JetBrains Mono', monospace; white-space: pre; box-shadow: 0 30px 60px rgba(14, 17, 48, .25); }
+  .code .k { color: #FF9A85; } .code .a { color: var(--mint); } .code .s { color: var(--sun); }
+  .code .hl { background: rgba(255, 201, 60, .22); border-radius: 8px; }
+  .caret { display: inline-block; width: 0.55em; height: 1.1em; margin-left: 2px; vertical-align: -0.2em; background: var(--sun); }
+  .pill { position: absolute; background: #fff; border: 4px solid var(--ink); border-radius: 999px; padding: 14px 30px; font: 700 38px 'Space Grotesk', sans-serif; box-shadow: 6px 6px 0 var(--ink); white-space: nowrap; }
+  .pill b { color: var(--blue); }
+  #pills .pill { position: static; }
+  .prompt { position: absolute; background: var(--night); color: #D9DDFF; border-radius: 28px; padding: 44px 50px; font: 400 32px/1.6 'JetBrains Mono', monospace; box-shadow: 0 30px 60px rgba(14, 17, 48, .25); }
+  .prompt .tag { display: block; font: 700 46px 'Caveat', cursive; color: var(--sun); margin-bottom: 14px; }
+  .prompt code { color: var(--mint); font: inherit; }
+  .phone { position: absolute; background: #101014; border-radius: 58px; padding: 14px; box-shadow: 0 40px 80px rgba(14, 17, 48, .3); }
+  .phone img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 46px; background: #fff; }
+  .note { position: absolute; font: 700 56px 'Caveat', cursive; color: var(--blue); white-space: nowrap; }
+  .url { position: absolute; left: 50%; transform: translateX(-50%); background: #fff; border: 5px solid var(--ink); border-radius: 22px; padding: 18px 44px; font: 700 58px 'JetBrains Mono', monospace; box-shadow: 10px 10px 0 var(--ink); white-space: nowrap; }
+  .logo { position: absolute; right: 70px; bottom: 44px; font: 700 64px 'Caveat', cursive; }
+  /* thumbnail layout (?thumb=1) */
+  #thumb { display: none; position: absolute; inset: 0; }
+  body.thumb .scene { display: none; }
+  body.thumb #thumb { display: block; }
+</style>
+</head>
+<body>
+  <!-- 1. hook -->
+  <div class="scene" id="sHook">
+    <h1 class="abs" style="left:140px; top:250px; width:1100px"><span class="line" id="hook1"></span><span class="line" id="hook2"></span></h1>
+    <p class="abs sub" id="hookSub" style="left:144px; top:600px; width:980px; margin:0"></p>
+    <div class="stage" id="mHook" style="left:1210px; top:150px; width:520px; height:800px"></div>
+    <div class="note" id="hookNote" style="left:1440px; top:120px; transform:rotate(-5deg)"></div>
+  </div>
+
+  <!-- 2. states -->
+  <div class="scene" id="sStates">
+    <h2 class="abs" id="statesTitle" style="left:0; right:0; top:84px; text-align:center"></h2>
+    <div class="card" id="cardA" style="left:170px; top:230px; width:470px; height:720px"><div class="m" id="mA"></div><div class="chip" id="chipA"></div><div class="label" id="labA"></div></div>
+    <div class="card" id="cardB" style="left:725px; top:230px; width:470px; height:720px"><div class="m" id="mB"></div><div class="chip" id="chipB"></div><div class="label" id="labB"></div></div>
+    <div class="card" id="cardC" style="left:1280px; top:230px; width:470px; height:720px"><div class="m" id="mC"></div><div class="chip" id="chipC"></div><div class="label" id="labC"></div></div>
+  </div>
+
+  <!-- 3. code -->
+  <div class="scene" id="sCode">
+    <h2 class="abs" id="codeTitle" style="left:140px; top:110px"></h2>
+    <div class="code" id="codeBox" style="left:140px; top:280px; width:1120px; height:330px"></div>
+    <div class="abs" id="pills" style="left:140px; top:690px; width:1100px; display:flex; flex-wrap:wrap; gap:26px 22px"></div>
+    <div class="card" id="codeCard" style="left:1350px; top:220px; width:430px; height:640px"><div class="m" id="mCode" style="height:88%"></div></div>
+  </div>
+
+  <!-- 4. AI -->
+  <div class="scene" id="sAI">
+    <h2 class="abs" id="aiTitle" style="left:140px; top:100px"></h2>
+    <div class="pill" id="ai1" style="left:140px; top:250px; font-size:32px; padding:10px 24px">Claude</div>
+    <div class="pill" id="ai2" style="left:330px; top:250px; font-size:32px; padding:10px 24px">ChatGPT</div>
+    <div class="pill" id="ai3" style="left:560px; top:250px; font-size:32px; padding:10px 24px">Cursor</div>
+    <div class="pill" id="ai4" style="left:750px; top:250px; font-size:32px; padding:10px 24px">Copilot</div>
+    <div class="prompt" id="promptBox" style="left:140px; top:360px; width:1020px; height:440px"></div>
+    <div class="abs" id="aiResult" style="left:140px; top:850px; width:1040px"><div style="font:700 44px 'Space Grotesk'" id="aiResult1"></div><div class="hand" style="font-size:50px" id="aiResult2"></div></div>
+    <div class="phone" id="phone" style="left:1290px; top:70px; width:432px; height:934px"><img id="phoneImg" alt=""></div>
+  </div>
+
+  <!-- 5. end card -->
+  <div class="scene" id="sEnd">
+    <h2 class="abs" id="endTitle" style="left:0; right:0; top:110px; text-align:center; font-size:96px"></h2>
+    <div class="abs hand" id="endPrice" style="left:0; right:0; top:215px; text-align:center; font-size:120px"></div>
+    <div class="url" id="endUrl" style="top:400px"></div>
+    <div class="stage" id="mE1" style="left:420px; top:560px; width:330px; height:500px"></div>
+    <div class="stage" id="mE2" style="left:795px; top:560px; width:330px; height:500px"></div>
+    <div class="stage" id="mE3" style="left:1170px; top:560px; width:330px; height:500px"></div>
+    <div class="logo">uko ✎</div>
+  </div>
+
+  <!-- YouTube thumbnail (1280×720 screenshot, scaled from this 1920×1080 layout) -->
+  <div id="thumb">
+    <h1 class="abs" style="left:110px; top:150px; width:1100px; font-size:150px; line-height:.98" id="thumbTitle"></h1>
+    <div class="pill" style="left:116px; top:720px; font-size:52px" id="thumbPill1"></div>
+    <div class="pill" style="left:116px; top:860px; font-size:52px; background:var(--sun)" id="thumbPill2"></div>
+    <div class="stage" id="mT1" style="left:1150px; top:170px; width:560px; height:860px"></div>
+  </div>
+
+  <script src="/mascot_engine/dist/uko-mascot-engine.min.js"></script>
+  <script src="compose.js"></script>
+</body>
+</html>

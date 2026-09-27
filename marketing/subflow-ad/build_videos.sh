@@ -20,7 +20,8 @@ sys.exit('FAIL [$lang] error scene: the form closed at %.1f s (the amount was ac
   node audio.cjs $lang
   node render_ad.cjs --lang $lang
   ffmpeg -y -loglevel error -i out/uko-subflow-ad-9x16-$lang.mp4 -vf scale=720:-2 -c:v libx264 -preset slow -crf 26 -c:a aac -b:a 96k -movflags +faststart $LANDING/uko-subflow-ad-$lang.mp4
-  ffmpeg -y -loglevel error -ss 20 -i out/uko-subflow-ad-9x16-$lang.mp4 -frames:v 1 -vf scale=720:-2 -q:v 4 $LANDING/uko-subflow-ad-poster-$lang.jpg
+  ffmpeg -y -loglevel error -ss 20 -i out/uko-subflow-ad-9x16-$lang.mp4 -frames:v 1 -vf scale=720:-2 -q:v 2 out/poster-$lang.png
+  python3 -c "from PIL import Image; Image.open('out/poster-$lang.png').save('$LANDING/uko-subflow-ad-poster-$lang.webp', quality=72, method=6)"
   mkdir -p $SUBFLOW/$lang
   for sc in themes add calendar simulate cancel; do
     ffmpeg -y -loglevel error -framerate 30 -i clips-$lang/$sc/%05d.jpg -vf "scale=600:-2:flags=lanczos,format=yuv420p" -c:v libx264 -preset slow -crf 22 -profile:v high -movflags +faststart -an $SUBFLOW/$lang/$sc.mp4

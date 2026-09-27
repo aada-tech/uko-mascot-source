@@ -685,7 +685,7 @@ ${call}`;
         const resp = await fetch('/api/create-checkout-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ consent: true })
+          body: JSON.stringify({ consent: true, lang: (document.documentElement.lang || 'fr').slice(0, 2) })
         });
         const data = await resp.json().catch(() => ({}));
         if (resp.ok && data.url) { window.location.href = data.url; return; }

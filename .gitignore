@@ -10,6 +10,7 @@ marketing/subflow-ad/clips/
 marketing/subflow-ad/clips-*/
 marketing/subflow-ad/landing-clips/
 marketing/subflow-ad/out/
+marketing/presentation/out/
 .wrangler/
 
 # Secrets and personal data: never committed

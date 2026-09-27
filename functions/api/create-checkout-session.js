@@ -17,19 +17,26 @@ export const PRODUCT = {
   currency: 'eur',
 };
 export const TERMS_VERSION = '2026-09-27';
+const SUBMIT_TEXT = {
+  fr: 'Accès immédiat après paiement : tu as demandé l’exécution immédiate et renoncé à ton droit de rétractation (CGV). Paiement unique, sans abonnement.',
+  en: 'Immediate access after payment: you asked for immediate delivery and waived your right of withdrawal (terms of sale). One-time payment, no subscription.',
+  es: 'Acceso inmediato tras el pago: pediste la entrega inmediata y renunciaste a tu derecho de desistimiento (condiciones de venta). Pago único, sin suscripción.',
+};
 
 export async function onRequestPost({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: 'Origine non autorisée.' }, 403);
   let body = {};
   try { body = await request.json(); } catch (e) { /* empty body */ }
   if (body.consent !== true) return json({ error: 'Coche la case d’acceptation des CGV avant de payer.' }, 400);
+  // The page's language (fr, en, es): Stripe Checkout and the way back follow it.
+  const lang = ['fr', 'en', 'es'].includes(body.lang) ? body.lang : 'fr';
 
   const base = siteUrl(request, env);
   const consentAt = new Date().toISOString();
   try {
     const session = await stripe(env, 'POST', 'checkout/sessions', {
       mode: 'payment',
-      locale: 'fr',
+      locale: lang,
       line_items: [{
         quantity: 1,
         price_data: {
@@ -42,10 +49,8 @@ export async function onRequestPost({ request, env }) {
       metadata: { product: PRODUCT.id, terms_version: TERMS_VERSION, consent_withdrawal_waiver: 'yes', consent_at: consentAt },
       payment_intent_data: { metadata: { product: PRODUCT.id, terms_version: TERMS_VERSION } },
       success_url: `${base}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${base}/?canceled=1#prix`,
-      custom_text: {
-        submit: { message: 'Accès immédiat après paiement : tu as demandé l’exécution immédiate et renoncé à ton droit de rétractation (CGV). Paiement unique, sans abonnement.' },
-      },
+      cancel_url: `${base}${lang === 'fr' ? '' : '/' + lang}/?canceled=1#prix`,
+      custom_text: { submit: { message: SUBMIT_TEXT[lang] } },
       invoice_creation: {
         enabled: true,
         invoice_data: {

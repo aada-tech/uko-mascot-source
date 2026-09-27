@@ -24,6 +24,8 @@ vendues en pack (moteur web + fichiers Rive) avec un Starter gratuit.
 | `test_and_deploy/` | Build du site, i18n, tests (moteur, personnages, Starter, parité Rive, landing) |
 | `characters/` | Planches et vidéo de la famille, générées depuis le moteur |
 | `marketing/subflow-ad/` | Captures de SubFlow et montage de la pub et des clips |
+| `marketing/presentation/` | Vidéo de présentation 16:9 pour YouTube (rendue avec le moteur), miniature, textes YouTube |
+| `marketing/LANCEMENT.md` | **La checklist de lancement** : admin, domaine, Stripe, déploiement, YouTube, promotion |
 | `rive_animations/` | **Kit pour construire les mascottes dans l'éditeur Rive** (SVG à importer, planches, contrat) : voir son README |
 | `references/`, `inuko/` | Références de dessin et de mouvement, pistes de personnages |
 
