@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0 — 27 septembre 2026
+- Poids : `uko-mascot-engine.min.js`, le moteur minifié (≈ 58 Ko gzip au lieu de ≈ 97), livré à côté de la
+  version lisible `uko-mascot-engine.js` (même code, pour le lire ou le donner à une IA). Rendu identique.
+- `AI-PROMPT.md` : un prompt prêt à coller (français, anglais, espagnol) pour adapter la mascotte à ton app
+  avec un assistant de code (Claude, ChatGPT, Cursor, Copilot…).
+- Exemples Rive sur `@rive-app/canvas-lite` : runtime web deux fois plus léger (≈ 360 Ko gzip de wasm au lieu
+  de ≈ 800), testé avec les trois fichiers `.riv`.
+- README : ce que contient le pack, et ce qui reste à brancher côté app.
+
 ## 2.1.0 — 23 septembre 2026
 - Nouveau : deux personnages sur le même squelette, avec les mêmes animations : **Aituko** (robot, visage LED,
   antenne sur ressort) et **Meowuko** (chat, oreilles, moustaches, queue). Option `character`

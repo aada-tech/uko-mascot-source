@@ -8,6 +8,7 @@
 //
 //   node test_and_deploy/i18n_site.cjs extract   → adds new French strings to strings.json (en/es empty)
 //   node test_and_deploy/i18n_site.cjs check     → fails if a string has no translation
+//   node test_and_deploy/i18n_site.cjs prune     → removes the strings no page uses any more
 //   require('./i18n_site.cjs').translate(html, lang) → translated page (used by publish_site.cjs)
 const fs = require('fs');
 const path = require('path');
@@ -52,15 +53,19 @@ async function withPage(fn) {
 }
 
 // Strings that stay as they are in every language (names, code identifiers, units).
-const SAME = s => /^(uko|Uko|Rive|Web|React|Flutter|iOS|Android|HTML|JS|Stripe|state|trigger|idle|thinking|loading|sleep|welcome|success|error|empty|wake|FR|EN|ES|Starter)$/.test(s) || /^[\w.-]+\.(js|riv|zip)$/.test(s);
+const SAME = s => /^(uko|Uko|Rive|Web|React|Flutter|iOS|Android|HTML|JS|Stripe|state|trigger|idle|thinking|loading|sleep|welcome|success|error|empty|wake|FR|EN|ES|Starter|aituko|meowuko|Aituko|Meowuko|SubFlow)$/.test(s) || /^[\w.-]+\.(js|riv|zip)$/.test(s);
 
-async function extract() {
-  const dict = fs.existsSync(DICT) ? JSON.parse(fs.readFileSync(DICT, 'utf8')) : {};
-  const found = await withPage(page => page.evaluate((pages, walkSrc) => {
+function pageStrings() {
+  return withPage(page => page.evaluate((pages, walkSrc) => {
     const walk = eval('(' + walkSrc + ')'), out = [];
     for (const html of pages) walk(new DOMParser().parseFromString(html, 'text/html'), (text) => { out.push(text); return null; });
     return out;
   }, PAGES.map(p => fs.readFileSync(path.join(ROOT, 'landing_page', p), 'utf8')), walk.toString()));
+}
+
+async function extract() {
+  const dict = fs.existsSync(DICT) ? JSON.parse(fs.readFileSync(DICT, 'utf8')) : {};
+  const found = await pageStrings();
   let added = 0;
   for (const s of found) if (!SAME(s) && !dict[s]) { dict[s] = { en: '', es: '' }; added++; }
   fs.mkdirSync(path.dirname(DICT), { recursive: true });
@@ -90,6 +95,14 @@ module.exports = { translate, missing, LANGS };
 if (require.main === module) {
   const cmd = process.argv[2];
   if (cmd === 'extract') extract();
+  else if (cmd === 'prune') pageStrings().then(found => {
+    // Drops the entries no page uses any more (after a text was rewritten or removed).
+    const dict = JSON.parse(fs.readFileSync(DICT, 'utf8')), keep = new Set(found);
+    const gone = Object.keys(dict).filter(k => !keep.has(k));
+    for (const k of gone) delete dict[k];
+    fs.writeFileSync(DICT, JSON.stringify(dict, null, 2) + '\n');
+    console.log(`${gone.length} unused strings removed · ${Object.keys(dict).length} left`);
+  });
   else if (cmd === 'check') { const m = missing(); if (m.length) { console.log(`${m.length} strings without translation:\n` + m.slice(0, 40).join('\n')); process.exit(1); } console.log('all strings translated'); }
-  else console.log('usage: i18n_site.cjs extract|check');
+  else console.log('usage: i18n_site.cjs extract|prune|check');
 }

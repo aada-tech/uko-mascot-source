@@ -1,6 +1,6 @@
 {
   "name": "@uko/mascot-engine",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "main": "dist/uko-mascot-engine.js",
   "scripts": { "build": "node build_mascot_engine.js" }

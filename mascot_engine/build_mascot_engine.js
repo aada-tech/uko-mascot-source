@@ -107,11 +107,26 @@ const distFile = path.join(distDir, DEBUG ? 'uko-mascot-engine.debug.js' : 'uko-
 fs.writeFileSync(distFile, out, 'utf8');
 const raw = Buffer.byteLength(out), gz = zlib.gzipSync(out, { level: 9 }).length;
 console.log(`${path.relative(here, distFile)}  ${(raw / 1024).toFixed(1)} KB raw · ${(gz / 1024).toFixed(1)} KB gzip`);
-if (!DEBUG && !STARTER) fs.writeFileSync(path.join(distDir, 'size.json'), JSON.stringify({ version, rawBytes: raw, gzipBytes: gz }, null, 2) + '\n');
-
-if (process.argv.includes('--publish') && !DEBUG && !STARTER) {
-  const target = path.join(here, '..', 'landing_page', 'js', 'uko-mascot-engine.js');
-  fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.copyFileSync(distFile, target);
-  console.log('published →', path.relative(path.join(here, '..'), target));
-}
+// Production copy: minified (dead debug branches dropped). The readable file stays the
+// reference (the one an AI assistant or a developer reads and adapts); the .min.js is
+// what a site should serve. The site itself serves the minified build.
+(async () => {
+  let min = null;
+  if (!DEBUG) {
+    let terser;
+    try { terser = require('terser'); } catch (e) { terser = require(path.join(here, '..', 'node_modules', 'terser')); }
+    const res = await terser.minify(out, { compress: { passes: 2 }, mangle: true, format: { comments: /Uko Mascot Engine/ } });
+    min = res.code;
+    const minFile = distFile.replace(/\.js$/, '.min.js');
+    fs.writeFileSync(minFile, min, 'utf8');
+    const mraw = Buffer.byteLength(min), mgz = zlib.gzipSync(min, { level: 9 }).length;
+    console.log(`${path.relative(here, minFile)}  ${(mraw / 1024).toFixed(1)} KB raw · ${(mgz / 1024).toFixed(1)} KB gzip`);
+    if (!STARTER) fs.writeFileSync(path.join(distDir, 'size.json'), JSON.stringify({ version, rawBytes: raw, gzipBytes: gz, minRawBytes: mraw, minGzipBytes: mgz }, null, 2) + '\n');
+  }
+  if (process.argv.includes('--publish') && !DEBUG && !STARTER) {
+    const target = path.join(here, '..', 'landing_page', 'js', 'uko-mascot-engine.js');
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, min, 'utf8');
+    console.log('published (minified) →', path.relative(path.join(here, '..'), target));
+  }
+})().catch(e => { console.error(e); process.exit(1); });

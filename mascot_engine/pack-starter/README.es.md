@@ -8,7 +8,7 @@ todos los colores, tema claro u oscuro. Pruébalas en tu app y quédatelas en pr
 
 | | Para | Archivo |
 |---|---|---|
-| **Motor web** | sitios y apps web (HTML, React, Vue, Svelte…) | `uko-mascot-engine.js` (cero dependencias) |
+| **Motor web** | sitios y apps web (HTML, React, Vue, Svelte…) | `uko-mascot-engine.min.js` (≈ 52 KB gzip, cero dependencias); `uko-mascot-engine.js` = el mismo, legible |
 | **Archivo Rive** | web, Flutter, iOS, Android, React Native… | `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv` + máquina de estados «Uko» |
 
 ## Starter o pack completo
@@ -24,18 +24,31 @@ todos los colores, tema claro u oscuro. Pruébalas en tu app y quédatelas en pr
 | Mirada en toda la página (`follow="page"`, dedo en móvil), `lookAt()` | — | sí |
 | Uso comercial | sí | sí |
 
-**Pasar al pack completo**: reemplaza `uko-mascot-engine.js` y los archivos `rive/*.riv` por los del pack. Tu código no cambia.
+**Pasar al pack completo**: reemplaza `uko-mascot-engine.min.js` (y `uko-mascot-engine.js`) y los archivos `rive/*.riv` por los del pack. Tu código no cambia.
 Si tu código ya pide un estado o un movimiento del pack completo (por ejemplo `error`, `climb()`, `lookAt()`), Uko se queda en su estado actual
 y la consola indica dónde encontrarlo: nada se rompe.
 
 Pack completo: {{SITE_URL}}/es/#prix
+
+## Qué recibes
+
+- `uko-mascot-engine.min.js`: el motor web para cargar en tu sitio o tu app.
+- `uko-mascot-engine.js`: el mismo código, legible: para entenderlo o dárselo a tu asistente de código.
+- `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv`: las mismas mascotas para iOS, Android, Flutter, React Native y la web.
+- `examples/`: un ejemplo listo para abrir por plataforma.
+- `AI-PROMPT.md`: el prompt para adaptar la mascota a tu app con IA.
+
+**Es una base.** Los 4 estados del Starter funcionan tal cual. Lo propio de tu app
+(cuándo reacciona la mascota, dónde se coloca, un comportamiento a medida como trepar a un formulario)
+se conecta con unas pocas líneas de código: pega el prompt de `AI-PROMPT.md` en tu asistente de código
+(Claude, ChatGPT, Cursor, Copilot…) y lo hace por ti.
 
 ---
 
 ## 1. Motor web
 
 ```html
-<script src="uko-mascot-engine.js"></script>
+<script src="uko-mascot-engine.min.js"></script>
 
 <uko-mascot state="loading" hair="afro" brand="#FFD6E0" style="width:240px;height:360px"></uko-mascot>
 ```
@@ -74,7 +87,7 @@ En cada estado de fondo Uko respira, cambia el peso de pierna y hace pequeños g
 ### React
 
 ```jsx
-import './uko-mascot-engine.js';
+import './uko-mascot-engine.min.js';
 
 export default function Status({ busy, done }) {
   const state = busy ? 'loading' : done ? 'success' : 'idle';
@@ -121,7 +134,7 @@ También se aceptan alias en inglés: `bald`, `medium`, `fade`, `cornrows`, `pon
 - Se respeta `prefers-reduced-motion` (poses fijas, sin efectos).
 - La animación se pausa cuando la pestaña está oculta. `setMaxFps(30)` para páginas muy cargadas.
 - Fuera de la pantalla (página desplazada, `display: none`), una mascota solo se redibuja 4 veces por segundo; sus estados y movimientos siguen. Los peinados detallados se aligeran solos en tamaño pequeño (menos de ~200 píxeles de pantalla de ancho), sin diferencia visible.
-- Peso: motor web 298 KB sin comprimir, **≈ 89 KB gzip**. Archivos Rive: uko.riv 74 · aituko.riv 72 · meowuko.riv 73 KB. Con Rive, cuenta también el runtime de tu plataforma (web: `@rive-app/canvas`, ≈ 100 KB gzip de JS + ≈ 760 KB gzip de wasm, cargado una vez para todas las mascotas).
+- Peso: motor web **≈ 52 KB gzip** (`uko-mascot-engine.min.js`, 149 KB sin comprimir; la versión legible pesa 299 KB). Archivos Rive: uko.riv 74 · aituko.riv 72 · meowuko.riv 73 KB. Con Rive, cuenta también el runtime de tu plataforma, cargado una vez para todas las mascotas; en la web, usa `@rive-app/canvas-lite` (≈ 95 KB gzip de JS + ≈ 360 KB gzip de wasm) en lugar de `@rive-app/canvas` (≈ 800 KB gzip de wasm): es todo lo que necesitan estos archivos.
 
 ---
 
@@ -144,7 +157,7 @@ Los números son los del pack completo (que añade `1` thinking, `3` sleep y los
 **Colores** (data binding): view model `Appearance` con `bodyColor`, `lineColor`, `hairColor` (+ `accentColor` en `aituko.riv`).
 
 ```js
-import { Rive } from '@rive-app/canvas';
+import { Rive } from '@rive-app/canvas-lite';
 
 const uko = new Rive({
   src: 'uko.riv', canvas: document.querySelector('canvas'),

@@ -1,5 +1,5 @@
-// Copie uko-mascot-engine.js dans ton projet (ex. src/vendor/) puis :
-import './vendor/uko-mascot-engine.js';
+// Copie uko-mascot-engine.min.js dans ton projet (ex. src/vendor/) puis :
+import './vendor/uko-mascot-engine.min.js';
 
 export function UkoStatus({ status = 'idle', hair = 'boucles', color = '#FFD6E0' }) {
   // status: idle | welcome | loading | success (Starter) — le pack complet ajoute thinking, error, empty, sleep, wake

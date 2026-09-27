@@ -8,7 +8,7 @@ any colors, light or dark theme. Try them in your app, and keep them in producti
 
 | | For | File |
 |---|---|---|
-| **Web engine** | websites and web apps (HTML, React, Vue, Svelte…) | `uko-mascot-engine.js` (zero dependencies) |
+| **Web engine** | websites and web apps (HTML, React, Vue, Svelte…) | `uko-mascot-engine.min.js` (≈ 52 KB gzip, zero dependencies); `uko-mascot-engine.js` = the same, readable |
 | **Rive file** | web, Flutter, iOS, Android, React Native… | `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv` + "Uko" state machine |
 
 ## Starter or full pack
@@ -24,18 +24,31 @@ any colors, light or dark theme. Try them in your app, and keep them in producti
 | Gaze over the whole page (`follow="page"`, finger on mobile), `lookAt()` | — | yes |
 | Commercial use | yes | yes |
 
-**Moving to the full pack**: replace `uko-mascot-engine.js` and the `rive/*.riv` files with the pack's files. Your code does not change.
+**Moving to the full pack**: replace `uko-mascot-engine.min.js` (and `uko-mascot-engine.js`) and the `rive/*.riv` files with the pack's files. Your code does not change.
 If your code already asks for a full-pack state or movement (for example `error`, `climb()`, `lookAt()`), Uko stays in its current state
 and the console says where to get it: nothing breaks.
 
 Full pack: {{SITE_URL}}/en/#prix
+
+## What you get
+
+- `uko-mascot-engine.min.js`: the web engine to load in your site or app.
+- `uko-mascot-engine.js`: the same code, readable: to understand it or to give it to your coding assistant.
+- `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv`: the same mascots for iOS, Android, Flutter, React Native and the web.
+- `examples/`: one ready-to-open example per platform.
+- `AI-PROMPT.md`: the prompt to fit the mascot to your app with AI.
+
+**It is a base.** The Starter's 4 states work as they are. What is specific to your app
+(when the mascot reacts, where it sits, a custom behavior such as climbing onto a form)
+takes a few lines of code: paste the prompt from `AI-PROMPT.md` into your coding assistant
+(Claude, ChatGPT, Cursor, Copilot…) and it does it for you.
 
 ---
 
 ## 1. Web engine
 
 ```html
-<script src="uko-mascot-engine.js"></script>
+<script src="uko-mascot-engine.min.js"></script>
 
 <uko-mascot state="loading" hair="afro" brand="#FFD6E0" style="width:240px;height:360px"></uko-mascot>
 ```
@@ -74,7 +87,7 @@ In every background state Uko breathes, shifts its weight and makes small gestur
 ### React
 
 ```jsx
-import './uko-mascot-engine.js';
+import './uko-mascot-engine.min.js';
 
 export default function Status({ busy, done }) {
   const state = busy ? 'loading' : done ? 'success' : 'idle';
@@ -121,7 +134,7 @@ English aliases are accepted: `bald`, `medium`, `fade`, `cornrows`, `ponytail`, 
 - `prefers-reduced-motion` is respected (still poses, no effects).
 - The animation pauses when the tab is hidden. `setMaxFps(30)` for very busy pages.
 - Off screen (scrolled away, `display: none`), a mascot redraws only 4 times per second; its states and moves carry on. Detailed hairstyles lighten themselves when small (under ~200 screen pixels wide), with no visible difference.
-- Size: web engine 298 KB raw, **≈ 89 KB gzip**. Rive files: uko.riv 74 · aituko.riv 72 · meowuko.riv 73 KB. With Rive, also count your platform's runtime (web: `@rive-app/canvas`, ≈ 100 KB gzip of JS + ≈ 760 KB gzip of wasm, loaded once for all mascots).
+- Size: web engine **≈ 52 KB gzip** (`uko-mascot-engine.min.js`, 149 KB raw; the readable version is 299 KB). Rive files: uko.riv 74 · aituko.riv 72 · meowuko.riv 73 KB. With Rive, also count your platform's runtime, loaded once for all mascots; on the web, use `@rive-app/canvas-lite` (≈ 95 KB gzip of JS + ≈ 360 KB gzip of wasm) rather than `@rive-app/canvas` (≈ 800 KB gzip of wasm): it is all these files need.
 
 ---
 
@@ -144,7 +157,7 @@ The numbers are the full pack's (which adds `1` thinking, `3` sleep, and the `er
 **Colors** (data binding): view model `Appearance` with `bodyColor`, `lineColor`, `hairColor` (+ `accentColor` in `aituko.riv`).
 
 ```js
-import { Rive } from '@rive-app/canvas';
+import { Rive } from '@rive-app/canvas-lite';
 
 const uko = new Rive({
   src: 'uko.riv', canvas: document.querySelector('canvas'),

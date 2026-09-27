@@ -1,7 +1,7 @@
 // POST /api/create-checkout-session — Uko Mascot Pack, Stripe Checkout.
 //
 // - The amount is defined HERE (price_data), so what is charged always matches
-//   the price shown on the site: 12 € TTC launch price (tax-inclusive), 19 € afterwards.
+//   the price shown on the site: 6,99 €, one-time payment.
 // - The buyer must tick the consent box (CGV + licence + immediate access with
 //   waiver of the withdrawal right, Code de la consommation L221-28 13°).
 //   Consent time and terms version are stored in the session metadata as proof.
@@ -13,10 +13,10 @@ export const PRODUCT = {
   id: 'uko',
   name: 'Uko — Mascot Pack',
   description: 'Moteur Uko (Web Component + React), 9 états, 17 coiffures, fichier Rive avec machine à états. Licence commerciale perpétuelle.',
-  amount: 1200,         // centimes TTC — prix de lancement affiché sur le site (puis 1900)
+  amount: 699,          // centimes — prix affiché sur le site (6,99 €)
   currency: 'eur',
 };
-export const TERMS_VERSION = '2026-09-23';
+export const TERMS_VERSION = '2026-09-27';
 
 export async function onRequestPost({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: 'Origine non autorisée.' }, 403);

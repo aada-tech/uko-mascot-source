@@ -8,8 +8,21 @@ Two ways to use them:
 
 | | For | File |
 |---|---|---|
-| **Web engine** | websites and web apps (HTML, React, Vue, Svelte…) | `uko-mascot-engine.js` (≈ 96 KB gzip, zero dependencies) |
+| **Web engine** | websites and web apps (HTML, React, Vue, Svelte…) | `uko-mascot-engine.min.js` (≈ 58 KB gzip, zero dependencies); `uko-mascot-engine.js` = the same, readable |
 | **Rive file** | web, Flutter, iOS, Android, React Native, Unity… | `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv` + "Uko" state machine |
+
+## What you get
+
+- `uko-mascot-engine.min.js`: the web engine to load in your site or app.
+- `uko-mascot-engine.js`: the same code, readable: to understand it or to give it to your coding assistant.
+- `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv`: the same mascots for iOS, Android, Flutter, React Native and the web.
+- `examples/`: one ready-to-open example per platform.
+- `AI-PROMPT.md`: the prompt to fit the mascot to your app with AI.
+
+**It is a base.** The 9 states, the moves and the gaze work as they are. What is specific to your app
+(when the mascot reacts, where it sits, a custom behavior such as climbing onto a form)
+takes a few lines of code: paste the prompt from `AI-PROMPT.md` into your coding assistant
+(Claude, ChatGPT, Cursor, Copilot…) and it does it for you.
 
 ---
 
@@ -18,7 +31,7 @@ Two ways to use them:
 ### HTML (Web Component)
 
 ```html
-<script src="uko-mascot-engine.js"></script>
+<script src="uko-mascot-engine.min.js"></script>
 
 <uko-mascot state="loading" hair="dreadlocks" brand="#FFFFFF" style="width:240px;height:360px"></uko-mascot>
 ```
@@ -58,7 +71,7 @@ Gaze: when what it looks at (`lookAt`, or the mouse with `follow="page"`) is far
 ### React
 
 ```jsx
-import './uko-mascot-engine.js';
+import './uko-mascot-engine.min.js';
 
 export default function Status({ busy, failed }) {
   const state = failed ? 'error' : busy ? 'loading' : 'idle';
@@ -109,7 +122,7 @@ English aliases are accepted: `bald`, `medium`, `fade`, `cornrows`, `ponytail`, 
 - `prefers-reduced-motion` is respected (still poses, no effects).
 - The animation pauses when the tab is hidden. `setMaxFps(30)` for very busy pages.
 - Off screen (scrolled away, `display: none`), a mascot redraws only 4 times per second; its states and moves carry on. Detailed hairstyles lighten themselves when small (under ~200 screen pixels wide), with no visible difference.
-- Size: web engine 328 KB raw, **≈ 96 KB gzip**. Rive files: uko.riv 136 · aituko.riv 134 · meowuko.riv 136 KB. With Rive, also count your platform's runtime (web: `@rive-app/canvas`, ≈ 100 KB gzip of JS + ≈ 760 KB gzip of wasm, loaded once for all mascots).
+- Size: web engine **≈ 58 KB gzip** (`uko-mascot-engine.min.js`, 175 KB raw; the readable version is 333 KB). Rive files: uko.riv 136 · aituko.riv 134 · meowuko.riv 136 KB. With Rive, also count your platform's runtime, loaded once for all mascots; on the web, use `@rive-app/canvas-lite` (≈ 95 KB gzip of JS + ≈ 360 KB gzip of wasm) rather than `@rive-app/canvas` (≈ 800 KB gzip of wasm): it is all these files need.
 - Each instance is independent: put as many mascots on a page as you like.
 
 ---
@@ -142,7 +155,7 @@ With the web runtime: `new Rive({ …, autoBind: true })`, then `rive.viewModelI
 ### Web
 
 ```js
-import { Rive } from '@rive-app/canvas';
+import { Rive } from '@rive-app/canvas-lite';
 
 const uko = new Rive({
   src: 'uko.riv', canvas: document.querySelector('canvas'),

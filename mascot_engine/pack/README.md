@@ -8,8 +8,21 @@ Deux façons de les utiliser :
 
 | | Pour qui | Fichier |
 |---|---|---|
-| **Moteur web** | sites et apps web (HTML, React, Vue, Svelte…) | `uko-mascot-engine.js` (≈ 96 Ko gzip, zéro dépendance) |
+| **Moteur web** | sites et apps web (HTML, React, Vue, Svelte…) | `uko-mascot-engine.min.js` (≈ 58 Ko gzip, zéro dépendance) ; `uko-mascot-engine.js` = le même, lisible |
 | **Fichier Rive** | web, Flutter, iOS, Android, React Native, Unity… | `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv` + machine à états « Uko » |
+
+## Ce que tu reçois
+
+- `uko-mascot-engine.min.js` : le moteur web à charger dans ton site ou ton app.
+- `uko-mascot-engine.js` : le même code, lisible : pour le comprendre ou le donner à ton assistant de code.
+- `rive/uko.riv`, `rive/aituko.riv`, `rive/meowuko.riv` : les mêmes mascottes pour iOS, Android, Flutter, React Native et le web.
+- `examples/` : un exemple prêt à ouvrir par plateforme.
+- `AI-PROMPT.md` : le prompt pour adapter la mascotte à ton app avec l'IA.
+
+**C'est une base.** Les 9 états, les mouvements et le regard marchent tels quels. Ce qui est propre à ton app
+(à quel moment la mascotte réagit, où elle se place, un comportement sur mesure comme grimper sur un formulaire)
+se branche avec quelques lignes de code : colle le prompt de `AI-PROMPT.md` dans ton assistant de code
+(Claude, ChatGPT, Cursor, Copilot…), il le fait pour toi.
 
 ---
 
@@ -18,7 +31,7 @@ Deux façons de les utiliser :
 ### HTML (Web Component)
 
 ```html
-<script src="uko-mascot-engine.js"></script>
+<script src="uko-mascot-engine.min.js"></script>
 
 <uko-mascot state="loading" hair="dreadlocks" brand="#FFFFFF" style="width:240px;height:360px"></uko-mascot>
 ```
@@ -58,7 +71,7 @@ Regard : quand ce qu'elle regarde (`lookAt`, ou la souris avec `follow="page"`) 
 ### React
 
 ```jsx
-import './uko-mascot-engine.js';
+import './uko-mascot-engine.min.js';
 
 export default function Status({ busy, failed }) {
   const state = failed ? 'error' : busy ? 'loading' : 'idle';
@@ -108,7 +121,7 @@ Alias anglais acceptés : `bald`, `medium`, `fade`, `cornrows`, `ponytail`, `str
 - `prefers-reduced-motion` est respecté (poses fixes, pas d'effets).
 - L'animation se met en pause quand l'onglet est caché. `setMaxFps(30)` pour les pages très chargées.
 - Hors de l'écran (page défilée, `display: none`), une mascotte ne se redessine que 4 fois par seconde ; ses états et mouvements continuent. Les coiffures détaillées s'allègent toutes seules en petit (moins de ~200 pixels d'écran de large), sans différence visible.
-- Poids : moteur web 328 Ko brut, **≈ 96 Ko gzip**. Fichiers Rive : uko.riv 136 · aituko.riv 134 · meowuko.riv 136 Ko. Côté Rive, compte aussi le runtime de ta plateforme (web : `@rive-app/canvas`, ≈ 100 Ko gzip de JS + ≈ 760 Ko gzip de wasm, chargé une fois pour toutes les mascottes).
+- Poids : moteur web **≈ 58 Ko gzip** (`uko-mascot-engine.min.js`, 175 Ko brut ; la version lisible fait 333 Ko). Fichiers Rive : uko.riv 136 · aituko.riv 134 · meowuko.riv 136 Ko. Côté Rive, compte aussi le runtime de ta plateforme, chargé une fois pour toutes les mascottes ; sur le web, prends `@rive-app/canvas-lite` (≈ 95 Ko gzip de JS + ≈ 360 Ko gzip de wasm) plutôt que `@rive-app/canvas` (≈ 800 Ko gzip de wasm) : il suffit pour ces fichiers.
 - Chaque instance est indépendante : autant de mascottes que tu veux sur une page.
 
 ---
@@ -141,7 +154,7 @@ Avec le runtime web : `new Rive({ …, autoBind: true })`, puis `rive.viewModelI
 ### Web
 
 ```js
-import { Rive } from '@rive-app/canvas';
+import { Rive } from '@rive-app/canvas-lite';
 
 const uko = new Rive({
   src: 'uko.riv', canvas: document.querySelector('canvas'),

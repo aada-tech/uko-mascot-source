@@ -21,7 +21,9 @@ const SITE = (process.env.UKO_SITE_URL || JSON.parse(fs.readFileSync(path.join(R
 
 // One Rive file per character (same state machine and inputs in each).
 const CHARACTERS = ['uko', 'aituko', 'meowuko'];
-const files = { [STARTER ? 'dist/starter/uko-mascot-engine.js' : 'dist/uko-mascot-engine.js']: 'uko-mascot-engine.js' };
+// The readable engine (to read, adapt, give to an AI assistant) and its minified twin (to ship).
+const ENGINE_DIR = STARTER ? 'dist/starter' : 'dist';
+const files = { [`${ENGINE_DIR}/uko-mascot-engine.js`]: 'uko-mascot-engine.js', [`${ENGINE_DIR}/uko-mascot-engine.min.js`]: 'uko-mascot-engine.min.js' };
 for (const c of CHARACTERS) {
   const src = STARTER ? `dist/starter/${c}-starter.riv` : `dist/${c}.riv`;
   files[src] = `rive/${c}.riv`; files[`${src}.json`] = `rive/${c}.riv.json`;
@@ -39,6 +41,8 @@ for (const [from, to] of Object.entries(files)) copy(from, to);
 const READMES = fs.readdirSync(path.join(ROOT, DOCS)).filter(f => /^README(\.[a-z]{2})?\.md$/.test(f));
 for (const f of [...READMES, 'LICENSE.md']) copy(`${DOCS}/${f}`, f);
 copy('pack/CHANGELOG.md', 'CHANGELOG.md');
+// Same AI prompt in both editions (it tells the assistant what the Starter lacks).
+copy('pack/AI-PROMPT.md', 'AI-PROMPT.md');
 for (const f of fs.readdirSync(path.join(ROOT, DOCS, 'examples'))) copy(`${DOCS}/examples/${f}`, `examples/${f}`);
 for (const f of READMES) {
   const readme = path.join(STAGE, f);

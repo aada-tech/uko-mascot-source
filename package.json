@@ -1,6 +1,6 @@
 {
   "name": "uko-mascot-source",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "description": "Uko, Aituko and Meowuko: living stick-figure mascots. Engine, Rive files, packs, landing page, tests.",
   "scripts": {
@@ -16,7 +16,8 @@
     "i18n:check": "node test_and_deploy/i18n_site.cjs check"
   },
   "devDependencies": {
-    "puppeteer": "^24.0.0"
+    "puppeteer": "^24.0.0",
+    "terser": "^5.36.0"
   },
   "engines": {
     "node": ">=20"

@@ -38,11 +38,11 @@ npm install
 ## Construire et tester
 
 ```bash
-npm run build          # moteur (debug, publié, Starter) → packs ZIP → site/ (brouillon)
+npm run build          # moteur (lisible + minifié, Starter) → packs ZIP → site/ (brouillon)
 npm run build:rive     # les 6 fichiers .riv (après build:engine)
 npm test               # personnages, invariants de mouvement, Starter
 npm run serve          # site/ sur http://localhost:3350
-UKO_BASE_URL=http://localhost:3350/ npm run test:landing   # aussi /en/ et /es/
+UKO_BASE_URL=http://localhost:3350/ npm run test:landing   # aussi /en/ et /es/ ; vérifie aussi le poids de la page
 npm run i18n:check     # chaque texte du site traduit
 ```
 
@@ -51,6 +51,13 @@ Comparer deux moteurs (aucune régression visuelle sur les poses existantes) :
 ```bash
 node test_and_deploy/compare_engines.cjs <ancien.js> mascot_engine/dist/uko-mascot-engine.js
 ```
+
+Poids : le site sert le moteur **minifié** (`landing_page/js/uko-mascot-engine.js`, ≈ 58 Ko gzip) et ne charge
+aucun runtime Rive. Les packs livrent `uko-mascot-engine.min.js` (à charger) et `uko-mascot-engine.js` (le même,
+lisible, pour le lire ou le donner à une IA), plus `AI-PROMPT.md`. Les exemples Rive utilisent `@rive-app/canvas-lite`.
+
+Sous Linux en root (conteneur), Chrome demande `--no-sandbox` : pointer `PUPPETEER_EXECUTABLE_PATH` vers un petit
+script qui l'ajoute.
 
 ## Déployer le site
 

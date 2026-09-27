@@ -20,7 +20,10 @@ const cfg = JSON.parse(fs.readFileSync(path.join(SRC, LEGAL), 'utf8'));
 const SITE_URL = (cfg.SITE_URL || 'https://uko-mascot.pages.dev').replace(/\/$/, '');
 
 const PAGES = ['index.html', 'success.html', 'mentions-legales.html', 'cgv.html', 'confidentialite.html', 'licence.html'];
-const DIRS = ['css', 'js', 'rive', 'fonts', 'media'];
+// landing_page/rive/ (the .riv files and the Rive web runtime) is not published: the
+// landing runs on the web engine only, and the .riv files ship in the packs. The folder
+// stays in the repo for the Rive tests and to measure the sizes shown on the page.
+const DIRS = ['css', 'js', 'fonts', 'media'];
 const PACK_ZIP = path.join(PACK, 'mascot_engine', 'dist', `Uko-Mascot-Pack-${require('../mascot_engine/package.json').version}.zip`);
 // Free download (Uko Starter): public, served as a plain static file.
 const STARTER_ZIP = path.join(PACK, 'mascot_engine', 'dist', `Uko-Starter-${require('../mascot_engine/package.json').version}.zip`);
@@ -81,6 +84,8 @@ const translated = (async () => {
       .replace(/(<a href="\/" hreflang="fr"[^>]*?) aria-current="page"/, '$1')
       .replace(new RegExp(`(<a href="/${lang}/" hreflang="${lang}"[^>]*?data-lang="${lang}")`), '$1 aria-current="page"')
       .replace(/uko-(subflow-ad|custom)-(poster-)?fr\./g, `uko-$1-$2${lang}.`);
+    // Prices are not text to translate (no letters): English writes the euro sign first.
+    if (lang === 'en') html = html.replace('<div class="price">6,99 €</div>', '<div class="price">€6.99</div>').replace('<div class="price">0 € <small>', '<div class="price">€0 <small>');
     fs.mkdirSync(path.join(OUT, lang), { recursive: true });
     fs.writeFileSync(path.join(OUT, lang, 'index.html'), html);
   }
@@ -92,11 +97,10 @@ const today = new Date().toISOString().slice(0, 10);
 const urls = [['', '1.0', 'weekly'], ['en/', '0.9', 'weekly'], ['es/', '0.9', 'weekly'], ...['mentions-legales', 'cgv', 'confidentialite', 'licence'].map(p => [p, '0.3', 'yearly'])];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, p, c]) => `  <url><loc>${SITE_URL}/${u}</loc><lastmod>${today}</lastmod><changefreq>${c}</changefreq><priority>${p}</priority></url>`).join('\n')}\n</urlset>\n`);
 
-// Security headers (Cloudflare Pages _headers). 'wasm-unsafe-eval' is required
-// by the Rive runtime; everything else is served from this origin only.
+// Security headers (Cloudflare Pages _headers). Everything is served from this origin only.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
+  "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   "img-src 'self' data: blob:",
@@ -119,8 +123,8 @@ fs.writeFileSync(path.join(OUT, '_headers'), `/*
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-/rive/rive.wasm
-  Cache-Control: public, max-age=2592000
+/media/*
+  Cache-Control: public, max-age=604800
 
 /success
   X-Robots-Tag: noindex

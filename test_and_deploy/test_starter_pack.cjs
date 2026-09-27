@@ -23,7 +23,7 @@ const check = (ok, msg) => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${msg}`); if (
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'uko-starter-'));
   execFileSync('unzip', ['-q', ZIP, '-d', tmp]);
   const pack = path.join(tmp, `Uko-Starter-${version}`);
-  for (const f of ['uko-mascot-engine.js', 'rive/uko.riv', 'README.md', 'LICENSE.md', 'examples/web-component.html'])
+  for (const f of ['uko-mascot-engine.js', 'uko-mascot-engine.min.js', 'rive/uko.riv', 'README.md', 'LICENSE.md', 'AI-PROMPT.md', 'examples/web-component.html'])
     check(fs.existsSync(path.join(pack, f)), `zip contains ${f}`);
   check(!/\{\{[A-Z_]+\}\}/.test(fs.readFileSync(path.join(pack, 'README.md'), 'utf8')), 'README has no placeholder left');
 
@@ -46,7 +46,8 @@ const check = (ok, msg) => { console.log(`${ok ? 'ok  ' : 'FAIL'} ${msg}`); if (
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); if (m.type() === 'info') infos.push(m.text()); });
   await page.goto(base + '/');
-  await page.addScriptTag({ url: base + '/pack/uko-mascot-engine.js' });
+  // The minified engine: the file the README tells people to ship.
+  await page.addScriptTag({ url: base + '/pack/uko-mascot-engine.min.js' });
 
   // ---- engine
   const api = await page.evaluate(() => ({ edition: UkoMascot.edition, order: UkoMascot.ORDER, hairs: Object.keys(UkoMascot.HAIR_STYLES) }));

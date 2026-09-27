@@ -1,6 +1,6 @@
-// npm install @rive-app/react-canvas
+// npm install @rive-app/react-canvas-lite
 import { useEffect } from 'react';
-import { useRive, useStateMachineInput } from '@rive-app/react-canvas';
+import { useRive, useStateMachineInput } from '@rive-app/react-canvas-lite';
 
 const STATE = { idle: 0, thinking: 1, loading: 2, sleep: 3 };
 
